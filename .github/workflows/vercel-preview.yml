@@ -1,0 +1,59 @@
+name: Vercel Preview Deployment
+
+on:
+  pull_request:
+    branches: [main]
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+jobs:
+  deploy-preview:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        working-directory: next-app
+        run: npm ci
+
+      - name: Install Vercel CLI
+        working-directory: next-app
+        run: npx vercel --version
+
+      - name: Pull Vercel environment
+        working-directory: next-app
+        run: npx vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project
+        working-directory: next-app
+        run: npx vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Vercel (preview)
+        id: deploy
+        working-directory: next-app
+        run: |
+          URL=$(npx vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "preview_url=$URL" >> "$GITHUB_OUTPUT"
+
+      - name: Comment preview URL on PR
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = '${{ steps.deploy.outputs.preview_url }}';
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: `✅ **Vercel Preview Deployment**\n\n🔗 ${url}`
+            });
