@@ -7,7 +7,7 @@ High-performance training, development, and elite optimization platform.
 
 ## Overview
 
-FSA Elite Performance is a full-scale digital platform designed to deliver advanced performance training, athlete development systems, and structured optimization programs.
+FSA Elite Performance is a sales performance company under Fontenots Sales Association LLC, focused on increasing business revenue through sales training, systems, and talent development. This full-scale digital platform delivers advanced performance training, structured optimization programs, and professional development systems designed to elevate sales rep effectiveness and professional image.
 
 This repository contains source code, assets, branding elements, and deployment configurations required to run and scale the application.
 
@@ -15,11 +15,12 @@ This repository contains source code, assets, branding elements, and deployment 
 
 ## Features
 
-- Elite performance training systems
-- Data-driven athlete tracking
-- Mental and physical optimization modules
+- AI-powered sales training and roleplay systems
+- Real-time objection handling practice with scoring
+- Professional branding and self-promotion tools
+- Data-driven performance tracking
 - Fully responsive web application
-- Integrated branding, logos, and UI assets
+- Integrated member store for professional gear
 - Optimized for fast deployment and scalability
 
 ---
@@ -180,7 +181,7 @@ OpenAI prompt library integration
 
 ## Vision
 
-FSA Elite Performance is built to become a premier digital ecosystem for elite training, performance tracking, and next-level athlete development.
+FSA Elite Performance is built to become a premier digital ecosystem for sales training excellence, revenue growth, and professional development — empowering sales professionals to reach elite performance levels through cutting-edge training systems and talent development.
 
 ---
 
@@ -188,17 +189,18 @@ FSA Elite Performance is built to become a premier digital ecosystem for elite t
 
 ### Descripcion General
 
-FSA Elite Performance es una plataforma digital disenada para ofrecer entrenamiento de alto rendimiento, desarrollo de atletas y sistemas avanzados de optimizacion.
+FSA Elite Performance es una empresa de rendimiento en ventas bajo Fontenots Sales Association LLC, enfocada en aumentar los ingresos empresariales a través de capacitación en ventas, sistemas y desarrollo de talento. Esta plataforma digital ofrece entrenamiento avanzado de rendimiento, desarrollo profesional y sistemas de optimización estructurados diseñados para elevar la efectividad de los representantes de ventas y su imagen profesional.
 
 Este repositorio contiene el codigo fuente, recursos visuales y configuraciones necesarias para ejecutar y escalar la aplicacion.
 
 ### Funcionalidades
 
-- Sistemas de entrenamiento de elite
+- Sistemas de entrenamiento en ventas impulsados por IA
+- Práctica de manejo de objeciones en tiempo real con puntuación
+- Herramientas de marca profesional y autopromoción
 - Seguimiento de rendimiento basado en datos
-- Optimizacion mental y fisica
 - Aplicacion web totalmente adaptable
-- Integracion completa de marca y diseno
+- Tienda de miembros integrada para equipo profesional
 - Alto rendimiento y escalabilidad
 
 ### Instalacion
@@ -221,7 +223,7 @@ Compatible con:
 
 ### Vision (Espanol)
 
-FSA Elite Performance esta disenado para convertirse en una plataforma lider en entrenamiento, rendimiento y desarrollo de atletas de alto nivel.
+FSA Elite Performance esta disenado para convertirse en una plataforma lider en excelencia en capacitación de ventas, crecimiento de ingresos y desarrollo profesional — empoderando a los profesionales de ventas para alcanzar niveles de rendimiento elite a través de sistemas de entrenamiento de vanguardia y desarrollo de talento.
 
 ---
 

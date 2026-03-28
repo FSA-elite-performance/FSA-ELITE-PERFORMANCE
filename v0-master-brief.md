@@ -17,7 +17,7 @@
 | Address | 213 Caribbean Boulevard, Sunset, LA 70584 |
 
 **What FSA ELITE Does:**
-FSA ELITE is a third-party B2B sales training company that helps businesses sharpen their salespeople — getting every rep ready for the phones and every customer interaction. Managers and business owners send their teams to FSA ELITE for AI-powered training and self-promoting tools that elevate rep performance and professional image.
+FSA ELITE is a sales performance company under Fontenots Sales Association LLC, focused on increasing business revenue through sales training, systems, and talent development. We help businesses sharpen their salespeople — getting every rep ready for the phones and every customer interaction. Managers and business owners send their teams to FSA ELITE for AI-powered training and self-promoting tools that elevate rep performance and professional image.
 
 **Industries Served:** Automotive, real estate, insurance, solar, retail, service, and B2B.
 
