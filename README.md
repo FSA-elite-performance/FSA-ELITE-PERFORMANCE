@@ -37,14 +37,15 @@ This repository contains source code, assets, branding elements, and deployment 
 ## Project Structure
 
 ```text
-next-app/
-  pages/
-  pages/api/
-  styles/
-  lib/
-  public/
-  next.config.js
-README.md
+pages/            # Next.js page routes
+pages/api/        # Serverless API routes (Stripe, OpenAI, auth)
+components/       # Reusable React components
+lib/              # Shared utilities (auth, membership, AI, bot-protection)
+styles/           # Global CSS
+public/           # Static assets (favicons, logos, OG images)
+middleware.ts     # Edge middleware (membership gating, BotID)
+next.config.js    # Next.js configuration
+.env.example      # Environment variable documentation
 ```
 
 ---
@@ -65,17 +66,17 @@ Use branding consistently across all pages and components.
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/fsa-elite-performance.git
+git clone https://github.com/FSA-elite-performance/FSA-ELITE-PERFORMANCE.git
 
 # Navigate into project root
-cd fsa-elite-performance
+cd FSA-ELITE-PERFORMANCE
 
 # Install dependencies
-cd next-app
 npm ci
 
 # Configure environment
 cp .env.example .env.local
+# Edit .env.local and fill in your Stripe, OpenAI, and Firebase credentials
 
 # Run development server
 npm run dev
@@ -100,7 +101,7 @@ Bot and abuse protection notes:
   - `/api/create-checkout-session` (deep analysis check level)
 - On `NEXT_EXPORT=1` static builds, BotID rewrites and API runtime protections are not active because static export does not run API routes.
 
-Build commands (run from `next-app/`):
+Build commands:
 
 ```bash
 npm run build
@@ -119,13 +120,13 @@ GitHub Actions Vercel deployment:
 
 Deployment runbook:
 
-- `next-app/DEPLOYMENT.md` includes required env vars by environment, domain cutover steps, and one-click reliability checks.
+- `DEPLOYMENT.md` includes required env vars by environment, domain cutover steps, and one-click reliability checks.
 
 ---
 
 ## Environment Variables
 
-Create `.env.local` in `next-app/` and include required values documented in `next-app/.env.example`:
+Copy `.env.example` to `.env.local` and fill in the required values:
 
 ```env
 STRIPE_SECRET_KEY=
@@ -134,46 +135,44 @@ NEXT_PUBLIC_BASE_URL=
 OPENAI_API_KEY=
 STRIPE_TRAINING_PRICE_ID=
 MEMBERSHIP_SIGNING_SECRET=
+```
 
-## AI Roleplay Setup
+See `.env.example` for the full list of available variables and inline documentation.
 
-- Obtain an OpenAI API key at: https://platform.openai.com/account/api-keys
-- Add the key to `next-app/.env.local` as `OPENAI_API_KEY=` (do NOT commit this file).
-- The server API route `next-app/pages/api/ai-chat.ts` reads `process.env.OPENAI_API_KEY` and will return an error if unset.
+### AI Roleplay Setup
 
-Security & key rotation
+- Obtain an OpenAI API key at: <https://platform.openai.com/account/api-keys>
+- Add the key to `.env.local` as `OPENAI_API_KEY=` (do NOT commit this file).
+- The server API route `pages/api/ai-chat.ts` reads `process.env.OPENAI_API_KEY` and will return an error if unset.
+
+### Security & key rotation
 
 - If an API key is exposed, revoke it immediately in the OpenAI dashboard and create a new one.
 - Avoid committing keys. To remove a leaked key from git history, use `git-filter-repo` or the BFG (force-push required).
-- Add `.env.local` to `.gitignore` (already included) and use platform secrets (Vercel/GH Actions) for production.
+- `.env.local` is already in `.gitignore`. Use platform secrets (Vercel / GitHub Actions) for production.
 
-Making the Roleplay Lab public
+### Making the Roleplay Lab public
 
-- The Roleplay UI (`next-app/pages/roleplay.tsx`) can be gated behind membership checks. This repository's default branch currently has the Roleplay Lab open to all visitors; to re-enable gating, restore the client membership check that calls `/api/membership-status`.
+- The Roleplay UI (`pages/roleplay.tsx`) can be gated behind membership checks. The default branch currently has the Roleplay Lab open to all visitors; to re-enable gating, restore the client membership check that calls `/api/membership-status`.
+- To toggle access, set `NEXT_PUBLIC_ROLEPLAY_PUBLIC=true` in `.env.local` (or leave unset/false to require membership).
 
-If you want, I can add a small admin page to toggle public vs members-only access at runtime.
- 
-CI / Safety additions
-
-- A GitHub Action `secret-scan.yml` runs on PRs and pushes to `main` to detect common secret patterns (including `sk-` OpenAI keys) and fail the check if found.
-- A GitHub Action `link-check.yml` runs a static export and validates internal links using `linkinator` to prevent HTML-Proofer failures on deployment.
-
-Local admin toggle
-
-- To make the Roleplay Lab public or members-only, set `NEXT_PUBLIC_ROLEPLAY_PUBLIC=true` in `next-app/.env.local` (or leave unset/false to require membership).
-
-OpenAI prompt library integration
+### OpenAI prompt library integration
 
 - You can configure a server-side Prompt Library ID to centrally manage the system prompt the AI uses.
-- Add `OPENAI_PROMPT_ID=pmpt_...` to `next-app/.env.local` to enable. When set, `/api/ai-chat` will call the Responses API with that prompt ID and pass the conversation as input. If unset, the API will use the local `SYSTEM_PROMPT` defined in `next-app/pages/api/ai-chat.ts`.
-```
+- Add `OPENAI_PROMPT_ID=pmpt_...` to `.env.local` to enable. When set, `/api/ai-chat` will call the Responses API with that prompt ID and pass the conversation as input. If unset, the API will use the local `SYSTEM_PROMPT` defined in `pages/api/ai-chat.ts`.
+
+## CI / Safety
+
+- A GitHub Action `secret-scan.yml` runs on PRs and pushes to `main` to detect common secret patterns (OpenAI keys, Stripe live keys, AWS credentials, private key blocks) and fail the check if found.
+- A GitHub Action `link-check.yml` runs a static export and validates internal links using `linkinator` to prevent broken-link regressions.
+- CodeQL analysis runs on pushes to `main` and weekly on a schedule.
 
 ## Access Control
 
 - Membership activation now happens server-side after Stripe checkout success.
-- `next-app/pages/api/activate-membership.ts` verifies the Stripe Checkout Session and issues a signed HttpOnly membership cookie.
-- `next-app/pages/api/membership-status.ts` lets the client determine whether member access is active.
-- `next-app/middleware.ts` protects `/roleplay` and `/store` on runtime deployments.
+- `pages/api/activate-membership.ts` verifies the Stripe Checkout Session and issues a signed HttpOnly membership cookie.
+- `pages/api/membership-status.ts` lets the client determine whether member access is active.
+- `middleware.ts` protects `/roleplay` and `/store` on runtime deployments.
 - Static export builds still render pages, but runtime-only protections depend on Vercel or another Next.js server deployment.
 
 ---
@@ -204,8 +203,8 @@ Este repositorio contiene el codigo fuente, recursos visuales y configuraciones 
 ### Instalacion
 
 ```bash
-git clone https://github.com/yourusername/fsa-elite-performance.git
-cd fsa-elite-performance/next-app
+git clone https://github.com/FSA-elite-performance/FSA-ELITE-PERFORMANCE.git
+cd FSA-ELITE-PERFORMANCE
 npm ci
 cp .env.example .env.local
 npm run dev

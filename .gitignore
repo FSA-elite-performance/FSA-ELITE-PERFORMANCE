@@ -66,6 +66,10 @@ backup-codes-*.txt
 *.doc
 *.xlsx
 *.xls
+*.mhtml
+*.zip
+*.bak
+*.pre-fix-backup
 licenseid.*
 Articles_Of_Incorporation*
 Invoice*
