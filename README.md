@@ -55,7 +55,7 @@ next.config.js    # Next.js configuration
 Official FSA Elite Performance visual assets are stored in:
 
 ```text
-next-app/public/
+public/
 ```
 
 Use branding consistently across all pages and components.
