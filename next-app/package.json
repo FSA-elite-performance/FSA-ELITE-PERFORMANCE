@@ -1,0 +1,27 @@
+{
+  "name": "fsa-elite-sales-training",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/edge-config": "^1.4.3",
+    "@vercel/speed-insights": "^2.0.0",
+    "botid": "^1.5.11",
+    "next": "^15.5.14",
+    "openai": "^6.29.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.30",
+    "@types/react": "^18.3.20",
+    "@types/react-dom": "^18.3.5",
+    "typescript": "^5.8.2"
+  }
+}
