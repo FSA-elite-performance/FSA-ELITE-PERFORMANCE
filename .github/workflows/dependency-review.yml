@@ -1,0 +1,22 @@
+name: Dependency Review
+
+on:
+  pull_request:
+    paths:
+      - 'next-app/package.json'
+      - 'next-app/package-lock.json'
+      - '.github/workflows/dependency-review.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    name: Dependency review
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Dependency review
+        uses: actions/dependency-review-action@v4
