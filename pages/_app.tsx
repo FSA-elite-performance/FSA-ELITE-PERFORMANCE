@@ -1,11 +1,17 @@
 import type { AppProps } from 'next/app';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AppLayout from '../components/AppLayout';
-import OliveWidget from '../components/OliveWidget';
 import '../styles/globals.css';
+
+// Loaded lazily: OliveWidget is only interactive after user engagement and
+// does not need to block the initial page render.
+const OliveWidget = dynamic(() => import('../components/OliveWidget'), {
+  ssr: false,
+});
 
 /** Routes that get the sidebar app layout. */
 const APP_LAYOUT_ROUTES = new Set(['/welcome', '/roleplay', '/store', '/legal']);

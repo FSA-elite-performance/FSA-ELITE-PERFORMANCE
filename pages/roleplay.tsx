@@ -6,7 +6,6 @@ import { PUBLIC_SEO_KEYWORDS, PUBLIC_SITE_URL } from '../lib/businessDetails';
 import { fetchMembershipStatus } from '../lib/membershipClient';
 import { formatUsd, SUBSCRIPTION_PRICE_CENTS } from '../lib/subscriptionPlan';
 import { useRealtimeVoice, type VoiceTranscript } from '../lib/useRealtimeVoice';
-import { OLIVE_ROLEPLAY_SYSTEM_PROMPT } from '../lib/olivePersona';
 import {
   BOSS_UNLOCK_THRESHOLD,
   formatSkillTag,
@@ -171,22 +170,28 @@ export default function Roleplay() {
 
   // ── Voice Mode ──
   const [voiceMode, setVoiceMode] = useState(false);
+  const [voiceInstructions, setVoiceInstructions] = useState('');
 
   const activePersona = getPersonaById(activePersonaId);
 
-  const voiceInstructions = `${OLIVE_ROLEPLAY_SYSTEM_PROMPT}
-
-You are now playing the role of "${activePersona.label}".
-Goal: ${activePersona.goal}
-Fear: ${activePersona.fear}
-Constraint: ${activePersona.constraint}
-Decision style: ${activePersona.decisionStyle}
-Proof needed: ${activePersona.proofNeeded}
-Hidden budget range: ${activePersona.hiddenVariables.budgetRange}
-Trade status: ${activePersona.hiddenVariables.tradeStatus}
-Credit confidence: ${activePersona.hiddenVariables.creditConfidence}
-
-Stay fully in character. Respond as this buyer would in a real conversation. Keep responses to 2-4 sentences.`;
+  // Preload voice instructions in the background whenever the active persona
+  // changes so they are ready before the user starts a voice session.
+  useEffect(() => {
+    let active = true;
+    fetch(`/api/voice-instructions?personaId=${encodeURIComponent(activePersonaId)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data: { instructions?: string } | null) => {
+        if (active && typeof data?.instructions === 'string') {
+          setVoiceInstructions(data.instructions);
+        }
+      })
+      .catch(() => {
+        // Non-critical — the voice button will stay disabled until instructions load.
+      });
+    return () => {
+      active = false;
+    };
+  }, [activePersonaId]);
 
   const handleVoiceTranscript = useCallback((transcript: VoiceTranscript) => {
     setMessages((prev) => [
@@ -628,6 +633,8 @@ Stay fully in character. Respond as this buyer would in a real conversation. Kee
                     type="button"
                     className="btn-primary roleplay-voice-btn"
                     onClick={startVoiceSession}
+                    disabled={!voiceInstructions}
+                    title={!voiceInstructions ? 'Loading voice settings…' : undefined}
                   >
                     🎙️ Start Voice Session
                   </button>
