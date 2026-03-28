@@ -34,7 +34,7 @@ const FEATURES = [
     statLabel: 'AI Personas',
   },
   {
-    title: 'Member Store',
+    title: 'FSA Store',
     description: 'Premium business cards, branded gear, and promo tools that make your presence memorable.',
     stat: '17+',
     statLabel: 'Products',
@@ -55,11 +55,53 @@ const FEATURES = [
 
 const INDUSTRIES = ['Automotive', 'Real Estate', 'Insurance', 'Solar', 'Retail', 'B2B', 'SaaS', 'Finance'];
 
+const GROWTH_PATH = [
+  {
+    title: 'Phase 1 · Founding Access',
+    description: 'Start with AI drills, dashboard visibility, and store access so the method gets proven in real conversations first.',
+    stat: 'Now',
+    statLabel: 'Live',
+  },
+  {
+    title: 'Phase 2 · Team Training',
+    description: 'Add recurring coaching, score reviews, and sales-process support for small and mid-sized businesses.',
+    stat: 'MRR',
+    statLabel: 'Team Programs',
+  },
+  {
+    title: 'Phase 3 · Enterprise System',
+    description: 'Turn the proven method into recruiting standards, leadership visibility, and software-enabled performance.',
+    stat: 'Scale',
+    statLabel: 'Systemized',
+  },
+];
+
+const PRICING_OPTIONS = [
+  {
+    title: 'Solo / Founding Access',
+    description: `Start with the current Phase One experience for ${formatUsd(SUBSCRIPTION_PRICE_CENTS)} one time.`,
+    stat: formatUsd(SUBSCRIPTION_PRICE_CENTS),
+    statLabel: 'One Time',
+  },
+  {
+    title: 'Team Training',
+    description: 'Monthly recurring coaching, onboarding, and KPI reviews for growing sales teams.',
+    stat: 'Monthly',
+    statLabel: 'Contact Sales',
+  },
+  {
+    title: 'Enterprise',
+    description: 'Custom scope for larger rollouts, leadership reporting, and recruiting standards.',
+    stat: 'Custom',
+    statLabel: 'Annual / Scoped',
+  },
+];
+
 const STEPS = [
   {
     num: '01',
     title: 'Join',
-    description: 'One-time payment. No subscription. Instant access to everything.',
+    description: 'One-time payment. Instant Phase One access. No recurring charges.',
   },
   {
     num: '02',
@@ -76,15 +118,15 @@ const STEPS = [
 const FAQ_ITEMS = [
   {
     question: 'Who is this for?',
-    answer: 'Sales professionals who want sharper conversations, cleaner branding, and a more memorable presence. Works for any industry.',
+    answer: 'Closers, team leads, and small-to-mid-sized businesses that want more revenue from stronger conversations, cleaner systems, and a sharper rep presence.',
   },
   {
     question: 'What does it cost?',
-    answer: `One-time ${formatUsd(SUBSCRIPTION_PRICE_CENTS)} for full platform access. No monthly fees. Store items priced separately.`,
+    answer: `Founding Access is ${formatUsd(SUBSCRIPTION_PRICE_CENTS)} one time for the current Phase One experience. Team and enterprise programs are structured separately as recurring engagements.`,
   },
   {
     question: 'What do I get?',
-    answer: 'Immediate access to AI Roleplay Lab, OLIVE assistant, member store, dashboard, and all future updates.',
+    answer: 'Immediate access to the current AI Roleplay Lab, OLIVE assistant, dashboard, and FSA Store. Future phases and premium service layers may be offered separately.',
   },
   {
     question: 'How do I get support?',
@@ -105,27 +147,25 @@ export default function Home() {
   }, []);
 
   const trainingLink = hasMembership ? '/roleplay' : '/checkout-preview';
-  const storeLink = hasMembership ? '/store' : '/checkout-preview';
-
   return (
     <>
       <Head>
-        <title>FSA ELITE | AI Sales Training and Professional Branding</title>
+        <title>FSA ELITE | Sales Performance Training for Closers and Teams</title>
         <meta
           name="description"
-          content="AI-powered sales training, objection roleplay, and professional branding tools for sales reps who want to level up fast."
+          content="FSA Elite Performance helps closers and sales teams grow revenue with AI roleplay, rep-branding tools, and a sharper sales system."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/`} />
         <meta property="og:site_name" content="FSA ELITE" />
-        <meta property="og:title" content="FSA ELITE | AI Sales Training and Professional Branding" />
-        <meta property="og:description" content="AI-powered sales training, objection roleplay, and professional branding tools." />
+        <meta property="og:title" content="FSA ELITE | Sales Performance Training for Closers and Teams" />
+        <meta property="og:description" content="AI roleplay, rep-branding tools, and sales performance training built to help closers and teams grow revenue." />
         <meta property="og:url" content={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE | AI Sales Training" />
-        <meta name="twitter:description" content="AI-powered sales training and professional branding tools." />
+        <meta name="twitter:title" content="FSA ELITE | Sales Performance Training" />
+        <meta name="twitter:description" content="AI roleplay, rep-branding tools, and sales performance training for closers and teams." />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
       </Head>
 
@@ -182,33 +222,33 @@ export default function Home() {
         {/* Hero Section */}
         <section className="landing-hero">
           <div className="landing-hero-content">
-            <div className="landing-hero-badge">
-              <span className="landing-badge-dot" />
-              One Payment. Lifetime Access.
-            </div>
-            
-            <h1 className="landing-hero-title">
-              The complete platform for
-              <br />
-              <span className="landing-hero-highlight">sales performance</span>
-            </h1>
-            
-            <p className="landing-hero-subtitle">
-              AI objection drills, professional branding tools, and closer gear.
-              Built for reps who refuse to blend in.
-            </p>
+              <div className="landing-hero-badge">
+                <span className="landing-badge-dot" />
+                Phase One. Founding Access.
+              </div>
+              
+              <h1 className="landing-hero-title">
+                Train the rep.
+                <br />
+                <span className="landing-hero-highlight">Sharpen the system.</span>
+              </h1>
+              
+              <p className="landing-hero-subtitle">
+                FSA Elite Performance helps closers and growing sales teams increase revenue
+                with AI drills, rep-branding tools, and a sales system that gets proven before it gets bigger.
+              </p>
 
-            <div className="landing-hero-actions">
-              <Link href="/checkout-preview" className="btn-primary btn-lg">
-                Unlock Access — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
-              </Link>
-              <Link href={trainingLink} className="btn-secondary btn-lg">
-                {hasMembership ? 'Open Roleplay Lab' : 'Preview Training'}
+              <div className="landing-hero-actions">
+                <Link href="/checkout-preview" className="btn-primary btn-lg">
+                  Claim Founding Access — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
+                </Link>
+                <Link href={trainingLink} className="btn-secondary btn-lg">
+                  {hasMembership ? 'Open Roleplay Lab' : 'Preview Training'}
               </Link>
             </div>
 
             <p className="landing-hero-note">
-              Instant access · No subscription · Secure checkout
+              Current Phase One access · One-time payment · Secure checkout
             </p>
           </div>
 
@@ -261,9 +301,9 @@ export default function Home() {
         <section className="landing-section" id="features">
           <div className="landing-section-header">
             <span className="landing-eyebrow">Features</span>
-            <h2 className="landing-section-title">Everything you need to close more deals</h2>
+            <h2 className="landing-section-title">The current sales performance stack</h2>
             <p className="landing-section-subtitle">
-              Training, branding, and tools — all connected in one platform.
+              Start with the drills, dashboard, and store that help prove the method in real conversations.
             </p>
           </div>
 
@@ -281,11 +321,34 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="landing-section landing-section-alt">
+          <div className="landing-section-header">
+            <span className="landing-eyebrow">Growth Ladder</span>
+            <h2 className="landing-section-title">Build proof before you build complexity</h2>
+            <p className="landing-section-subtitle">
+              FSA ELITE starts with a sharp entry offer, then expands into recurring team programs and a scalable system.
+            </p>
+          </div>
+
+          <div className="landing-features-grid">
+            {GROWTH_PATH.map((item) => (
+              <article key={item.title} className="landing-feature-card">
+                <div className="landing-feature-stat">
+                  <strong>{item.stat}</strong>
+                  <span>{item.statLabel}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         {/* How It Works */}
-        <section className="landing-section landing-section-alt" id="how-it-works">
+        <section className="landing-section" id="how-it-works">
           <div className="landing-section-header">
             <span className="landing-eyebrow">How It Works</span>
-            <h2 className="landing-section-title">From signup to closing stronger</h2>
+            <h2 className="landing-section-title">Start with proof, then scale</h2>
           </div>
 
           <div className="landing-steps">
@@ -302,21 +365,44 @@ export default function Home() {
           </div>
         </section>
 
+        <section className="landing-section landing-section-alt">
+          <div className="landing-section-header">
+            <span className="landing-eyebrow">Pricing Model</span>
+            <h2 className="landing-section-title">Start with access. Grow into recurring revenue.</h2>
+            <p className="landing-section-subtitle">
+              The current checkout unlocks Phase One today, while team and enterprise programs support the long-term revenue model.
+            </p>
+          </div>
+
+          <div className="landing-features-grid">
+            {PRICING_OPTIONS.map((item) => (
+              <article key={item.title} className="landing-feature-card">
+                <div className="landing-feature-stat">
+                  <strong>{item.stat}</strong>
+                  <span>{item.statLabel}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
         {/* CTA Section */}
         <section className="landing-cta">
           <div className="landing-cta-content">
             <h2>The rep who prepares harder closes more.</h2>
             <p>
-              Most reps wing it. FSA ELITE members drill it, brand it, and walk in
-              looking like they have already closed this deal before.
+              Most reps wing it. FSA ELITE starts by sharpening the rep, then turns
+              that proof into stronger coaching, cleaner standards, and scalable growth.
             </p>
             <div className="landing-cta-actions">
               <Link href="/checkout-preview" className="btn-primary btn-lg">
-                Start for {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
+                Start Phase One for {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
               </Link>
-              <Link href={storeLink} className="btn-secondary btn-lg">
-                {hasMembership ? 'Open Store' : 'Preview Store'}
-              </Link>
+              <a href={`mailto:${SUPPORT_EMAIL}?subject=FSA%20ELITE%20Team%20Training`} className="btn-secondary btn-lg">
+                Ask About Team Training
+              </a>
             </div>
           </div>
         </section>
@@ -353,7 +439,7 @@ export default function Home() {
               <div className="landing-footer-col">
                 <h4>Product</h4>
                 <Link href="/roleplay">Roleplay Lab</Link>
-                <Link href="/store">Member Store</Link>
+                <Link href="/store">Store</Link>
                 <Link href="/checkout-preview">Pricing</Link>
               </div>
               <div className="landing-footer-col">

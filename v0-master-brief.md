@@ -23,10 +23,10 @@ FSA ELITE is a third-party B2B sales training company that helps businesses shar
 
 ---
 
-## Membership & Pricing
+## Founding Access & Pricing
 
-- **One-time $12.99 lifetime membership** — no subscriptions
-- Unlocks: AI Roleplay Lab, full Member Store access, all future training content
+- **One-time $12.99 Founding Access** — current Phase One access with no recurring charges
+- Unlocks: AI Roleplay Lab, dashboard access, and the FSA Store
 
 ---
 
@@ -99,7 +99,7 @@ OLIVE adapts responses based on current page: home, store, checkout-preview, rol
 
 ---
 
-### 3. Member Store (`/store`)
+### 3. FSA Store (`/store`)
 
 17+ products across 6 categories:
 
@@ -121,7 +121,7 @@ OLIVE adapts responses based on current page: home, store, checkout-preview, rol
 ├── pages/
 │   ├── index.tsx          # Landing page
 │   ├── roleplay.tsx       # AI Roleplay Lab
-│   ├── store.tsx          # Member Store
+│   ├── store.tsx          # FSA Store
 │   ├── welcome.tsx        # Dashboard
 │   ├── login.tsx          # Auth
 │   ├── register.tsx       # Auth

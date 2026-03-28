@@ -104,12 +104,12 @@ export default function Success() {
         </div>
         <h1>You are in.</h1>
         {checkoutKind === 'merch' ? (
-          <p>Payment confirmed. Your merch order is locked in and your member access stays active.</p>
+          <p>Payment confirmed. Your merch order is locked in and your store access stays active.</p>
         ) : (
           <p>
             {activatingMembership
               ? `Payment confirmed. Activating your ${SUBSCRIPTION_NAME} now…`
-              : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is live — AI training, member store, and every future update are yours.`}
+              : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is live — AI training, dashboard access, and the FSA Store are ready.`}
           </p>
         )}
         {activationError && <p className="home-error">{activationError}</p>}
@@ -129,7 +129,7 @@ export default function Success() {
               : 'Next step: open the Roleplay Lab and run your first objection drill. Takes 3 minutes.'}
         </p>
         <Link href={checkoutKind === 'merch' ? '/store' : '/roleplay'} className="btn-primary">
-          {checkoutKind === 'merch' ? 'Return to Member Store' : 'Start AI Roleplay Training'}
+          {checkoutKind === 'merch' ? 'Return to Store' : 'Start AI Roleplay Training'}
         </Link>
         <Link href="/" className="btn-secondary" style={{ marginTop: '0.75rem' }}>
           Return to Home

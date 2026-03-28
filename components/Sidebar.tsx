@@ -11,7 +11,7 @@ interface SidebarProps {
 const NAV_ITEMS = [
   { href: '/welcome', label: 'Dashboard', icon: '🏁' },
   { href: '/roleplay', label: 'Roleplay Lab', icon: '🎯' },
-  { href: '/store', label: 'Member Store', icon: '🛍️' },
+  { href: '/store', label: 'Store', icon: '🛍️' },
 ];
 
 export default function Sidebar({ open, onClose }: SidebarProps) {
@@ -53,7 +53,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           <img src="/logo.jpg" alt="FSA ELITE" className="app-sidebar-logo" />
           <span className="app-sidebar-title">
             FSA ELITE
-            <span className="app-sidebar-subtitle">Training + Identity</span>
+            <span className="app-sidebar-subtitle">Sales Performance</span>
           </span>
         </Link>
 

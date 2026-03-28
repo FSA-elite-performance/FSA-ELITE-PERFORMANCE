@@ -68,10 +68,10 @@ export default function CheckoutPreview() {
   return (
     <>
       <Head>
-        <title>Membership Checkout | FSA ELITE</title>
+        <title>Founding Access Checkout | FSA ELITE</title>
         <meta
           name="description"
-          content="Review FSA ELITE membership access, pricing, and support details before continuing to secure Stripe checkout on fsaeliteperformance.com."
+          content="Review FSA ELITE Founding Access, pricing, and support details before continuing to secure Stripe checkout on fsaeliteperformance.com."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/checkout-preview`} />
@@ -84,11 +84,11 @@ export default function CheckoutPreview() {
               <Link href="/" className="store-back-link">
                 ← Back to Home
               </Link>
-              <p className="eyebrow">Membership Checkout</p>
+              <p className="eyebrow">Founding Access Checkout</p>
               <h1>{SUBSCRIPTION_NAME}</h1>
               <p className="checkout-preview-description">{SUBSCRIPTION_DESCRIPTION}</p>
               <p className="store-support-line">
-                Most sales courses charge $49/month. Coaching programs run $997+. This is {formatUsd(SUBSCRIPTION_PRICE_CENTS)} — once — and you keep everything.
+                Most sales courses charge $49/month. Coaching programs run $997+. Founding Access is {formatUsd(SUBSCRIPTION_PRICE_CENTS)} one time for the current Phase One experience.
               </p>
               <ul className="checkout-preview-list">
                 {PLAN_ITEMS.map((item) => (
@@ -105,7 +105,7 @@ export default function CheckoutPreview() {
                   <span className="checkout-preview-brand-domain">fsaeliteperformance.com</span>
                 </div>
               </div>
-              <p className="checkout-preview-badge">Full course access</p>
+              <p className="checkout-preview-badge">Phase One access</p>
               <p className="checkout-preview-note">Sold by {PUBLIC_BUSINESS_NAME}</p>
               <h2>{SUBSCRIPTION_NAME}</h2>
               <div className="checkout-preview-price">
@@ -113,13 +113,13 @@ export default function CheckoutPreview() {
                 <span>one-time payment</span>
               </div>
               <p className="checkout-preview-note">
-                Membership unlocks the AI Roleplay Lab with 5 buyer personas, your performance dashboard, and the full 15+ product member store.
+                Founding Access unlocks the current AI Roleplay Lab with 5 buyer personas, your closer dashboard, and the full 15+ product FSA Store.
               </p>
               <p className="checkout-preview-note">
-                Secure Stripe-hosted checkout. No subscription. No surprise charges. Takes 30 seconds.
+                Secure Stripe-hosted checkout. No recurring charges. Team and enterprise programs are scoped separately. Takes 30 seconds.
               </p>
               <button type="button" className="btn-primary checkout-preview-button" onClick={startCheckout} disabled={checkoutLoading}>
-                {checkoutLoading ? 'Redirecting…' : '🔒 Unlock Lifetime Access — ' + formatUsd(SUBSCRIPTION_PRICE_CENTS)}
+                {checkoutLoading ? 'Redirecting…' : '🔒 Claim Founding Access — ' + formatUsd(SUBSCRIPTION_PRICE_CENTS)}
               </button>
               {checkoutError && <p className="home-error checkout-preview-error">{checkoutError}</p>}
               <p className="checkout-preview-support">
