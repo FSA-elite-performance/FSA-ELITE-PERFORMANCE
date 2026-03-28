@@ -1,0 +1,12 @@
+{
+  "name": "fsa-elite-sales-training",
+  "private": true,
+  "workspaces": [
+    "next-app"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace next-app",
+    "build": "npm run build --workspace next-app",
+    "start": "npm run start --workspace next-app"
+  }
+}
