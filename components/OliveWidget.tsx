@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, FormEvent } from 'react';
+import { useState, useRef, useEffect, FormEvent, KeyboardEvent as ReactKeyboardEvent } from 'react';
 import { OLIVE_GREETING, OLIVE_NAME, OLIVE_TAGLINE } from '../lib/olivePersona';
 import { AI_CHAT_MAX_MSG_CHARS } from '../lib/aiChatConstants';
 
@@ -84,6 +84,11 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
   const [error, setError] = useState('');
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const modeTabRefs = useRef<Record<OliveMode, HTMLButtonElement | null>>({
+    general: null,
+    coach: null,
+    battle: null,
+  });
 
   // Load persisted state on mount.
   useEffect(() => {
@@ -192,6 +197,89 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
     setError('');
   }
 
+  function focusModeTab(next: OliveMode) {
+    window.requestAnimationFrame(() => {
+      modeTabRefs.current[next]?.focus();
+    });
+  }
+
+  function switchModeByOffset(offset: number) {
+    const currentIndex = MODES.findIndex((entry) => entry.id === mode);
+    const nextIndex = (currentIndex + offset + MODES.length) % MODES.length;
+    const nextMode = MODES[nextIndex]?.id;
+    if (!nextMode) return;
+    switchMode(nextMode);
+    focusModeTab(nextMode);
+  }
+
+  function handleModeKeyDown(event: ReactKeyboardEvent<HTMLButtonElement>, currentMode: OliveMode) {
+    const currentIndex = MODES.findIndex((entry) => entry.id === currentMode);
+    if (currentIndex === -1) return;
+
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      switchModeByOffset(1);
+      return;
+    }
+
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      switchModeByOffset(-1);
+      return;
+    }
+
+    if (event.key === 'Home') {
+      event.preventDefault();
+      const nextMode = MODES[0]?.id;
+      if (!nextMode) return;
+      switchMode(nextMode);
+      focusModeTab(nextMode);
+      return;
+    }
+
+    if (event.key === 'End') {
+      event.preventDefault();
+      const nextMode = MODES[MODES.length - 1]?.id;
+      if (!nextMode) return;
+      switchMode(nextMode);
+      focusModeTab(nextMode);
+    }
+  }
+
+  useEffect(() => {
+    function handleWindowKeyDown(event: KeyboardEvent) {
+      if (event.defaultPrevented || event.ctrlKey || event.metaKey) return;
+
+      if (event.altKey && event.key.toLowerCase() === 'o') {
+        event.preventDefault();
+
+        if (!enabled) {
+          setEnabled(true);
+          setOpen(true);
+          return;
+        }
+
+        if (!open) {
+          setOpen(true);
+          return;
+        }
+
+        inputRef.current?.focus();
+        return;
+      }
+
+      if (!enabled || !open || !event.altKey || event.key !== 'Tab') return;
+
+      event.preventDefault();
+      switchModeByOffset(event.shiftKey ? -1 : 1);
+    }
+
+    window.addEventListener('keydown', handleWindowKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleWindowKeyDown);
+    };
+  }, [enabled, open, mode]);
+
   function clearHistory() {
     setMessages([]);
     window.localStorage.removeItem(getHistoryKey(mode));
@@ -204,7 +292,8 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
         className="olive-fab olive-fab-disabled"
         onClick={toggleEnabled}
         aria-label="Enable OLIVE assistant"
-        title="Turn OLIVE back on"
+        aria-keyshortcuts="Alt+O"
+        title="Turn OLIVE back on (Option+O)"
       >
         <span className="olive-fab-icon">O</span>
       </button>
@@ -224,6 +313,8 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
           className="olive-fab"
           onClick={() => setOpen(true)}
           aria-label="Open OLIVE assistant"
+          aria-keyshortcuts="Alt+O"
+          title="Open OLIVE assistant (Option+O)"
         >
           <span className="olive-fab-icon">O</span>
           <span className="olive-fab-pulse" />
@@ -273,10 +364,14 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
             {MODES.map((m) => (
               <button
                 key={m.id}
+                ref={(element) => { modeTabRefs.current[m.id] = element; }}
                 role="tab"
                 aria-selected={mode === m.id}
+                aria-keyshortcuts="Alt+Tab"
+                tabIndex={mode === m.id ? 0 : -1}
                 className={`olive-mode-tab${mode === m.id ? ' olive-mode-tab-active' : ''}`}
                 onClick={() => switchMode(m.id)}
+                onKeyDown={(event) => handleModeKeyDown(event, m.id)}
                 title={m.title}
               >
                 {m.label}
