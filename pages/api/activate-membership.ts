@@ -45,7 +45,7 @@ export default async function handler(
       return res.redirect(302, '/checkout-preview?error=activation_unavailable');
     }
 
-    return res.status(500).json({ active: false, error: 'Membership activation is unavailable.' });
+    return res.status(500).json({ active: false, error: 'Membership activation unavailable. Please contact support.' });
   }
 
   const rawSessionId =
@@ -60,7 +60,7 @@ export default async function handler(
       return res.redirect(302, '/checkout-preview?error=missing_session');
     }
 
-    return res.status(400).json({ active: false, error: 'sessionId is required.' });
+    return res.status(400).json({ active: false, error: 'Payment session not found. Please try checkout again.' });
   }
 
   const stripe = getStripeClient(secretKey);
@@ -73,7 +73,7 @@ export default async function handler(
         return res.redirect(302, '/checkout-preview?error=payment_incomplete');
       }
 
-      return res.status(400).json({ active: false, error: 'Payment has not completed.' });
+      return res.status(400).json({ active: false, error: 'Payment not completed. Please complete checkout first.' });
     }
 
     if (session.metadata?.product_id !== SUBSCRIPTION_PRODUCT_ID) {
@@ -81,7 +81,7 @@ export default async function handler(
         return res.redirect(302, '/checkout-preview?error=ineligible_session');
       }
 
-      return res.status(400).json({ active: false, error: 'Session is not eligible for membership activation.' });
+      return res.status(400).json({ active: false, error: 'This payment is not eligible for membership. Please contact support.' });
     }
 
     const token = await createMembershipToken(session.id);
@@ -92,7 +92,7 @@ export default async function handler(
         return res.redirect(302, '/checkout-preview?error=activation_unavailable');
       }
 
-      return res.status(500).json({ active: false, error: 'Membership activation is unavailable.' });
+      return res.status(500).json({ active: false, error: 'Membership activation unavailable. Please contact support.' });
     }
 
     res.setHeader('Set-Cookie', buildMembershipCookie(token, process.env.NODE_ENV === 'production'));
@@ -104,11 +104,13 @@ export default async function handler(
     return res.status(200).json({ active: true });
   } catch (error: unknown) {
     console.error('Membership activation failed:', error);
+    const errorDetails = error instanceof Error ? error.message : 'Unknown error';
+    console.error('Activation error details:', errorDetails);
 
     if (req.method === 'GET') {
       return res.redirect(302, '/checkout-preview?error=activation_failed');
     }
 
-    return res.status(500).json({ active: false, error: 'Membership activation failed. Please contact support.' });
+    return res.status(500).json({ active: false, error: 'Membership activation failed. Please contact support with your payment confirmation.' });
   }
 }

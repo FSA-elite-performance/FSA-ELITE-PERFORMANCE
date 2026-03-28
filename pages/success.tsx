@@ -57,8 +57,9 @@ export default function Success() {
             }
           })
           .catch((error: unknown) => {
-            const message = error instanceof Error ? error.message : 'Membership activation failed.';
+            const message = error instanceof Error ? error.message : 'Membership activation failed. Please contact support.';
             setActivationError(message);
+            console.error('Activation error:', error);
           })
           .finally(() => {
             setActivatingMembership(false);
@@ -108,8 +109,10 @@ export default function Success() {
         ) : (
           <p>
             {activatingMembership
-              ? `Payment confirmed. Activating your ${SUBSCRIPTION_NAME} now…`
-              : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is live — AI training, member store, and every future update are yours.`}
+              ? `Payment confirmed. Activating your ${SUBSCRIPTION_NAME}...`
+              : activationError
+                ? `Payment successful, but there was an issue activating your membership. Please contact support.`
+                : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is now active — AI training, member store, and all future updates are yours.`}
           </p>
         )}
         {activationError && <p className="home-error">{activationError}</p>}
@@ -125,8 +128,10 @@ export default function Success() {
           {checkoutKind === 'merch'
             ? 'Head back to the store or jump into a training session.'
             : activatingMembership
-              ? 'Hang tight — access is confirming now.'
-              : 'Next step: open the Roleplay Lab and run your first objection drill. Takes 3 minutes.'}
+              ? 'Setting up your account access now...'
+              : activationError
+                ? 'If this issue persists, email support with your payment confirmation.'
+                : 'Next step: Open the AI Roleplay Lab and run your first objection drill. Takes 3 minutes.'}
         </p>
         <Link href={checkoutKind === 'merch' ? '/store' : '/roleplay'} className="btn-primary">
           {checkoutKind === 'merch' ? 'Return to Member Store' : 'Start AI Roleplay Training'}

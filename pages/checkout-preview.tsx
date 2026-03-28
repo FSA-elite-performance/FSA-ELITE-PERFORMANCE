@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   PUBLIC_SEO_KEYWORDS,
   PUBLIC_BUSINESS_NAME,
@@ -31,11 +31,27 @@ export default function CheckoutPreview() {
   const [checkoutLoading, setCheckoutLoading] = useState(false);
   const [checkoutError, setCheckoutError] = useState('');
 
+  // Check for error query params (e.g., from activation failures)
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const errorCode = params.get('error');
+    if (errorCode) {
+      const errorMessages: Record<string, string> = {
+        activation_unavailable: 'Membership activation is currently unavailable. Please contact support.',
+        missing_session: 'Payment session not found. Please try checkout again.',
+        payment_incomplete: 'Payment was not completed. Please try again.',
+        ineligible_session: 'This payment is not eligible for membership. Please contact support.',
+        activation_failed: 'Membership activation failed. Please contact support with your payment confirmation.',
+      };
+      setCheckoutError(errorMessages[errorCode] ?? 'An error occurred. Please try again.');
+    }
+  }, []);
+
   async function startCheckout() {
     if (checkoutLoading) return;
 
     if (!STRIPE_PUBLISHABLE_KEY) {
-      setCheckoutError('Stripe publishable key is missing. Contact support before checkout.');
+      setCheckoutError('Payment system is not configured. Please contact support.');
       return;
     }
 
@@ -52,14 +68,14 @@ export default function CheckoutPreview() {
       const data = (await response.json()) as { url?: string; error?: string };
 
       if (!response.ok || !data.url) {
-        setCheckoutError(data.error ?? 'Unable to start checkout right now. Please try again.');
+        setCheckoutError(data.error ?? 'Unable to start checkout. Please refresh and try again.');
         return;
       }
 
       window.localStorage.setItem(CHECKOUT_CONTEXT_KEY, 'membership');
       window.location.href = data.url;
     } catch {
-      setCheckoutError('Network error while starting checkout. Please try again.');
+      setCheckoutError('Network error. Please check your connection and try again.');
     } finally {
       setCheckoutLoading(false);
     }
