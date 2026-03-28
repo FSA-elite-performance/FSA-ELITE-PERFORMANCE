@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { PUBLIC_SEO_KEYWORDS, PUBLIC_SITE_URL } from '../lib/businessDetails';
 import { formatSkillTag, type SkillTag } from '../lib/roleplayIntelligence';
 
@@ -19,6 +19,19 @@ type RoleplayProgress = {
 };
 
 const ROLEPLAY_PROGRESS_KEY = 'fsaelite:roleplay-progress:v1';
+
+type StatusCheck = {
+  id: string;
+  label: string;
+  state: 'pass' | 'warn' | 'fail';
+  detail: string;
+};
+
+type SystemStatus = {
+  timestamp: string;
+  environment: string;
+  checks: StatusCheck[];
+};
 
 const SKILL_KEYS: SkillTag[] = [
   'frame_control',
@@ -61,10 +74,28 @@ function todayKey(): string {
 
 export default function Welcome() {
   const [progress, setProgress] = useState<RoleplayProgress | null>(null);
+  const [systemStatus, setSystemStatus] = useState<SystemStatus | null>(null);
+  const [statusError, setStatusError] = useState(false);
 
   useEffect(() => {
     setProgress(loadProgress());
   }, []);
+
+  const fetchSystemStatus = useCallback(async () => {
+    try {
+      const res = await fetch('/api/system-status', { credentials: 'same-origin' });
+      if (!res.ok) { setStatusError(true); return; }
+      const data: SystemStatus = await res.json();
+      setSystemStatus(data);
+      setStatusError(false);
+    } catch {
+      setStatusError(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchSystemStatus();
+  }, [fetchSystemStatus]);
 
   const sessions = progress?.sessionsCompleted ?? 0;
   const turns = progress?.totalTurns ?? 0;
@@ -223,6 +254,37 @@ export default function Welcome() {
               ? 'One session turns this dashboard into a real coaching tool. Takes 3 minutes.'
               : `${drillsToday} drill${drillsToday === 1 ? '' : 's'} today. Top reps run at least 3.`}
           </p>
+        </div>
+
+        {/* System Health */}
+        <div className="dash-panel dash-system-health">
+          <h2>⚙️ System Health</h2>
+          {statusError ? (
+            <p className="dash-panel-muted">Unable to reach system status.</p>
+          ) : !systemStatus ? (
+            <p className="dash-panel-muted">Loading…</p>
+          ) : (
+            <>
+              <div className="dash-health-summary">
+                <span className="dash-health-env">{systemStatus.environment}</span>
+                <span className="dash-health-ts">
+                  {new Date(systemStatus.timestamp).toLocaleTimeString()}
+                </span>
+              </div>
+              <div className="dash-health-checks">
+                {systemStatus.checks.map((c) => (
+                  <div className="dash-health-row" key={c.id}>
+                    <span
+                      className="dash-health-dot"
+                      data-state={c.state}
+                      title={c.detail}
+                    />
+                    <span className="dash-health-label">{c.label}</span>
+                  </div>
+                ))}
+              </div>
+            </>
+          )}
         </div>
       </main>
     </>

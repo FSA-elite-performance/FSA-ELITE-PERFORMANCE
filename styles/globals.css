@@ -1380,6 +1380,57 @@ ul { padding-left: 1.15rem; }
   text-align: center;
 }
 
+/* ── System Health Widget ── */
+.dash-system-health {
+  margin-top: 1.5rem;
+}
+.dash-health-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+.dash-health-env {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.dash-health-checks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+.dash-health-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--color-muted);
+}
+.dash-health-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dash-health-dot[data-state="pass"] {
+  background: var(--color-success);
+}
+.dash-health-dot[data-state="warn"] {
+  background: var(--color-warning);
+}
+.dash-health-dot[data-state="fail"] {
+  background: var(--color-error, #ef4444);
+}
+.dash-health-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @media (max-width: 768px) {
   .dash-metrics {
     grid-template-columns: repeat(2, 1fr);

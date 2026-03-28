@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { getEdgeFlag } from './lib/edgeConfig';
 import {
   buildClearedMembershipCookie,
   MEMBERSHIP_COOKIE_NAME,
@@ -92,6 +93,20 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const isProduction = process.env.NODE_ENV === 'production';
   const host = request.headers.get('host') ?? '';
+
+  // 0. Maintenance mode — toggled via Vercel Edge Config without a redeploy.
+  //    API routes are exempt so health-checks and webhooks keep working.
+  if (!pathname.startsWith('/api/')) {
+    const maintenance = await getEdgeFlag('maintenance', false);
+    if (maintenance) {
+      return new NextResponse(
+        '<html><body style="font-family:system-ui;display:grid;place-items:center;min-height:100vh;background:#0d1117;color:#e6edf3;margin:0">'
+        + '<div style="text-align:center"><h1>🛠️ FSA ELITE — Maintenance</h1>'
+        + '<p>We are performing a quick upgrade. Please check back shortly.</p></div></body></html>',
+        { status: 503, headers: { 'Content-Type': 'text/html', 'Retry-After': '300' } },
+      );
+    }
+  }
 
   // 0a. www → bare canonical redirect (301 permanent)
   const wwwCanonical = WWW_REDIRECTS[host];
