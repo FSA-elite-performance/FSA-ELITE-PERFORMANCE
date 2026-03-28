@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vercel Sandbox</title>
+  <meta
+    name="description"
+    content="Safely run untrusted or user-generated code in isolated Vercel sandboxes for AI agents, previews, and developer tooling."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Vercel Sandbox" />
+  <meta
+    property="og:description"
+    content="Use the Sandbox SDK or CLI to create isolated environments for AI agents, code generation, experimentation, and live previews."
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #f5a623;
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --surface-alt: #101010;
+      --border: #2a2a2a;
+      --text: #f0f0f0;
+      --muted: #888;
+      --muted-strong: #ccc;
+      --radius: 8px;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--gold); }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero {
+      background: linear-gradient(135deg, var(--bg) 60%, var(--surface) 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+    }
+    .hero .label {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); max-width: 680px; margin: 0 auto 2rem; font-size: 1.05rem; }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e09210; text-decoration: none; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .note { color: var(--muted); font-size: 0.8rem; margin-top: 0.75rem; }
+    .cred {
+      background: var(--surface);
+      padding: 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .features { padding: 4rem 1.5rem; background: var(--bg); }
+    .features h2,
+    .quick-reference h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .features .subtitle,
+    .quick-reference .subtitle {
+      color: var(--muted);
+      text-align: center;
+      margin: 0 auto 2.5rem;
+      max-width: 720px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .card,
+    .info-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: calc(var(--radius) + 2px);
+      padding: 1.5rem;
+    }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .card h3,
+    .info-card h3 {
+      color: var(--gold);
+      font-size: 1rem;
+      margin-bottom: 0.6rem;
+    }
+    .card p { color: var(--muted); font-size: 0.9rem; line-height: 1.6; }
+    .quick-reference {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--bg) 100%);
+      border-top: 1px solid var(--border);
+    }
+    .info-card {
+      text-align: left;
+    }
+    .info-card ul {
+      padding-left: 1.1rem;
+      color: var(--muted-strong);
+      line-height: 1.8;
+      font-size: 0.92rem;
+    }
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <p class="label">Vercel</p>
+      <h1>Safe execution for <br /><span>Vercel Sandbox.</span></h1>
+      <p>
+        Safely run untrusted or user-generated code in isolated Vercel sandboxes.
+        Use the Sandbox SDK or CLI to create environments for AI agents, code generation, experimentation, and live previews.
+      </p>
+      <div class="actions">
+        <a href="#features" class="btn">Explore capabilities →</a>
+        <a href="#quick-reference" class="btn btn-secondary">Read quick reference</a>
+      </div>
+      <p class="note">Recommended path: use <strong>@vercel/sandbox</strong> for automation and the CLI for debugging or one-off workflows.</p>
+    </div>
+  </section>
+
+  <div class="cred">
+    Each sandbox runs in a secure Firecracker microVM with its own filesystem and network, helping you isolate AI output, user uploads, and preview workloads.
+  </div>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>What you can do with Vercel Sandbox</h2>
+      <p class="subtitle">Build dynamic, real-time workflows with isolation, fast startup, and observability built in.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🛡️</div>
+          <h3>Execute untrusted code safely</h3>
+          <p>Run AI agent output, user uploads, or third-party scripts without exposing production systems.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧰</div>
+          <h3>Build interactive tools</h3>
+          <p>Create code playgrounds, AI-powered UI builders, and developer sandboxes on demand.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧪</div>
+          <h3>Test in isolation</h3>
+          <p>Preview user-submitted or agent-generated code with access to logs, file edits, and live previews.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Run development servers</h3>
+          <p>Spin up applications with live previews inside a short-lived sandbox environment.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚙️</div>
+          <h3>SDK and CLI workflows</h3>
+          <p>Use the SDK for automation and the CLI for manual testing, agentic workflows, debugging, and one-off tasks.</p>
+        </div>
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Fast startup and snapshotting</h3>
+          <p>Sandboxes start in milliseconds and can snapshot state so you can resume work without reinstalling dependencies.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="quick-reference" id="quick-reference">
+    <div class="container">
+      <h2>Authentication, runtimes, and resources</h2>
+      <p class="subtitle">Use this quick reference when choosing an auth strategy, a runtime, or the next piece of documentation to open.</p>
+      <div class="grid">
+        <div class="info-card">
+          <h3>Authentication</h3>
+          <ul>
+            <li>Vercel OIDC tokens are recommended and automatic in production on Vercel.</li>
+            <li>For local development, run <code>vercel link</code> and <code>vercel env pull</code> to get a development token.</li>
+            <li>Use access tokens when <code>VERCEL_OIDC_TOKEN</code> is unavailable, such as external CI/CD or non-Vercel environments.</li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>System specifications</h3>
+          <ul>
+            <li>Amazon Linux 2023</li>
+            <li>Runtimes: <code>node24</code>, <code>node22</code>, and <code>python3.13</code></li>
+            <li>Default runtime: <code>node24</code></li>
+            <li>User: <code>vercel-sandbox</code> with <code>sudo</code> access</li>
+            <li>Working directory: <code>/vercel/sandbox</code></li>
+          </ul>
+        </div>
+        <div class="info-card">
+          <h3>Resources</h3>
+          <ul>
+            <li>Quickstart</li>
+            <li>Working with Sandbox</li>
+            <li>Concepts</li>
+            <li>SDK Reference</li>
+            <li>CLI Reference</li>
+            <li>Pricing</li>
+            <li>Sandbox Repo</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <script>document.write(new Date().getFullYear())</script> Vercel Sandbox</p>
+  </footer>
+</body>
+</html>
