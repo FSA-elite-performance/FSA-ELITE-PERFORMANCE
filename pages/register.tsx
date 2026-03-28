@@ -9,6 +9,7 @@ import {
 } from 'firebase/auth';
 import { getClientAuth } from '../lib/firebaseClient';
 import { PUBLIC_BUSINESS_NAME } from '../lib/businessDetails';
+import { formatUsd, SUBSCRIPTION_PRICE_CENTS } from '../lib/subscriptionPlan';
 
 const PASSWORD_MIN_LENGTH = 8;
 
@@ -100,7 +101,7 @@ export default function Register() {
 
           <h1 className="auth-title">Create your account</h1>
           <p className="auth-subtitle">
-            Free to join. One-time $12.99 unlocks the full training platform.
+            Free to join. Solo access starts at {formatUsd(SUBSCRIPTION_PRICE_CENTS)} and team plans are scoped separately.
           </p>
 
           <form className="auth-form" onSubmit={handleSubmit} noValidate>
