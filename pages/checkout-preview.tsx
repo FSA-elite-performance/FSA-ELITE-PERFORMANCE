@@ -68,7 +68,7 @@ export default function CheckoutPreview() {
   return (
     <>
       <Head>
-        <title>Membership Checkout | FSA ELITE</title>
+        <title>Membership Checkout | FSA Elite Performance</title>
         <meta
           name="description"
           content="Review FSA ELITE membership access, pricing, and support details before continuing to secure Stripe checkout on fsaeliteperformance.com."
@@ -101,7 +101,7 @@ export default function CheckoutPreview() {
               <div className="checkout-preview-brand">
                 <img src="/logo.png" alt="FSA Elite Performance" className="checkout-preview-logo" />
                 <div>
-                  <strong className="checkout-preview-brand-name">FSA Elite Performance</strong>
+                  <strong className="checkout-preview-brand-name">{PUBLIC_BUSINESS_NAME}</strong>
                   <span className="checkout-preview-brand-domain">fsaeliteperformance.com</span>
                 </div>
               </div>

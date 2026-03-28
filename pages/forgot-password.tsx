@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { getClientAuth } from '../lib/firebaseClient';
-import { SUPPORT_EMAIL } from '../lib/businessDetails';
+import { PUBLIC_BUSINESS_NAME, SUPPORT_EMAIL } from '../lib/businessDetails';
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState('');
@@ -49,7 +49,7 @@ export default function ForgotPassword() {
           <div className="auth-brand">
             <img src="/logo.png" alt="FSA Elite Performance" className="auth-logo" />
             <div>
-              <strong className="auth-brand-name">FSA Elite Performance</strong>
+              <strong className="auth-brand-name">{PUBLIC_BUSINESS_NAME}</strong>
               <span className="auth-brand-sub">fsaeliteperformance.com</span>
             </div>
           </div>

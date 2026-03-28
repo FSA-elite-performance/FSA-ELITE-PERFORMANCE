@@ -397,7 +397,7 @@ Stay fully in character. Respond as this buyer would in a real conversation. Kee
   return (
     <>
       <Head>
-        <title>OLIVE Roleplay Lab | FSA ELITE AI Sales Training</title>
+        <title>OLIVE Roleplay Lab | FSA Elite Performance AI Sales Training</title>
         <meta
           name="description"
           content="Practice live objection handling with OLIVE, the FSA ELITE AI Sales Intelligence engine for closers in any industry."
