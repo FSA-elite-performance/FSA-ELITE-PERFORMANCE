@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSA Elite — Sales Training for Closers</title>
+  <meta name="description" content="Sales training. Closer mindset. Real growth. Built for hungry salespeople who want to level up and win." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FSA Elite — Sales Training for Closers" />
+  <meta property="og:description" content="Sales training. Closer mindset. Real growth. Built for hungry salespeople who want to level up and win." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #f5a623;
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--gold); }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 1.5rem; }
+    /* Hero */
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 60%, #1a1000 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .hero .label {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: #aaa; max-width: 580px; margin: 0 auto 2.5rem; font-size: 1.05rem; }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e09210; text-decoration: none; }
+    .note { color: #555; font-size: 0.8rem; margin-top: 0.75rem; }
+    /* Credibility */
+    .cred {
+      background: #111;
+      padding: 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+      color: #888;
+      font-size: 0.88rem;
+    }
+    .cred strong { color: var(--gold); }
+    .cred em { color: var(--text); font-style: normal; }
+    /* Features */
+    .features { padding: 4rem 1.5rem; background: #0d0d0d; }
+    .features h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 2.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .card h3 { color: var(--gold); font-size: 1rem; margin-bottom: 0.4rem; }
+    .card p { color: #aaa; font-size: 0.88rem; line-height: 1.6; }
+    /* CTA */
+    .cta-section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1a0e00, #0a0a0a);
+      border-top: 1px solid #2a2a2a;
+    }
+    .cta-section h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: 0.75rem; }
+    .cta-section p { color: #888; margin-bottom: 2rem; }
+    /* Footer */
+    footer {
+      border-top: 1px solid #2a2a2a;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <p class="label">FSA Elite Performance</p>
+      <h1>Stop Letting the Customer<br /><span>Run the Deal.</span></h1>
+      <p>
+        Sales training. Closer mindset. Real growth.<br />
+        Built for hungry salespeople who want to level up and win.
+      </p>
+      <!--
+        NOTE: This static page does NOT include Stripe Checkout.
+        To process payments, deploy the Next.js app via Vercel.
+        See the README for full setup instructions.
+      -->
+      <a href="https://fsaeliteperformance.com" class="btn">🚀 Get Early Access — Join Now</a>
+      <p class="note">One-time payment · Instant access · Powered by Stripe</p>
+    </div>
+  </section>
+
+  <!-- CREDIBILITY -->
+  <div class="cred">
+    Founded by <strong>Kaygun Fontenot</strong> ·
+    <em>25× Sales of the Month</em> ·
+    23 years old · Car industry veteran turned sales coach · LLC registered
+  </div>
+
+  <!-- FEATURES -->
+  <section class="features">
+    <div class="container">
+      <h2>What You Get with Early Access</h2>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">🔥</div>
+          <h3>Real-World Objection Handling</h3>
+          <p>Practice live objections from real deal scenarios — not textbook fluff.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🏆</div>
+          <h3>Closer Mindset Training</h3>
+          <p>Rewire how you think about sales. Build confidence and consistency.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📈</div>
+          <h3>Process Mastery</h3>
+          <p>Battle-tested FSA Elite framework refined over 25 sales-of-the-month wins.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📱</div>
+          <h3>Any Device, Any Time</h3>
+          <p>Phone, tablet, desktop — your training moves with you.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🎓</div>
+          <h3>Certifications &amp; Badges</h3>
+          <p>Earn verifiable credentials that prove your skill level.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💡</div>
+          <h3>AI-Powered Roleplay</h3>
+          <p>Practice with an AI playing a real skeptical customer. Level up before the floor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Early Access — $97 One-Time</h2>
+      <p>Lock in the founding member rate. Full access, lifetime updates at this price.</p>
+      <a href="https://fsaeliteperformance.com" class="btn">Get Early Access →</a>
+      <p class="note" style="margin-top:0.75rem;">Secure payment via Stripe · 30-day satisfaction guarantee</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <script>document.write(new Date().getFullYear())</script> FSA Elite Performance LLC · All rights reserved ·
+      <a href="mailto:support@fsaeliteperformance.com">support@fsaeliteperformance.com</a>
+    </p>
+  </footer>
+
+</body>
+</html>
