@@ -89,17 +89,17 @@ export default async function handler(
 
     if (verification.isBot) {
       console.warn('BotID blocked request to /api/create-checkout-session');
-      return res.status(403).json({ error: 'Access denied.' });
+      return res.status(403).json({ error: 'Access denied. Please refresh and try again.' });
     }
   } catch (error: unknown) {
     console.error('BotID verification failed for /api/create-checkout-session:', error);
-    return res.status(500).json({ error: 'Service temporarily unavailable. Please try again later.' });
+    return res.status(500).json({ error: 'Service temporarily unavailable. Please refresh and try again.' });
   }
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
     console.error('STRIPE_SECRET_KEY is not set');
-    return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
+    return res.status(500).json({ error: 'Payment system is not configured. Please contact support.' });
   }
 
   // Base URL used for success/cancel redirects. Prefer configured env,
@@ -108,7 +108,7 @@ export default async function handler(
 
   if (!isValidBaseUrl(baseUrl)) {
     console.error('Unable to resolve a valid checkout base URL');
-    return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
+    return res.status(500).json({ error: 'Checkout configuration error. Please contact support.' });
   }
 
   const stripe = getStripeClient(secretKey);
@@ -160,12 +160,14 @@ export default async function handler(
 
     if (!session.url) {
       console.error('Stripe session created without URL');
-      return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
+      return res.status(500).json({ error: 'Unable to start checkout. Please refresh and try again.' });
     }
 
     return res.status(200).json({ url: session.url });
   } catch (err: unknown) {
-    console.error('Stripe error:', err);
-    return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
+    console.error('Stripe checkout error:', err);
+    const errorMessage = err instanceof Error ? err.message : 'Unknown error';
+    console.error('Stripe error details:', errorMessage);
+    return res.status(500).json({ error: 'Unable to start checkout. Please try again or contact support.' });
   }
 }
