@@ -42,14 +42,14 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: 'npm'
-          cache-dependency-path: next-app/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install dependencies
-        working-directory: next-app
+        working-directory: .
         run: npm ci
 
       - name: Build app
-        working-directory: next-app
+        working-directory: .
         run: npm run build
 
       - name: Perform CodeQL analysis
