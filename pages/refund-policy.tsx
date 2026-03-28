@@ -11,7 +11,7 @@ import {
 const UPDATED_AT = 'March 24, 2026';
 
 const DIGITAL_ITEMS = [
-  'Elite Sales Performance is sold as a one-time digital training access product.',
+  'FSA ELITE Solo Access is sold as a digital sales training and member-access product.',
   'Access is delivered after successful payment confirmation.',
   'If you experience a billing problem, duplicate charge concern, or access-delivery issue, contact support promptly so we can review the order.',
 ];

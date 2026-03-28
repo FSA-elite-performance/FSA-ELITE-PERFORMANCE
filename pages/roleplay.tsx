@@ -397,7 +397,7 @@ Stay fully in character. Respond as this buyer would in a real conversation. Kee
   return (
     <>
       <Head>
-        <title>OLIVE Roleplay Lab | FSA ELITE AI Sales Training</title>
+        <title>OLIVE Roleplay Lab | FSA ELITE Sales Performance</title>
         <meta
           name="description"
           content="Practice live objection handling with OLIVE, the FSA ELITE AI Sales Intelligence engine for closers in any industry."
@@ -424,9 +424,9 @@ Stay fully in character. Respond as this buyer would in a real conversation. Kee
             <div className="container">
               <div className="member-gate-card">
                 <p className="eyebrow">Members Only</p>
-                <h1>Training access unlocks after the {formatUsd(SUBSCRIPTION_PRICE_CENTS)} membership payment.</h1>
+                <h1>Training access unlocks after the {formatUsd(SUBSCRIPTION_PRICE_CENTS)} solo access checkout.</h1>
                 <p className="member-gate-copy">
-                  The AI Roleplay Lab is part of the FSA ELITE membership. Complete the one-time purchase first, then
+                  The AI Roleplay Lab is part of FSA ELITE Solo Access. Complete the self-serve checkout first, then
                   return here to practice objection handling.
                 </p>
                 <div className="member-gate-actions">

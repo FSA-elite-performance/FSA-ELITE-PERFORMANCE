@@ -9,12 +9,12 @@ import {
 
 const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
 const SITE_DESCRIPTION =
-  'FSA Elite Performance delivers AI sales training, objection handling drills, self-branding tools, and closer gear for reps who want stronger skills and stronger identity.';
+  'FSA Elite Performance helps businesses grow revenue with trained reps, performance coaching, AI roleplay, and repeatable sales systems before scaling the method into software.';
 
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'FSA Elite Performance Training',
+  name: 'FSA Elite Performance',
   alternateName: [...PUBLIC_BRAND_ALIASES],
   url: SITE_URL,
   email: SUPPORT_EMAIL,
@@ -39,7 +39,7 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#0a0a0a" />
-        <meta name="application-name" content="FSA ELITE Sales Training" />
+        <meta name="application-name" content="FSA ELITE Sales Performance" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="FSA ELITE" />
@@ -71,16 +71,16 @@ export default function Document() {
         />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="FSA ELITE Sales Training" />
-        <meta property="og:title" content="FSA ELITE Sales Training" />
+        <meta property="og:site_name" content="FSA ELITE Sales Performance" />
+        <meta property="og:title" content="FSA ELITE Sales Performance" />
         <meta property="og:description" content={SITE_DESCRIPTION} />
         <meta property="og:url" content={SITE_URL} />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="FSA ELITE Sales Training" />
+        <meta property="og:image:alt" content="FSA ELITE Sales Performance" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE Sales Training" />
+        <meta name="twitter:title" content="FSA ELITE Sales Performance" />
         <meta name="twitter:description" content={SITE_DESCRIPTION} />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
         <script

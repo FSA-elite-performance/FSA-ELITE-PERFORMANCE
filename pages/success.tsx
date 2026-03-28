@@ -96,7 +96,7 @@ export default function Success() {
   return (
     <>
       <Head>
-        <title>Payment Successful | FSA ELITE Sales Training</title>
+        <title>Payment Successful | FSA ELITE Sales Performance</title>
       </Head>
       <main className="status-page">
         <div className="status-icon" aria-hidden="true">
@@ -109,7 +109,7 @@ export default function Success() {
           <p>
             {activatingMembership
               ? `Payment confirmed. Activating your ${SUBSCRIPTION_NAME} now…`
-              : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is live — AI training, member store, and every future update are yours.`}
+              : `Payment confirmed. Your ${SUBSCRIPTION_NAME} is live — AI training, the member store, and the core sales performance stack are ready.`}
           </p>
         )}
         {activationError && <p className="home-error">{activationError}</p>}

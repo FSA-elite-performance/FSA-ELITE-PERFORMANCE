@@ -9,7 +9,10 @@ import {
   SUPPORT_PHONE,
 } from '../lib/businessDetails';
 import {
+  FLAGSHIP_OFFER_DESCRIPTION,
+  FLAGSHIP_OFFER_NAME,
   formatUsd,
+  PRICING_TIERS,
   SUBSCRIPTION_DESCRIPTION,
   SUBSCRIPTION_MARKETING_FEATURES,
   SUBSCRIPTION_NAME,
@@ -20,11 +23,10 @@ import { CHECKOUT_CONTEXT_KEY } from '../lib/accessKeys';
 const PLAN_ITEMS = [
   ...SUBSCRIPTION_MARKETING_FEATURES,
   'Secure Stripe-hosted checkout with support and policy links visible before payment',
-  'Email support for billing, access, and cancellation requests',
+  'Designed as the self-serve starting point while team and enterprise pricing is scoped separately',
 ];
 
 const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
-
 const STRIPE_PUBLISHABLE_KEY = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY?.trim() ?? '';
 
 export default function CheckoutPreview() {
@@ -65,13 +67,15 @@ export default function CheckoutPreview() {
     }
   }
 
+  const contactHref = `mailto:${SUPPORT_EMAIL}?subject=FSA%20Elite%20Performance%20Pricing`;
+
   return (
     <>
       <Head>
-        <title>Membership Checkout | FSA ELITE</title>
+        <title>Pricing & Access | FSA ELITE</title>
         <meta
           name="description"
-          content="Review FSA ELITE membership access, pricing, and support details before continuing to secure Stripe checkout on fsaeliteperformance.com."
+          content="Review FSA ELITE pricing, flagship offer positioning, and the live solo access checkout before choosing the right sales performance plan."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/checkout-preview`} />
@@ -84,12 +88,37 @@ export default function CheckoutPreview() {
               <Link href="/" className="store-back-link">
                 ← Back to Home
               </Link>
-              <p className="eyebrow">Membership Checkout</p>
-              <h1>{SUBSCRIPTION_NAME}</h1>
-              <p className="checkout-preview-description">{SUBSCRIPTION_DESCRIPTION}</p>
-              <p className="store-support-line">
-                Most sales courses charge $49/month. Coaching programs run $997+. This is {formatUsd(SUBSCRIPTION_PRICE_CENTS)} — once — and you keep everything.
+              <p className="eyebrow">Pricing & Access</p>
+              <h1>Start with one clear offer, then expand into recurring revenue.</h1>
+              <p className="checkout-preview-description">
+                {FLAGSHIP_OFFER_NAME} is the lead offer. Use it to create proof, tighten SOPs, and validate the KPI rhythm
+                before scaling recruiting or software.
               </p>
+              <p className="store-support-line">{FLAGSHIP_OFFER_DESCRIPTION}</p>
+
+              <div className="landing-features-grid">
+                {PRICING_TIERS.map((tier) => (
+                  <article key={tier.id} className="landing-feature-card">
+                    <div className="landing-feature-stat">
+                      <strong>{tier.priceLabel}</strong>
+                      <span>{tier.cadenceLabel}</span>
+                    </div>
+                    <h3>{tier.name}</h3>
+                    <p>{tier.description}</p>
+                    <p><strong>Best for:</strong> {tier.bestFor}</p>
+                    {tier.contactOnly ? (
+                      <a href={contactHref} className="btn-secondary btn-sm">
+                        {tier.ctaLabel}
+                      </a>
+                    ) : (
+                      <button type="button" className="btn-primary btn-sm" onClick={startCheckout} disabled={checkoutLoading}>
+                        {checkoutLoading ? 'Redirecting…' : tier.ctaLabel}
+                      </button>
+                    )}
+                  </article>
+                ))}
+              </div>
+
               <ul className="checkout-preview-list">
                 {PLAN_ITEMS.map((item) => (
                   <li key={item}>{item}</li>
@@ -105,21 +134,20 @@ export default function CheckoutPreview() {
                   <span className="checkout-preview-brand-domain">fsaeliteperformance.com</span>
                 </div>
               </div>
-              <p className="checkout-preview-badge">Full course access</p>
+              <p className="checkout-preview-badge">Solo plan live now</p>
               <p className="checkout-preview-note">Sold by {PUBLIC_BUSINESS_NAME}</p>
               <h2>{SUBSCRIPTION_NAME}</h2>
               <div className="checkout-preview-price">
                 <strong>{formatUsd(SUBSCRIPTION_PRICE_CENTS)}</strong>
-                <span>one-time payment</span>
+                <span>self-serve launch access</span>
               </div>
+              <p className="checkout-preview-note">{SUBSCRIPTION_DESCRIPTION}</p>
               <p className="checkout-preview-note">
-                Membership unlocks the AI Roleplay Lab with 5 buyer personas, your performance dashboard, and the full 15+ product member store.
-              </p>
-              <p className="checkout-preview-note">
-                Secure Stripe-hosted checkout. No subscription. No surprise charges. Takes 30 seconds.
+                This checkout is for the solo plan only. Team and enterprise programs are scoped separately around seats,
+                leadership support, KPI reporting, and rollout needs.
               </p>
               <button type="button" className="btn-primary checkout-preview-button" onClick={startCheckout} disabled={checkoutLoading}>
-                {checkoutLoading ? 'Redirecting…' : '🔒 Unlock Lifetime Access — ' + formatUsd(SUBSCRIPTION_PRICE_CENTS)}
+                {checkoutLoading ? 'Redirecting…' : '🔒 Start Solo Access — ' + formatUsd(SUBSCRIPTION_PRICE_CENTS)}
               </button>
               {checkoutError && <p className="home-error checkout-preview-error">{checkoutError}</p>}
               <p className="checkout-preview-support">

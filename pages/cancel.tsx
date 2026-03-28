@@ -6,7 +6,7 @@ export default function Cancel() {
   return (
     <>
       <Head>
-        <title>Checkout Canceled | FSA ELITE Sales Training</title>
+        <title>Checkout Canceled | FSA ELITE Sales Performance</title>
       </Head>
       <main className="status-page">
         <div className="status-icon" aria-hidden="true">
@@ -15,9 +15,9 @@ export default function Cancel() {
         <h1>Checkout canceled</h1>
         <p>
           No charge was made. You can return to the order preview when you are ready to start your
-          FSA ELITE full training course access.
+          FSA ELITE solo access plan.
         </p>
-        <p className="status-muted">Training and member store access unlock after the one-time payment is completed.</p>
+        <p className="status-muted">Training and member store access unlock after the solo access checkout is completed.</p>
         <Link href="/checkout-preview" className="btn-primary">
           Return to Checkout Preview
         </Link>

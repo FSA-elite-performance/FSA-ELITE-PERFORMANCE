@@ -24,7 +24,7 @@ const TERMS_ITEMS = [
   {
     title: 'Payments',
     body:
-      'Payments are processed through Stripe. By placing an order, you authorize the applicable one-time payment or merchandise charge shown during checkout.',
+      'Payments are processed through Stripe. By placing an order, you authorize the applicable solo access charge or merchandise charge shown during checkout.',
   },
   {
     title: 'Accounts And Access Control',
