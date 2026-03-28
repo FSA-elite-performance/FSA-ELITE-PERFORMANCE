@@ -1,0 +1,108 @@
+<svg width="960" height="320" viewBox="0 0 960 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="oliveTitleDark oliveDescDark">
+  <title id="oliveTitleDark">OLIVE — FSA ELITE Performance AI</title>
+  <desc id="oliveDescDark">Dark-background variant of the OLIVE wordmark for the FSA ELITE Performance sales training bot.</desc>
+
+  <defs>
+    <!-- Primary olive-to-gold gradient -->
+    <linearGradient id="dkOliveGrad" x1="60" y1="140" x2="820" y2="200" gradientUnits="userSpaceOnUse">
+      <stop offset="0"    stop-color="#7A8F5E"/>
+      <stop offset="0.30" stop-color="#94A46A"/>
+      <stop offset="0.58" stop-color="#B8A862"/>
+      <stop offset="0.82" stop-color="#D4B468"/>
+      <stop offset="1"    stop-color="#E0C072"/>
+    </linearGradient>
+
+    <!-- Leaf gradient -->
+    <linearGradient id="dkLeafGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#E0C072"/>
+      <stop offset="0.5" stop-color="#A4AD6A"/>
+      <stop offset="1"   stop-color="#7A8F5E"/>
+    </linearGradient>
+
+    <!-- Leaf vein -->
+    <linearGradient id="dkVeinGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.40"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.06"/>
+    </linearGradient>
+
+    <!-- Accent line -->
+    <linearGradient id="dkLineGrad" x1="60" y1="0" x2="830" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0"   stop-color="#7A8F5E"/>
+      <stop offset="0.5" stop-color="#B8A862"/>
+      <stop offset="1"   stop-color="#E0C072"/>
+    </linearGradient>
+
+    <!-- Metallic sheen -->
+    <linearGradient id="dkSheen" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0"    stop-color="#FFFFFF" stop-opacity="0.14"/>
+      <stop offset="0.45" stop-color="#FFFFFF" stop-opacity="0"/>
+      <stop offset="1"    stop-color="#000000" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect width="960" height="320" rx="16" fill="#0D0D1A"/>
+
+  <!-- O LETTERFORM with leaf -->
+  <g id="dk-letter-O">
+    <circle cx="128" cy="172" r="68" stroke="url(#dkOliveGrad)" stroke-width="22" fill="none"/>
+    <circle cx="128" cy="172" r="56" stroke="#FFFFFF" stroke-opacity="0.04" stroke-width="1" fill="none"/>
+
+    <path d="M178 118
+             C192 104, 214 100, 228 110
+             C236 126, 226 150, 210 162
+             C200 170, 186 168, 178 160
+             C168 148, 168 132, 178 118Z"
+          fill="url(#dkLeafGrad)" opacity="0.88"/>
+
+    <path d="M182 122 C196 134, 210 148, 216 158"
+          stroke="url(#dkVeinGrad)" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+    <path d="M190 126 C194 134, 196 140, 196 146"
+          stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="1.0" stroke-linecap="round" fill="none"/>
+    <path d="M198 130 C204 138, 208 146, 208 154"
+          stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="1.0" stroke-linecap="round" fill="none"/>
+
+    <path d="M176 126 C178 122, 180 119, 182 118"
+          stroke="#94A46A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- LIVE text -->
+  <text x="246" y="212"
+        font-family="'Sora', 'Montserrat', 'Inter', system-ui, sans-serif"
+        font-size="128"
+        font-weight="800"
+        letter-spacing="0.14em"
+        fill="url(#dkOliveGrad)">LIVE</text>
+
+  <text x="246" y="212"
+        font-family="'Sora', 'Montserrat', 'Inter', system-ui, sans-serif"
+        font-size="128"
+        font-weight="800"
+        letter-spacing="0.14em"
+        fill="url(#dkSheen)">LIVE</text>
+
+  <!-- Accent line -->
+  <line x1="62" y1="238" x2="830" y2="238"
+        stroke="url(#dkLineGrad)" stroke-width="3" stroke-linecap="round" opacity="0.60"/>
+  <line x1="62" y1="237" x2="830" y2="237"
+        stroke="#FFFFFF" stroke-opacity="0.08" stroke-width="0.8" stroke-linecap="round"/>
+
+  <!-- FSA reference -->
+  <text x="830" y="108"
+        text-anchor="end"
+        font-family="'Sora', 'Montserrat', 'Inter', system-ui, sans-serif"
+        font-size="18"
+        font-weight="700"
+        letter-spacing="0.32em"
+        fill="#FFFFFF"
+        opacity="0.35">FSA</text>
+
+  <!-- Subtitle -->
+  <text x="830" y="268"
+        text-anchor="end"
+        font-family="'Sora', 'Montserrat', 'Inter', system-ui, sans-serif"
+        font-size="16"
+        font-weight="600"
+        letter-spacing="0.28em"
+        fill="#8A94A6">ELITE PERFORMANCE AI</text>
+</svg>
