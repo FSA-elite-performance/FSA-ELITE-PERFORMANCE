@@ -45,22 +45,22 @@ const CATEGORY_LABELS: Record<StoreCategory, string> = {
 const STORE_SIGNAL_ITEMS = [
   {
     value: 'Members Only',
-    label: 'Identity products and self-branding tools reserved for FSA ELITE members',
+    label: 'Identity products and self-branding tools reserved for FSA ELITE members — the reps who take image seriously',
   },
   {
     value: 'Secure Checkout',
     label: 'Powered by Stripe — encrypted, PCI-compliant, and live for every order',
   },
   {
-    value: '15+ Products',
-    label: 'Desk gear, promo tools, business cards, and closer gear designed for real selling environments',
+    value: '17+ Products',
+    label: 'Business cards, desk gear, promo tools, and closer gear designed for reps who want to be remembered',
   },
 ];
 
 const MEMBER_STORE_POINTS = [
-  'Desk gear and promo tools built specifically for working salespeople',
-  'Business cards, presentation folders, branded USB drives, and more',
-  "A store designed to support every stage of a rep's professional image",
+  'Business cards, portfolios, and leave-behinds that make you look established — not still building',
+  'Desk gear and promo tools built to put your name in front of every prospect, every day',
+  "A full identity stack: the look, the leave-behind, and the presence — all under one membership",
 ];
 
 const BUNDLE_OFFERS = [
@@ -313,10 +313,10 @@ export default function Store() {
   return (
     <>
       <Head>
-        <title>FSA ELITE Member Store | Sales Gear and Self-Logo Products</title>
+        <title>FSA ELITE Presence Store | Business Cards, Desk Gear & Closer Identity Tools</title>
         <meta
           name="description"
-          content="Shop FSA ELITE member gear, self-logo products, and creator-ready bundles built for salespeople across industries."
+          content="Shop FSA ELITE member presence tools — premium business cards, branded desk gear, closer gear, and promo tools that make sales reps look established and get remembered."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/store`} />
@@ -371,11 +371,11 @@ export default function Store() {
                 <span className="store-brand-domain">fsaeliteperformance.com</span>
               </div>
             </div>
-            <p className="eyebrow">FSA ELITE Member Store</p>
-            <h1 className="store-title">Your name. Your tools. Their memory.</h1>
+            <p className="eyebrow">FSA ELITE Presence Store</p>
+            <h1 className="store-title">Training sharpens the rep.<br />This is what sharpens their image.</h1>
             <p className="store-copy">
-              Business cards, desk gear, branded promo tools, and closer gear that make you look more established
-              before, during, and after every conversation.
+              Business cards, desk gear, branded leave-behinds, and closer gear built for working salespeople.
+              Look established before you say a word. Be remembered after you leave.
             </p>
             <p className="store-coming-soon-pill">Secure Stripe checkout is live — order now, ship fast.</p>
             <p className="store-cart-count">Items in cart: {cartCount}</p>
