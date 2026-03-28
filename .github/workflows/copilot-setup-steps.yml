@@ -24,8 +24,8 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: 'npm'
-          cache-dependency-path: next-app/package-lock.json
+          cache-dependency-path: package-lock.json
 
       - name: Install Next.js app dependencies
-        working-directory: next-app
+        working-directory: .
         run: npm ci
