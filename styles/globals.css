@@ -4414,3 +4414,427 @@ ul { padding-left: 1.15rem; }
     gap: 1.5rem;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   OLIVE PAGE — Dedicated full-screen OLIVE experience
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.olive-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+.olive-page-header {
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.8rem 1.2rem;
+}
+
+.olive-page-header-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.olive-page-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.olive-page-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: #ffffff;
+  font-weight: 800;
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.olive-page-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin: 0;
+  letter-spacing: 0.04em;
+}
+
+.olive-page-subtitle {
+  font-size: 0.7rem;
+  color: var(--color-muted);
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+.olive-page-nav {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.olive-page-nav-link {
+  font-size: 0.8rem;
+  color: var(--color-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.12s ease;
+}
+
+.olive-page-nav-link:hover {
+  color: var(--color-text);
+}
+
+/* Mode Selector Cards */
+.olive-page-modes {
+  max-width: 960px;
+  margin: 1.2rem auto;
+  padding: 0 1.2rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+
+.olive-page-mode-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.olive-page-mode-card:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-1px);
+}
+
+.olive-page-mode-card-active {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+.olive-page-mode-icon {
+  font-size: 1.3rem;
+  line-height: 1;
+}
+
+.olive-page-mode-card strong {
+  font-size: 0.85rem;
+  color: var(--color-text-heading);
+}
+
+.olive-page-mode-desc {
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+/* Chat Area */
+.olive-page-chat {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.2rem;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.olive-page-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  border-bottom: none;
+}
+
+.olive-page-chat-header-info {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.82rem;
+  color: var(--color-text);
+}
+
+.olive-page-chat-mode-icon {
+  font-size: 1rem;
+}
+
+.olive-page-clear-btn {
+  background: none;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  color: var(--color-muted);
+  font-size: 0.72rem;
+  padding: 0.25rem 0.55rem;
+  cursor: pointer;
+  transition: color 0.12s ease, border-color 0.12s ease;
+}
+
+.olive-page-clear-btn:hover {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+/* Messages */
+.olive-page-messages {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-bg-soft);
+  border-left: 1px solid var(--color-border);
+  border-right: 1px solid var(--color-border);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  min-height: 320px;
+  max-height: min(520px, 50vh);
+}
+
+.olive-page-msg {
+  max-width: 80%;
+  animation: fadeInUp 0.2s ease-out;
+}
+
+.olive-page-msg-user {
+  align-self: flex-end;
+}
+
+.olive-page-msg-assistant {
+  align-self: flex-start;
+}
+
+.olive-page-msg-speaker {
+  display: block;
+  font-size: 0.66rem;
+  color: var(--color-accent);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+  margin-left: 0.15rem;
+}
+
+.olive-page-msg-bubble p {
+  margin: 0;
+  padding: 0.6rem 0.85rem;
+  border-radius: 12px;
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+
+.olive-page-msg-user .olive-page-msg-bubble p {
+  background: var(--color-accent);
+  color: #ffffff;
+  border-radius: 12px 12px 4px 12px;
+}
+
+.olive-page-msg-assistant .olive-page-msg-bubble p {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: 12px 12px 12px 4px;
+}
+
+.olive-page-typing {
+  color: var(--color-muted) !important;
+  font-style: italic;
+}
+
+.olive-page-error {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  border: 1px solid color-mix(in srgb, var(--color-danger) 30%, transparent);
+  border-radius: var(--radius);
+  padding: 0.5rem 0.7rem;
+  text-align: center;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* Input Bar */
+.olive-page-input-bar {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  border-top: none;
+}
+
+.olive-page-input {
+  flex: 1;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.95rem;
+  font-family: var(--font-sans);
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  line-height: 1.4;
+}
+
+.olive-page-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-soft);
+}
+
+.olive-page-send {
+  flex-shrink: 0;
+  padding: 0.55rem 1.1rem;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--color-accent);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  transition: opacity 0.12s ease;
+  align-self: flex-end;
+}
+
+.olive-page-send:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.olive-page-send:not(:disabled):hover {
+  opacity: 0.9;
+}
+
+/* Info Section */
+.olive-page-info {
+  background: var(--color-bg-soft);
+  border-top: 1px solid var(--color-border);
+  margin-top: 2rem;
+  padding: 2.5rem 1.2rem;
+}
+
+.olive-page-info-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.olive-page-info-inner h2 {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  color: var(--color-text-heading);
+  margin-bottom: 1.5rem;
+}
+
+.olive-page-capabilities {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.olive-page-capability {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1.2rem 0.9rem;
+  text-align: center;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.olive-page-capability:hover {
+  border-color: var(--color-border-strong);
+  transform: translateY(-2px);
+}
+
+.olive-page-capability-icon {
+  font-size: 1.5rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.olive-page-capability h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text-heading);
+  margin: 0 0 0.35rem;
+}
+
+.olive-page-capability p {
+  font-size: 0.78rem;
+  color: var(--color-muted);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.olive-page-info-cta {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .olive-page-modes {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .olive-page-mode-card {
+    flex-direction: row;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.7rem 0.85rem;
+  }
+
+  .olive-page-mode-icon {
+    font-size: 1.1rem;
+  }
+
+  .olive-page-mode-desc {
+    display: none;
+  }
+
+  .olive-page-capabilities {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .olive-page-nav {
+    display: none;
+  }
+
+  .olive-page-messages {
+    min-height: 260px;
+    max-height: 40vh;
+  }
+}
+
+@media (max-width: 480px) {
+  .olive-page-capabilities {
+    grid-template-columns: 1fr;
+  }
+
+  .olive-page-msg {
+    max-width: 92%;
+  }
+}

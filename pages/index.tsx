@@ -41,7 +41,7 @@ const FEATURES = [
   },
   {
     title: 'OLIVE Assistant',
-    description: 'Your AI sales coach available 24/7 for roleplay practice, script help, and pitch feedback.',
+    description: 'Your AI sales coach available 24/7 — objection coaching, battle drills, and real-time sales Q&A.',
     stat: '24/7',
     statLabel: 'Available',
   },
@@ -353,6 +353,7 @@ export default function Home() {
               <div className="landing-footer-col">
                 <h4>Product</h4>
                 <Link href="/roleplay">Roleplay Lab</Link>
+                <Link href="/olive">OLIVE Assistant</Link>
                 <Link href="/store">Member Store</Link>
                 <Link href="/checkout-preview">Pricing</Link>
               </div>
