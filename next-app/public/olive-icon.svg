@@ -1,0 +1,44 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="OLIVE icon">
+  <defs>
+    <linearGradient id="iconOliveGrad" x1="20" y1="30" x2="180" y2="170">
+      <stop offset="0"    stop-color="#5C6E42"/>
+      <stop offset="0.45" stop-color="#8B9A58"/>
+      <stop offset="0.80" stop-color="#BFA05A"/>
+      <stop offset="1"    stop-color="#CAA15F"/>
+    </linearGradient>
+    <linearGradient id="iconLeafGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="#CAA15F"/>
+      <stop offset="0.5" stop-color="#8B9A58"/>
+      <stop offset="1"   stop-color="#5C6E42"/>
+    </linearGradient>
+  </defs>
+
+  <!-- O ring -->
+  <circle cx="100" cy="108" r="62" stroke="url(#iconOliveGrad)" stroke-width="20" fill="none"/>
+
+  <!-- Olive leaf from upper-right -->
+  <path d="M146 62
+           C162 46, 186 42, 200 54
+           C206 72, 194 98, 176 112
+           C164 122, 148 118, 140 108
+           C130 96, 132 76, 146 62Z"
+        fill="url(#iconLeafGrad)" opacity="0.90"/>
+
+  <!-- Leaf vein -->
+  <path d="M150 66 C166 80, 180 96, 184 108"
+        stroke="#FFFFFF" stroke-opacity="0.38" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+
+  <!-- Stem -->
+  <path d="M142 72 C144 67, 147 64, 150 62"
+        stroke="#748654" stroke-width="2.2" stroke-linecap="round" fill="none"/>
+
+  <!-- Compact FSA text -->
+  <text x="100" y="192"
+        text-anchor="middle"
+        font-family="'Sora', 'Montserrat', 'Inter', system-ui, sans-serif"
+        font-size="14"
+        font-weight="700"
+        letter-spacing="0.40em"
+        fill="#1A1A2E"
+        opacity="0.40">FSA</text>
+</svg>
