@@ -5,8 +5,14 @@ import {
   PUBLIC_BUSINESS_NAME,
   STRIPE_STATEMENT_DESCRIPTOR,
 } from '../../lib/businessDetails';
+import { createLogger, getRequestId } from '../../lib/logger';
 import { MERCH_PRODUCTS } from '../../lib/merchCatalog';
 import { MEMBERSHIP_COOKIE_NAME, parseCookie, verifyMembershipToken } from '../../lib/membershipAccess';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
+
+// ─── Rate limit: 5 checkout sessions per 60 s per IP ─────────────────────────
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 
 type CheckoutItem = {
   productId?: unknown;
@@ -79,9 +85,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
+  const log = createLogger(getRequestId(req));
+
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ── Rate limiting ──
+  const ip = getClientIp(req);
+  const limit = rateLimit(`${ip}:/api/create-merch-checkout-session`, {
+    maxRequests: RATE_LIMIT_MAX,
+    windowMs: RATE_LIMIT_WINDOW_MS,
+  });
+  if (!limit.allowed) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: 'Too many requests. Please wait before trying again.' });
   }
 
   const membershipToken = parseCookie(req.headers.cookie, MEMBERSHIP_COOKIE_NAME);
@@ -92,13 +111,13 @@ export default async function handler(
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
-    console.error('STRIPE_SECRET_KEY is not set');
+    log.error('STRIPE_SECRET_KEY is not set');
     return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
   }
 
   const baseUrl = resolveBaseUrl(req);
   if (!isValidBaseUrl(baseUrl)) {
-    console.error('Unable to resolve a valid checkout base URL');
+    log.error('Unable to resolve a valid checkout base URL');
     return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
   }
 
@@ -169,13 +188,13 @@ export default async function handler(
     });
 
     if (!session.url) {
-      console.error('Stripe merch session created without URL');
+      log.error('Stripe merch session created without URL');
       return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
     }
 
     return res.status(200).json({ url: session.url });
   } catch (error: unknown) {
-    console.error('Stripe merch checkout error:', error);
+    log.error('Stripe merch checkout error', { error: String(error) });
     return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
   }
 }

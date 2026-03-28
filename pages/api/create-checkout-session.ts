@@ -16,6 +16,12 @@ import {
 } from '../../lib/subscriptionPlan';
 import { BOTID_ROUTE_CONFIG } from '../../lib/botid-config';
 import { getBotIdServerOptions } from '../../lib/botid-server';
+import { createLogger, getRequestId } from '../../lib/logger';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
+
+// ─── Rate limit: 5 checkout sessions per 60 s per IP ─────────────────────────
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 
 // ─── Singleton client (reused across warm serverless invocations) ─────────────
 let stripeClient: Stripe | null = null;
@@ -77,9 +83,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
+  const log = createLogger(getRequestId(req));
+
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ── Rate limiting ──
+  const ip = getClientIp(req);
+  const limit = rateLimit(`${ip}:/api/create-checkout-session`, {
+    maxRequests: RATE_LIMIT_MAX,
+    windowMs: RATE_LIMIT_WINDOW_MS,
+  });
+  if (!limit.allowed) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: 'Too many requests. Please wait before trying again.' });
   }
 
   try {
@@ -88,17 +107,17 @@ export default async function handler(
     );
 
     if (verification.isBot) {
-      console.warn('BotID blocked request to /api/create-checkout-session');
+      log.warn('BotID blocked request to /api/create-checkout-session');
       return res.status(403).json({ error: 'Access denied.' });
     }
   } catch (error: unknown) {
-    console.error('BotID verification failed for /api/create-checkout-session:', error);
+    log.error('BotID verification failed for /api/create-checkout-session', { error: String(error) });
     return res.status(500).json({ error: 'Service temporarily unavailable. Please try again later.' });
   }
 
   const secretKey = process.env.STRIPE_SECRET_KEY;
   if (!secretKey) {
-    console.error('STRIPE_SECRET_KEY is not set');
+    log.error('STRIPE_SECRET_KEY is not set');
     return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
   }
 
@@ -107,7 +126,7 @@ export default async function handler(
   const baseUrl = resolveBaseUrl(req);
 
   if (!isValidBaseUrl(baseUrl)) {
-    console.error('Unable to resolve a valid checkout base URL');
+    log.error('Unable to resolve a valid checkout base URL');
     return res.status(500).json({ error: 'Payment configuration error. Contact support.' });
   }
 
@@ -159,13 +178,13 @@ export default async function handler(
     });
 
     if (!session.url) {
-      console.error('Stripe session created without URL');
+      log.error('Stripe session created without URL');
       return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
     }
 
     return res.status(200).json({ url: session.url });
   } catch (err: unknown) {
-    console.error('Stripe error:', err);
+    log.error('Stripe error', { error: String(err) });
     return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
   }
 }
