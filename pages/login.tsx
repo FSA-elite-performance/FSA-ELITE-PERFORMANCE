@@ -66,7 +66,7 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Log In | FSA ELITE Performance</title>
+        <title>Log In | FSA Elite Performance</title>
         <meta name="robots" content="noindex" />
       </Head>
 

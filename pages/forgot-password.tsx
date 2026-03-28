@@ -40,7 +40,7 @@ export default function ForgotPassword() {
   return (
     <>
       <Head>
-        <title>Reset Password | FSA ELITE Performance</title>
+        <title>Reset Password | FSA Elite Performance</title>
         <meta name="robots" content="noindex" />
       </Head>
 

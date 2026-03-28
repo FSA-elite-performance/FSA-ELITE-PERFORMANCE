@@ -84,7 +84,7 @@ export default function Register() {
   return (
     <>
       <Head>
-        <title>Create Account | FSA ELITE Performance</title>
+        <title>Create Account | FSA Elite Performance</title>
         <meta name="robots" content="noindex" />
       </Head>
 

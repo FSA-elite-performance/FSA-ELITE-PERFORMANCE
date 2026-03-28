@@ -90,7 +90,7 @@ export default function ResetPassword() {
   return (
     <>
       <Head>
-        <title>Reset Password | FSA ELITE Performance</title>
+        <title>Reset Password | FSA Elite Performance</title>
         <meta name="robots" content="noindex" />
       </Head>
 

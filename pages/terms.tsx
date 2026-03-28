@@ -52,7 +52,7 @@ export default function TermsPage() {
   return (
     <>
       <Head>
-        <title>Terms of Service | FSA ELITE Performance</title>
+        <title>Terms of Service | FSA Elite Performance</title>
         <meta
           name="description"
           content="Read the FSA ELITE Performance terms of service for training access, payments, site usage, and customer responsibilities."
