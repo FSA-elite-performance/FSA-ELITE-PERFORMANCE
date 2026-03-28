@@ -1,0 +1,90 @@
+name: Deploy to GitHub Pages (Static Export)
+
+on:
+  push:
+    branches:
+      - main
+
+# Required permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Only one deployment at a time
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build-and-export:
+    name: Build & Export Next.js (Static)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: next-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: next-app
+        run: npm ci
+
+      # Enable static export for GitHub Pages build.
+      # NOTE: Static export does NOT support serverless API routes.
+      # The /api/create-checkout-session route will NOT function on GitHub Pages.
+      # For Stripe Checkout to work in production, deploy to Vercel (recommended)
+      # or another platform that supports Next.js serverless functions.
+      # Note: In Next.js 15, `next export` is removed — static export uses `output: 'export'`
+      # in next.config.js combined with `next build`.
+      - name: Build and export static site
+        working-directory: next-app
+        env:
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://fsaeliteperformance-arch.github.io/FSA-ELITE-SALES-TRAINING' }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+        run: |
+          # Enable static export for this build (Next.js 15 uses output:'export' in config)
+          sed -i "s|// output: 'export'|output: 'export'|" next.config.js
+          npm run build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: next-app/out
+
+  deploy:
+    name: Deploy to GitHub Pages
+    needs: build-and-export
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ⚠️  IMPORTANT: GitHub Pages is STATIC ONLY
+# ─────────────────────────────────────────────────────────────────────────────
+# This workflow exports the Next.js app as a static site and deploys it to
+# GitHub Pages. This is a FALLBACK / preview deployment only.
+#
+# GitHub Pages CANNOT run serverless functions. The Stripe Checkout API route
+# (/api/create-checkout-session) will NOT work on GitHub Pages.
+#
+# ✅ RECOMMENDED FOR PRODUCTION: Deploy to Vercel
+#    1. Go to https://vercel.com and import this repository
+#    2. Set root directory to: next-app
+#    3. Add environment variables in the Vercel dashboard:
+#       - STRIPE_SECRET_KEY
+#       - NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
+#       - NEXT_PUBLIC_BASE_URL
+#       - PRICE_AMOUNT_CENTS
+#    4. Vercel will automatically deploy on every push to main
+# ─────────────────────────────────────────────────────────────────────────────

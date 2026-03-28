@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FSA Elite Sales Performance Training — built for closers who want more." />
+  <title>FSA Elite 🔥 Sales Performance Training</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #c9a84c;
+      --black: #0a0a0a;
+      --white: #f5f5f5;
+      --gray: #1a1a1a;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      background: var(--black);
+      color: var(--white);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+    }
+    header { margin-bottom: 2rem; }
+    .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 1rem;
+      border-radius: 999px;
+      margin-bottom: 1.5rem;
+    }
+    h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    h1 span { color: var(--gold); }
+    .tagline {
+      font-size: clamp(1rem, 3vw, 1.35rem);
+      color: #aaa;
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.6;
+    }
+    .cta-group { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 6px;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.85; }
+    .btn-primary { background: var(--gold); color: var(--black); }
+    .btn-secondary { background: transparent; color: var(--gold); border: 2px solid var(--gold); }
+    .features {
+      margin-top: 4rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      max-width: 800px;
+    }
+    .feature {
+      background: var(--gray);
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 1.5rem;
+      width: 220px;
+      text-align: left;
+    }
+    .feature .icon { font-size: 1.75rem; margin-bottom: 0.75rem; }
+    .feature h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .feature p { font-size: 0.85rem; color: #888; line-height: 1.5; }
+    footer {
+      margin-top: 4rem;
+      font-size: 0.8rem;
+      color: #555;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="badge">Early Access — Limited Spots</div>
+    <h1>FSA <span>Elite</span> 🔥</h1>
+    <p class="tagline">
+      Sales training. Closer mindset. Real growth.<br />
+      Built for hungry salespeople who want to level up and win.
+    </p>
+    <div class="cta-group">
+      <a href="./next-app" class="btn btn-primary">Get Early Access →</a>
+      <a href="https://github.com/fsaeliteperformance-arch/FSA-ELITE-SALES-TRAINING" class="btn btn-secondary">View on GitHub</a>
+    </div>
+  </header>
+
+  <section class="features">
+    <div class="feature">
+      <div class="icon">🎯</div>
+      <h3>Objection Handling</h3>
+      <p>Master the real objections thrown at you every day — price, timing, trust — with proven rebuttals.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📈</div>
+      <h3>Closer Mindset</h3>
+      <p>Train your brain to perform under pressure. Sales is 80% mental — we train the 80%.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">🏆</div>
+      <h3>Sales Modules</h3>
+      <p>Structured lessons from a 25-time consecutive Sales of the Month champion.</p>
+    </div>
+    <div class="feature">
+      <div class="icon">📱</div>
+      <h3>Any Device</h3>
+      <p>Phone, tablet, desktop — train anywhere, put it down, pick it back up. Built for the floor.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>FSA Elite Sales Performance Training &copy; 2026 &nbsp;|&nbsp;
+      <a href="https://fsaeliteperformance.org">fsaeliteperformance.org</a>
+    </p>
+    <p style="margin-top:0.5rem; font-size:0.7rem; color:#333;">
+      This page is a static fallback. Full checkout powered by Next.js + Stripe requires Vercel deployment.
+    </p>
+  </footer>
+</body>
+</html>
