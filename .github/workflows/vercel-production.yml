@@ -1,0 +1,64 @@
+name: Vercel Production Deployment
+
+# Deploy every push to main as a Vercel Production deployment.
+# Requires three repository secrets:
+#   VERCEL_TOKEN      — Vercel personal access token
+#   VERCEL_ORG_ID     — Vercel team/org ID (from `vercel link`)
+#   VERCEL_PROJECT_ID — Vercel project ID (from `vercel link`)
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'next-app/**'
+      - '.github/workflows/vercel-production.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-production:
+    name: Deploy production to Vercel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: next-app/package-lock.json
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment (production)
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel build --prod --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Vercel (production)
+        id: deploy
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          url=$(vercel deploy --prebuilt --prod --token=${{ secrets.VERCEL_TOKEN }})
+          echo "production_url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Print production URL
+        run: echo "Production URL → ${{ steps.deploy.outputs.production_url }}"

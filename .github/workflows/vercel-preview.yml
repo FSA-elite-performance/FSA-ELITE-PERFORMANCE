@@ -1,0 +1,67 @@
+name: Vercel Preview Deployment
+
+# Deploy every push/PR on non-main branches as a Vercel Preview.
+# Requires three repository secrets:
+#   VERCEL_TOKEN      — Vercel personal access token
+#   VERCEL_ORG_ID     — Vercel team/org ID (from `vercel link`)
+#   VERCEL_PROJECT_ID — Vercel project ID (from `vercel link`)
+
+on:
+  push:
+    branches-ignore:
+      - main
+    paths:
+      - 'next-app/**'
+      - '.github/workflows/vercel-preview.yml'
+  pull_request:
+    paths:
+      - 'next-app/**'
+      - '.github/workflows/vercel-preview.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-preview:
+    name: Deploy preview to Vercel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js (LTS)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+          cache: 'npm'
+          cache-dependency-path: next-app/package-lock.json
+
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+
+      - name: Pull Vercel environment (preview)
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel pull --yes --environment=preview --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Build project
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: vercel build --token=${{ secrets.VERCEL_TOKEN }}
+
+      - name: Deploy to Vercel (preview)
+        id: deploy
+        working-directory: next-app
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+        run: |
+          url=$(vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }})
+          echo "preview_url=$url" >> "$GITHUB_OUTPUT"
+
+      - name: Print preview URL
+        run: echo "Preview URL → ${{ steps.deploy.outputs.preview_url }}"
