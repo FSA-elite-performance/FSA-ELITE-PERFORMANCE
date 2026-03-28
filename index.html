@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FSA Elite Domain Setup Guide</title>
+    <meta
+      name="description"
+      content="Clear setup guidance for choosing domain forwarding or DNS records for FSA Elite web properties."
+    >
+    <style>
+      :root {
+        --bg: #091017;
+        --panel: #0f1924;
+        --border: #2c4156;
+        --text: #ecf3fb;
+        --muted: #98abc0;
+        --accent: #c8a466;
+        --accent-soft: #1f1a10;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, sans-serif;
+        line-height: 1.6;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 0% 0%, #1a2a3a 0%, transparent 30%),
+          radial-gradient(circle at 100% 0%, #201910 0%, transparent 30%),
+          var(--bg);
+      }
+
+      .layout {
+        max-width: 980px;
+        margin: 0 auto;
+        padding: 1.2rem;
+      }
+
+      .hero {
+        background: linear-gradient(145deg, #0f1c28, #0b141f);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: clamp(1.2rem, 4vw, 2.2rem);
+      }
+
+      .eyebrow {
+        color: var(--accent);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 0.75rem;
+      }
+
+      h1,
+      h2,
+      h3 {
+        line-height: 1.2;
+        margin: 0;
+      }
+
+      h1 {
+        margin-top: 0.55rem;
+        font-size: clamp(1.8rem, 5vw, 2.8rem);
+      }
+
+      .hero p {
+        color: var(--muted);
+        margin-top: 0.9rem;
+        max-width: 66ch;
+      }
+
+      .hero-actions {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+      }
+
+      .btn {
+        display: inline-block;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 0.48rem 0.8rem;
+        text-decoration: none;
+        color: var(--text);
+        background: #111c28;
+      }
+
+      .btn.primary {
+        border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+        background: var(--accent-soft);
+        color: var(--accent);
+      }
+
+      .guide-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 1rem;
+        margin-top: 1.1rem;
+      }
+
+      .card {
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 1rem;
+      }
+
+      .card h2 {
+        font-size: 1.1rem;
+      }
+
+      .tag {
+        display: inline-block;
+        margin-top: 0.55rem;
+        border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--border));
+        background: var(--accent-soft);
+        color: var(--accent);
+        border-radius: 999px;
+        padding: 0.18rem 0.62rem;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .card ul {
+        margin: 0.8rem 0 0;
+        padding-left: 1.2rem;
+        color: var(--muted);
+      }
+
+      .table-wrap {
+        margin-top: 1.25rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        overflow-x: auto;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        min-width: 660px;
+      }
+
+      th,
+      td {
+        text-align: left;
+        padding: 0.75rem 0.85rem;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      th {
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--accent);
+        background: color-mix(in srgb, var(--panel) 86%, var(--bg));
+      }
+
+      .checklist {
+        margin-top: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 1rem;
+      }
+
+      .record-list {
+        margin-top: 1rem;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: var(--panel);
+        padding: 1rem;
+      }
+
+      .record-list h2 {
+        font-size: 1.08rem;
+      }
+
+      .record-list ul {
+        margin: 0.7rem 0 0;
+        padding-left: 1.15rem;
+        color: var(--muted);
+      }
+
+      .checklist h2 {
+        font-size: 1.08rem;
+      }
+
+      .checklist ol {
+        margin: 0.75rem 0 0;
+        padding-left: 1.25rem;
+        color: var(--muted);
+      }
+
+      footer {
+        margin-top: 1.2rem;
+        border-top: 1px solid var(--border);
+        padding: 0.95rem 0;
+        color: var(--muted);
+        font-size: 0.9rem;
+      }
+
+      code {
+        background: #0c131d;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 0.05rem 0.35rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="layout">
+      <article class="hero">
+        <p class="eyebrow">FSA Elite Ops Guide</p>
+        <h1>Domain forwarding vs DNS setup: use the right one for the job</h1>
+        <p>
+          Forwarding is a redirect shortcut. DNS setup is authoritative routing. If you need a fast redirect from one
+          domain to another, use forwarding. If you want full control, SSL, and app-level records, use DNS.
+        </p>
+        <div class="hero-actions" aria-label="Quick actions">
+          <a class="btn primary" href="https://fsaeliteperformance.com">Open Production Site</a>
+          <a class="btn" href="https://fsaeliteperformance.com/store">Open Store</a>
+          <a class="btn" href="https://fsaeliteperformance.com/checkout-preview">Open Checkout Preview</a>
+        </div>
+
+        <section class="guide-grid" aria-label="Domain setup options">
+          <section class="card">
+            <h2>Option A: Domain Forwarding</h2>
+            <p class="tag">Best for simple redirects</p>
+            <ul>
+              <li>Quickest setup when one domain should always send visitors to another.</li>
+              <li>Minimal DNS knowledge required.</li>
+              <li>Common use: send www to apex or old domain to new domain.</li>
+            </ul>
+          </section>
+
+          <section class="card">
+            <h2>Option B: DNS Records</h2>
+            <p class="tag">Best for production control</p>
+            <ul>
+              <li>Use A, AAAA, CNAME, TXT records for app hosting and verification.</li>
+              <li>Required when configuring custom hostnames with providers like Vercel.</li>
+              <li>Gives precise control over subdomains and email records.</li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="table-wrap" aria-label="Comparison table">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Decision area</th>
+                <th scope="col">Forwarding</th>
+                <th scope="col">DNS setup</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Primary outcome</th>
+                <td>Redirect traffic to another URL</td>
+                <td>Serve your app directly from a host</td>
+              </tr>
+              <tr>
+                <th scope="row">Control level</th>
+                <td>Low</td>
+                <td>High</td>
+              </tr>
+              <tr>
+                <th scope="row">Best use case</th>
+                <td>Temporary migration or canonical redirect</td>
+                <td>Long-term production architecture</td>
+              </tr>
+              <tr>
+                <th scope="row">Typical records</th>
+                <td>Registrar forwarding settings</td>
+                <td><code>A</code>, <code>AAAA</code>, <code>CNAME</code>, <code>TXT</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="checklist" aria-label="Implementation checklist">
+          <h2>Fast execution checklist</h2>
+          <ol>
+            <li>Choose one canonical domain for production traffic.</li>
+            <li>Forward every alternate domain to the canonical host.</li>
+            <li>Configure DNS records at the canonical host only.</li>
+            <li>Verify SSL and redirect behavior for apex and www variants.</li>
+            <li>Document final values so future changes are safe and repeatable.</li>
+          </ol>
+        </section>
+
+        <section class="record-list" aria-label="IONOS DNS records">
+          <h2>IONOS DNS records — exact values</h2>
+          <p style="color:var(--muted);margin:0.55rem 0 0.9rem">Log in to IONOS → Domains &amp; SSL → click the domain → DNS → Manage DNS records.</p>
+
+          <h3 style="font-size:0.95rem;margin:0.75rem 0 0.4rem">fsaeliteperformance.com → Vercel</h3>
+          <ul>
+            <li>Type <code>A</code> · Host <code>@</code> · Value <code>76.76.21.21</code> · TTL 3600</li>
+            <li>Type <code>CNAME</code> · Host <code>www</code> · Value <code>cname.vercel-dns.com</code> · TTL 3600</li>
+            <li>Add any <code>TXT</code> verification record shown in Vercel Project Settings → Domains when attaching the domain.</li>
+          </ul>
+
+          <h3 style="font-size:0.95rem;margin:0.75rem 0 0.4rem">fsaelite.org → GitHub Pages</h3>
+          <ul>
+            <li>Type <code>A</code> · Host <code>@</code> · Value <code>185.199.108.153</code> · TTL 3600</li>
+            <li>Type <code>A</code> · Host <code>@</code> · Value <code>185.199.109.153</code> · TTL 3600</li>
+            <li>Type <code>A</code> · Host <code>@</code> · Value <code>185.199.110.153</code> · TTL 3600</li>
+            <li>Type <code>A</code> · Host <code>@</code> · Value <code>185.199.111.153</code> · TTL 3600</li>
+            <li>Type <code>AAAA</code> · Host <code>@</code> · Value <code>2606:50c0:8000::153</code> · TTL 3600</li>
+            <li>Type <code>AAAA</code> · Host <code>@</code> · Value <code>2606:50c0:8001::153</code> · TTL 3600</li>
+            <li>Type <code>AAAA</code> · Host <code>@</code> · Value <code>2606:50c0:8002::153</code> · TTL 3600</li>
+            <li>Type <code>AAAA</code> · Host <code>@</code> · Value <code>2606:50c0:8003::153</code> · TTL 3600</li>
+            <li>Type <code>CNAME</code> · Host <code>www</code> · Value <code>fsaeliteperformance-arch.github.io</code> · TTL 3600</li>
+          </ul>
+          <p style="color:var(--muted);margin:0.6rem 0 0;font-size:0.88rem">After DNS propagates, set the custom domain in GitHub repository → Settings → Pages and enable Enforce HTTPS.</p>
+        </section>
+      </article>
+
+      <footer>
+        FSA Elite Sales Training repository root page. Keep this file standards-compliant for CI HTML validation.
+      </footer>
+    </main>
+  </body>
+</html>
