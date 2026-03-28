@@ -1,5 +1,5 @@
-export const LEGAL_BUSINESS_NAME = 'Fontenots Sales Association LLC';
-export const PUBLIC_BUSINESS_NAME = 'FSA ELITE';
+export const LEGAL_BUSINESS_NAME = 'Fontenot Sales Association LLC';
+export const PUBLIC_BUSINESS_NAME = 'FSA ELITE Performance';
 export const PUBLIC_SITE_URL = 'https://fsaeliteperformance.com/';
 export const PUBLIC_STORE_URL = 'https://fsaeliteperformance.store/';
 export const PUBLIC_BRAND_ALIASES = [
@@ -15,6 +15,7 @@ export const PUBLIC_SEO_KEYWORDS = [
 	...PUBLIC_BRAND_ALIASES,
 	'sales training',
 	'AI sales roleplay',
+	'sales performance',
 	'closer training',
 	'self-branding',
 	'business cards',
@@ -29,7 +30,7 @@ export const PUBLIC_SEO_KEYWORDS = [
 	'custom merch for salespeople',
 	'salesperson branded merchandise',
 	'custom pens pencils hats for reps',
-	'Fontenots Sales Association',
+	'Fontenot Sales Association',
 ].join(', ');
 
 export const SUPPORT_EMAIL = 'fsaeliteperformance@gmail.com';

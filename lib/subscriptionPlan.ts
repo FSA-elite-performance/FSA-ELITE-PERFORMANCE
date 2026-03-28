@@ -1,22 +1,22 @@
-export const SUBSCRIPTION_NAME = 'FSA ELITE Membership';
+export const SUBSCRIPTION_NAME = 'FSA ELITE Founding Access';
 export const SUBSCRIPTION_DESCRIPTION =
-  'One payment. Full access. AI objection drills, a 15+ product member store, and rep-branding tools that make closers sharper and more memorable — for less than a sales lunch.';
+  'One payment. Phase One access to the current FSA ELITE sales performance system — AI objection drills, the FSA Store, and rep-branding tools. No recurring charges.';
 export const SUBSCRIPTION_PRICE_CENTS = 1299;
 
 export const SUBSCRIPTION_PRODUCT_ID = 'prod_UC3ZdA1h6sSp3g';
 export const SUBSCRIPTION_PRODUCT_TAX_CODE = 'txcd_10000000';
 
 export const SUBSCRIPTION_MARKETING_FEATURES = [
-  'AI Roleplay Lab with 5 buyer personas — pressure-test your close before the real money is on the line',
-  'Member store with 15+ products: business cards, desk gear, promo tools, closer gear, and creator kits',
-  'Rep-branding tools built for real selling environments: portfolios, notepads, presentation folders, and more',
-  'Lifetime access to all current and future FSA ELITE training content — no monthly subscription ever',
+  'Founding access to the current AI Roleplay Lab with 5 buyer personas and real-time scoring',
+  'Dashboard visibility across 6 sales skills so reps and managers can spot what needs work fast',
+  'FSA Store access with 15+ business cards, desk gear, promo tools, closer gear, and creator kits',
+  'Founder pricing while FSA ELITE expands into recurring team training, rep systems, and enterprise coaching',
 ] as const;
 
 export const SUBSCRIPTION_METADATA = {
   access_type: 'one_time_payment',
-  audience: 'salespeople_all_industries',
-  product_type: 'training_course',
+  audience: 'sales_reps_and_teams',
+  product_type: 'founding_access',
 } as const;
 
 export function formatUsd(cents: number): string {

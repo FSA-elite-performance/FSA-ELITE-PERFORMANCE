@@ -216,7 +216,7 @@ export default function Welcome() {
             🎯 {turns === 0 ? 'Start Your First Drill' : 'Run Another Session'}
           </Link>
           <Link href="/store" className="btn-secondary btn-lg" style={{ marginTop: '0.5rem' }}>
-            🛍️ Browse Member Store
+            🛍️ Browse Store
           </Link>
           <p style={{ color: 'var(--color-muted)', fontSize: '0.78rem', marginTop: '0.5rem' }}>
             {turns === 0

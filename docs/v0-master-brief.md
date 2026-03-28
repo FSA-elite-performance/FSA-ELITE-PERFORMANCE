@@ -127,12 +127,12 @@ Light:
 
 ## MONETIZATION
 
-### Core Membership
-- **Price:** $12.99 one-time (lifetime access)
-- **Includes:** AI Roleplay Lab, 15+ product member store, rep-branding tools, all future content
+### Founding Access
+- **Price:** $12.99 one-time for the current Phase One experience
+- **Includes:** AI Roleplay Lab, dashboard access, the 15+ product FSA Store, and rep-branding tools
 - **Stripe Product:** prod_UC3ZdA1h6sSp3g
 
-### Merch Store (member-only)
+### FSA Store (access-controlled)
 - 15+ branded products across 6 categories
 - Separate Stripe checkout for merch
 - See PRODUCT CATALOG section below
@@ -249,13 +249,13 @@ Each persona has: Goal, Fear, Constraint, Trigger phrases, Decision style, Hidde
 ---
 
 ### 5. Checkout Preview (`/checkout-preview`)
-**Purpose:** Membership purchase decision page
+**Purpose:** Founding Access purchase decision page
 
 **Layout:** Clean, focused conversion page
 
 **Content:**
-- Membership name: "FSA ELITE Membership"
-- Price: $12.99 (one-time, lifetime)
+- Access name: "FSA ELITE Founding Access"
+- Price: $12.99 (one-time, Phase One access)
 - Full feature checklist with checkmarks
 - Payment method indicator (Stripe)
 - "Complete Purchase" CTA button

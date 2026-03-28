@@ -313,10 +313,10 @@ export default function Store() {
   return (
     <>
       <Head>
-        <title>FSA ELITE Member Store | Sales Gear and Self-Logo Products</title>
+        <title>FSA ELITE Store | Sales Gear and Self-Logo Products</title>
         <meta
           name="description"
-          content="Shop FSA ELITE member gear, self-logo products, and creator-ready bundles built for salespeople across industries."
+          content="Shop the FSA ELITE store for self-logo products, closer gear, and creator-ready bundles built for salespeople across industries."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/store`} />
@@ -328,8 +328,8 @@ export default function Store() {
             <div className="container">
               <div className="member-gate-card">
                 <p className="eyebrow">Checking Access</p>
-                <h1>Verifying your membership…</h1>
-                <p className="member-gate-copy">Please wait while FSA ELITE confirms your member store access.</p>
+                <h1>Verifying your access…</h1>
+                <p className="member-gate-copy">Please wait while FSA ELITE confirms your store access.</p>
               </div>
             </div>
           </section>
@@ -339,15 +339,15 @@ export default function Store() {
           <section className="member-gate-shell">
             <div className="container">
               <div className="member-gate-card">
-                <p className="eyebrow">Members Only</p>
-                <h1>Your store unlocks the moment you join — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}, one time.</h1>
+                <p className="eyebrow">Access Required</p>
+                <h1>Your store unlocks the moment you claim Founding Access — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}, one time.</h1>
                 <p className="member-gate-copy">
                   15+ products designed for reps who want sharper introductions, stronger leave-behinds, and a look
-                  that says “established” — not “still building.” Each product has its own member pricing.
+                  that says “established” — not “still building.” Each product keeps its own premium pricing.
                 </p>
                 <div className="member-gate-actions">
                   <Link href="/checkout-preview" className="btn-primary">
-                    Unlock Membership Access
+                    Unlock Founding Access
                   </Link>
                   <Link href="/" className="btn-secondary">
                     Back to Home
@@ -371,7 +371,7 @@ export default function Store() {
                 <span className="store-brand-domain">fsaeliteperformance.com</span>
               </div>
             </div>
-            <p className="eyebrow">FSA ELITE Member Store</p>
+             <p className="eyebrow">FSA ELITE Store</p>
             <h1 className="store-title">Your name. Your tools. Their memory.</h1>
             <p className="store-copy">
               Business cards, desk gear, branded promo tools, and closer gear that make you look more established
@@ -390,7 +390,7 @@ export default function Store() {
               <Link href="/terms">Terms</Link>
             </p>
 
-            <div className="store-signal-grid" aria-label="Member store highlights">
+            <div className="store-signal-grid" aria-label="Store highlights">
               {STORE_SIGNAL_ITEMS.map((item) => (
                 <article className="store-signal-card" key={item.value}>
                   <strong>{item.value}</strong>
@@ -404,7 +404,7 @@ export default function Store() {
         <section className="store-section">
           <div className="container store-layout">
             <div className="store-main-column">
-              <section className="store-showcase" aria-label="Featured member drop">
+              <section className="store-showcase" aria-label="Featured store drop">
                 <article className="store-feature-card">
                   <div className={`store-feature-media store-feature-media-${featuredProduct.category}`}>
                     <img src={featuredProduct.image} alt={featuredProduct.name} />

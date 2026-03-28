@@ -1,131 +1,99 @@
 # FSA Elite Performance
 
-Official repository for FSAElitePerformance.com.
-High-performance training, development, and elite optimization platform.
+FSA Elite Performance is the market-facing brand of **Fontenot Sales Association LLC**. The business exists to help companies increase revenue through trained sales talent, stronger sales systems, and performance coaching.
 
----
+This repository is the flagship product repo for the current FSA Elite Performance web experience at <https://fsaeliteperformance.com>.
 
-## Overview
+## Current Product Story
 
-FSA Elite Performance is a full-scale digital platform designed to deliver advanced performance training, athlete development systems, and structured optimization programs.
+FSA Elite Performance is being positioned as a phased sales-performance business:
 
-This repository contains source code, assets, branding elements, and deployment configurations required to run and scale the application.
+1. **Phase One — Founding Access**
+   - Public entry offer for the current AI roleplay, dashboard, and FSA Store experience
+   - One-time checkout used to gather proof, usage, and customer feedback
+2. **Phase Two — Team Training**
+   - Recurring training, optimization, and coaching programs for small and mid-sized businesses
+   - KPI visibility, manager support, and repeatable rep standards
+3. **Phase Three — Enterprise System**
+   - Software-enabled rollout of the proven sales method, recruiting standards, and performance infrastructure
 
----
+The current live checkout supports **Phase One Founding Access**. Team and enterprise engagements are positioned as higher-touch follow-on offers until recurring product workflows are expanded.
 
-## Features
+## What the App Includes Today
 
-- Elite performance training systems
-- Data-driven athlete tracking
-- Mental and physical optimization modules
-- Fully responsive web application
-- Integrated branding, logos, and UI assets
-- Optimized for fast deployment and scalability
+- AI Roleplay Lab with five buyer personas
+- Real-time score feedback across core sales skills
+- OLIVE AI sales assistant
+- Dashboard progress tracking
+- FSA Store for rep-branding tools, business cards, and closer gear
+- Stripe checkout, success flow, and access control for runtime deployments
 
----
+## Pricing Direction
+
+- **Founding Access** — `$12.99` one time for the current Phase One experience
+- **Team Training** — recurring monthly engagement for coaching, standards, and rep development
+- **Enterprise** — custom pricing for larger rollouts, leadership visibility, and system implementation
+
+This keeps the business aligned around recurring revenue and measurable performance while the software continues to mature.
 
 ## Tech Stack
 
-- Frontend: React / Next.js (Pages Router)
-- Backend: Node.js / Next.js API routes
-- Styling: Global CSS / Custom UI
-- Deployment: Vercel (recommended), static export support
-- Version Control: Git + GitHub
-
----
+- Next.js 15 (Pages Router)
+- React 18 + TypeScript
+- Next.js API routes for Stripe, auth, and AI integrations
+- Global CSS design system
+- Vercel deployment with static export compatibility
 
 ## Project Structure
 
+The active application lives at the repository root:
+
 ```text
-next-app/
-  pages/
-  pages/api/
-  styles/
-  lib/
-  public/
-  next.config.js
+components/
+lib/
+pages/
+pages/api/
+public/
+styles/
+middleware.ts
+next.config.js
+package.json
 README.md
 ```
 
----
+## Local Setup
 
-## Branding and Assets
-
-Official FSA Elite Performance visual assets are stored in:
-
-```text
-next-app/public/
-```
-
-Use branding consistently across all pages and components.
-
----
-
-## Installation and Setup
+Run all commands from the repository root:
 
 ```bash
-# Clone repository
-git clone https://github.com/yourusername/fsa-elite-performance.git
-
-# Navigate into project root
-cd fsa-elite-performance
-
-# Install dependencies
-cd next-app
 npm ci
-
-# Configure environment
 cp .env.example .env.local
-
-# Run development server
 npm run dev
 ```
 
-The app runs at `http://localhost:3000`.
+The app runs at <http://localhost:3000>.
 
----
+## Validation
 
-## Deployment
-
-This app is optimized for modern deployment platforms:
-
-- Vercel (recommended)
-- Static export hosting (with API limitations)
-- Cloud hosting
-
-Bot and abuse protection notes:
-
-- On Vercel builds, BotID is enabled for high-risk API routes:
-  - `/api/ai-chat` (basic check level)
-  - `/api/create-checkout-session` (deep analysis check level)
-- On `NEXT_EXPORT=1` static builds, BotID rewrites and API runtime protections are not active because static export does not run API routes.
-
-Build commands (run from `next-app/`):
+Use both build modes before shipping changes:
 
 ```bash
 npm run build
 NEXT_EXPORT=1 npm run build
 ```
 
-GitHub Actions Vercel deployment:
+## Deployment Notes
 
-- Workflows:
-  - `.github/workflows/vercel-preview.yml`
-  - `.github/workflows/vercel-production.yml`
-- Required repository secrets:
-  - `VERCEL_TOKEN`
-  - `VERCEL_ORG_ID`
-  - `VERCEL_PROJECT_ID`
+- **Primary deployment:** Vercel
+- **Secondary deployment:** static export hosting via `NEXT_EXPORT=1`
+- API routes and middleware do not run in static export mode
+- BotID protects sensitive runtime routes such as checkout and AI chat on server-backed deployments
 
-Deployment runbook:
-
-- `next-app/DEPLOYMENT.md` includes required env vars by environment, domain cutover steps, and one-click reliability checks.
-
----
+See `DEPLOYMENT.md` and `SECURITY.md` for deployment and security guidance.
 
 ## Environment Variables
 
-Create `.env.local` in `next-app/` and include required values documented in `next-app/.env.example`:
+Create `.env.local` in the repository root and add the values documented in `.env.example`, including:
 
 ```env
 STRIPE_SECRET_KEY=
@@ -134,109 +102,12 @@ NEXT_PUBLIC_BASE_URL=
 OPENAI_API_KEY=
 STRIPE_TRAINING_PRICE_ID=
 MEMBERSHIP_SIGNING_SECRET=
-
-## AI Roleplay Setup
-
-- Obtain an OpenAI API key at: https://platform.openai.com/account/api-keys
-- Add the key to `next-app/.env.local` as `OPENAI_API_KEY=` (do NOT commit this file).
-- The server API route `next-app/pages/api/ai-chat.ts` reads `process.env.OPENAI_API_KEY` and will return an error if unset.
-
-Security & key rotation
-
-- If an API key is exposed, revoke it immediately in the OpenAI dashboard and create a new one.
-- Avoid committing keys. To remove a leaked key from git history, use `git-filter-repo` or the BFG (force-push required).
-- Add `.env.local` to `.gitignore` (already included) and use platform secrets (Vercel/GH Actions) for production.
-
-Making the Roleplay Lab public
-
-- The Roleplay UI (`next-app/pages/roleplay.tsx`) can be gated behind membership checks. This repository's default branch currently has the Roleplay Lab open to all visitors; to re-enable gating, restore the client membership check that calls `/api/membership-status`.
-
-If you want, I can add a small admin page to toggle public vs members-only access at runtime.
- 
-CI / Safety additions
-
-- A GitHub Action `secret-scan.yml` runs on PRs and pushes to `main` to detect common secret patterns (including `sk-` OpenAI keys) and fail the check if found.
-- A GitHub Action `link-check.yml` runs a static export and validates internal links using `linkinator` to prevent HTML-Proofer failures on deployment.
-
-Local admin toggle
-
-- To make the Roleplay Lab public or members-only, set `NEXT_PUBLIC_ROLEPLAY_PUBLIC=true` in `next-app/.env.local` (or leave unset/false to require membership).
-
-OpenAI prompt library integration
-
-- You can configure a server-side Prompt Library ID to centrally manage the system prompt the AI uses.
-- Add `OPENAI_PROMPT_ID=pmpt_...` to `next-app/.env.local` to enable. When set, `/api/ai-chat` will call the Responses API with that prompt ID and pass the conversation as input. If unset, the API will use the local `SYSTEM_PROMPT` defined in `next-app/pages/api/ai-chat.ts`.
+OPENAI_PROMPT_ID=
+NEXT_PUBLIC_ROLEPLAY_PUBLIC=
 ```
 
-## Access Control
-
-- Membership activation now happens server-side after Stripe checkout success.
-- `next-app/pages/api/activate-membership.ts` verifies the Stripe Checkout Session and issues a signed HttpOnly membership cookie.
-- `next-app/pages/api/membership-status.ts` lets the client determine whether member access is active.
-- `next-app/middleware.ts` protects `/roleplay` and `/store` on runtime deployments.
-- Static export builds still render pages, but runtime-only protections depend on Vercel or another Next.js server deployment.
-
----
-
-## Vision
-
-FSA Elite Performance is built to become a premier digital ecosystem for elite training, performance tracking, and next-level athlete development.
-
----
-
-## Espanol
-
-### Descripcion General
-
-FSA Elite Performance es una plataforma digital disenada para ofrecer entrenamiento de alto rendimiento, desarrollo de atletas y sistemas avanzados de optimizacion.
-
-Este repositorio contiene el codigo fuente, recursos visuales y configuraciones necesarias para ejecutar y escalar la aplicacion.
-
-### Funcionalidades
-
-- Sistemas de entrenamiento de elite
-- Seguimiento de rendimiento basado en datos
-- Optimizacion mental y fisica
-- Aplicacion web totalmente adaptable
-- Integracion completa de marca y diseno
-- Alto rendimiento y escalabilidad
-
-### Instalacion
-
-```bash
-git clone https://github.com/yourusername/fsa-elite-performance.git
-cd fsa-elite-performance/next-app
-npm ci
-cp .env.example .env.local
-npm run dev
-```
-
-### Despliegue
-
-Compatible con:
-
-- Vercel (recomendado)
-- Static export hosting
-- Servicios en la nube
-
-### Vision (Espanol)
-
-FSA Elite Performance esta disenado para convertirse en una plataforma lider en entrenamiento, rendimiento y desarrollo de atletas de alto nivel.
-
----
+Never commit secrets. Use platform-managed environment variables for production.
 
 ## License
 
 MIT License
-
----
-
-## Contribution
-
-Pull requests are welcome. For major changes, open an issue first to discuss the proposal.
-
----
-
-## Live Site
-
-<https://fsaeliteperformance.com>
