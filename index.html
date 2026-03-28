@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSA Elite Sales Training</title>
+  <meta
+    name="description"
+    content="AI roleplay practice, Stripe-powered early access, and sales training built for automotive closers."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="FSA Elite Sales Training" />
+  <meta
+    property="og:description"
+    content="Practice objection handling with AI roleplay and unlock FSA Elite early access."
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #f5a623;
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--gold); }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 60%, #1a1000 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .hero .label {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: #aaa; max-width: 640px; margin: 0 auto 2rem; font-size: 1.05rem; }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e09210; text-decoration: none; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid #2a2a2a;
+    }
+    .note { color: #555; font-size: 0.8rem; margin-top: 0.75rem; }
+    .cred {
+      background: #111;
+      padding: 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .cred strong { color: var(--gold); }
+    .features { padding: 4rem 1.5rem; background: #0d0d0d; }
+    .features h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .features .subtitle {
+      color: #888;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .card h3 { color: var(--gold); font-size: 1rem; margin-bottom: 0.4rem; }
+    .card p { color: #aaa; font-size: 0.9rem; line-height: 1.6; }
+    .cta-section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1a0e00, #0a0a0a);
+      border-top: 1px solid #2a2a2a;
+    }
+    .setup-card {
+      display: inline-block;
+      max-width: 420px;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .setup-card .eyebrow {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .setup-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .setup-card ul {
+      list-style: none;
+      color: #ccc;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+    footer {
+      border-top: 1px solid #2a2a2a;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <p class="label">FSA Elite</p>
+      <h1>Train your team with <br /><span>FSA Elite Sales Training.</span></h1>
+      <p>
+        A high-performance sales training platform for automotive closers. Practice objection handling with AI roleplay,
+        unlock $97 early access through Stripe, and prepare for upcoming modules, certifications, and calculators.
+      </p>
+      <div class="actions">
+        <a href="/roleplay" class="btn">Explore roleplay trainer →</a>
+        <a href="https://github.com/fsaeliteperformance-arch/FSA-ELITE-SALES-TRAINING" class="btn btn-secondary">View GitHub repo</a>
+      </div>
+      <p class="note">Built with Next.js pages router · Stripe checkout · OpenAI roleplay</p>
+    </div>
+  </section>
+
+  <div class="cred">
+    Early access is powered by Stripe at <strong>$97</strong>, with AI roleplay available inside the training experience.
+  </div>
+
+  <section class="features">
+    <div class="container">
+      <h2>What FSA Elite gives you</h2>
+      <p class="subtitle">AI practice now, with more closer training, certifications, and sales tools on the roadmap.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>AI Sales Roleplay</h3>
+          <p>Practice real objection-handling conversations against an AI customer simulator built for automotive sales.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧩</div>
+          <h3>Objection-Handling Reps</h3>
+          <p>Sharpen rapport, price presentation, and commitment skills before the next showroom conversation.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔐</div>
+          <h3>Stripe Early Access</h3>
+          <p>Secure paid access through Stripe and keep checkout tied to the training offer with clean redirect flows.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Closer Development Roadmap</h3>
+          <p>Training modules, certifications, and calculator tools are planned as the platform expands.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Platform roadmap</h2>
+      <p>FSA Elite combines live AI practice with a paid-access training offer and an expanding library of closer tools.</p>
+      <div class="setup-card">
+        <p class="eyebrow">Inside early access</p>
+        <h3>FSA Elite</h3>
+        <ul>
+          <li>✅ AI objection-handling roleplay</li>
+          <li>✅ Stripe-powered checkout flow</li>
+          <li>✅ Training modules in development</li>
+          <li>✅ Certifications on the roadmap</li>
+          <li>✅ Sales calculators coming soon</li>
+        </ul>
+        <a href="https://github.com/fsaeliteperformance-arch/FSA-ELITE-SALES-TRAINING" class="btn">Open GitHub repo →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <script>document.write(new Date().getFullYear())</script> FSA Elite Sales Training</p>
+  </footer>
+</body>
+</html>
