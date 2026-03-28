@@ -61,8 +61,8 @@ export async function createSessionToken(uid: string, email: string): Promise<st
   const now = Math.floor(Date.now() / 1000);
   const payload: SessionTokenPayload = {
     type: 'session',
-    uid,
-    email,
+    uid: uid.trim(),
+    email: email.trim(),
     issuedAt: now,
     expiresAt: now + SESSION_TOKEN_TTL_SECONDS,
   };
@@ -93,8 +93,10 @@ export async function verifySessionToken(
   try {
     const payload = JSON.parse(decodeBase64Url(encodedPayload)) as SessionTokenPayload;
     if (payload.type !== 'session') return null;
+    if (typeof payload.uid !== 'string' || !payload.uid.trim()) return null;
+    if (typeof payload.email !== 'string') return null;
     if (Math.floor(Date.now() / 1000) > payload.expiresAt) return null;
-    return { uid: payload.uid, email: payload.email };
+    return { uid: payload.uid, email: payload.email.trim() };
   } catch {
     return null;
   }
