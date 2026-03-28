@@ -1,0 +1,27 @@
+{
+  "name": "FSA ELITE Sales Training",
+  "short_name": "FSA ELITE",
+  "description": "Sales training for closers in any industry with AI roleplay and practical objection handling drills.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#0a0a0a",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
