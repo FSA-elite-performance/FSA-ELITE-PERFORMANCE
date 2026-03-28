@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kubiks Next.js Starter</title>
+  <meta
+    name="description"
+    content="A minimal Next.js starter demonstrating how to integrate and extend Kubiks in your own applications."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Kubiks Next.js Starter" />
+  <meta
+    property="og:description"
+    content="Clone the upstream Kubiks starter, create your own private repository, and deploy from every push."
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --gold: #f5a623;
+      --bg: #0a0a0a;
+      --surface: #141414;
+      --text: #f0f0f0;
+      --muted: #888;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--gold); }
+    .container { max-width: 920px; margin: 0 auto; padding: 0 1.5rem; }
+    .hero {
+      background: linear-gradient(135deg, #0a0a0a 60%, #1a1000 100%);
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+    }
+    .hero .label {
+      color: var(--gold);
+      font-weight: 700;
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: #aaa; max-width: 640px; margin: 0 auto 2rem; font-size: 1.05rem; }
+    .actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: #000;
+      font-weight: 700;
+      font-size: 1.05rem;
+      padding: 0.9rem 2.4rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: #e09210; text-decoration: none; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid #2a2a2a;
+    }
+    .note { color: #555; font-size: 0.8rem; margin-top: 0.75rem; }
+    .cred {
+      background: #111;
+      padding: 1.25rem;
+      text-align: center;
+      border-bottom: 1px solid #2a2a2a;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    .cred strong { color: var(--gold); }
+    .features { padding: 4rem 1.5rem; background: #0d0d0d; }
+    .features h2 {
+      text-align: center;
+      font-size: clamp(1.5rem, 4vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+    .features .subtitle {
+      color: #888;
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 1.5rem;
+    }
+    .card .icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+    .card h3 { color: var(--gold); font-size: 1rem; margin-bottom: 0.4rem; }
+    .card p { color: #aaa; font-size: 0.9rem; line-height: 1.6; }
+    .cta-section {
+      padding: 4rem 1.5rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1a0e00, #0a0a0a);
+      border-top: 1px solid #2a2a2a;
+    }
+    .setup-card {
+      display: inline-block;
+      max-width: 420px;
+      width: 100%;
+      background: var(--surface);
+      border: 2px solid var(--gold);
+      border-radius: 12px;
+      padding: 2rem 2.25rem;
+      margin-top: 1rem;
+      text-align: left;
+    }
+    .setup-card .eyebrow {
+      color: var(--gold);
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .setup-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    .setup-card ul {
+      list-style: none;
+      color: #ccc;
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+    }
+    footer {
+      border-top: 1px solid #2a2a2a;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="container">
+      <p class="label">Kubiks Inc.</p>
+      <h1>Launch your <br /><span>Kubiks Next.js Starter.</span></h1>
+      <p>
+        A minimal Next.js starter demonstrating how to integrate and extend Kubiks in your own applications.
+        Clone the upstream starter, then create your own private Git repository for automatic deployments.
+      </p>
+      <div class="actions">
+        <a href="https://github.com/kubiks-inc/nextjs-starter-kubiks" class="btn">Clone from GitHub →</a>
+        <a href="https://github.com/fsaeliteperformance-arch/kubiks-next-js-starter" class="btn btn-secondary">View target repo path</a>
+      </div>
+      <p class="note">Source repo: kubiks-inc/nextjs-starter-kubiks · Branch: main</p>
+    </div>
+  </section>
+
+  <div class="cred">
+    Create a Git repository after deploying so every push can ship automatically. Recommended destination:
+    <strong> fsaeliteperformance-arch/kubiks-next-js-starter</strong>
+  </div>
+
+  <section class="features">
+    <div class="container">
+      <h2>What this starter gives you</h2>
+      <p class="subtitle">A clean base for integrating Kubiks, customizing the UI, and deploying from your own private repository.</p>
+      <div class="grid">
+        <div class="card">
+          <div class="icon">⚡</div>
+          <h3>Minimal Next.js Foundation</h3>
+          <p>Start from a lean pages-router project that is easy to understand and extend.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧩</div>
+          <h3>Kubiks-Ready Extension Point</h3>
+          <p>Use the starter as a base for Kubiks integrations, custom UI, and product workflows.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔐</div>
+          <h3>Private Repository Ownership</h3>
+          <p>Create your own private GitHub repository under fsaeliteperformance-arch.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🚀</div>
+          <h3>Automatic Deployments</h3>
+          <p>Keep deployment connected to your repository so each push can update the project automatically.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2>Repository setup</h2>
+      <p>Start from the upstream Kubiks starter, then publish your own private repository to continue building.</p>
+      <div class="setup-card">
+        <p class="eyebrow">Recommended GitHub repo</p>
+        <h3>kubiks-next-js-starter</h3>
+        <ul>
+          <li>✅ Git scope: fsaeliteperformance-arch</li>
+          <li>✅ Visibility: private</li>
+          <li>✅ Upstream source: kubiks-inc/nextjs-starter-kubiks</li>
+          <li>✅ Default branch: main</li>
+          <li>✅ Automatic deploys from every push</li>
+        </ul>
+        <a href="https://github.com/fsaeliteperformance-arch/kubiks-next-js-starter" class="btn">Open repo destination →</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© <script>document.write(new Date().getFullYear())</script> Kubiks Next.js Starter</p>
+  </footer>
+</body>
+</html>

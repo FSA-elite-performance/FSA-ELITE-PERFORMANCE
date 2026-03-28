@@ -1,0 +1,12 @@
+{
+  "name": "fsa-elite-sales-training",
+  "private": true,
+  "scripts": {
+    "dev": "npm --prefix next-app run dev",
+    "build": "npm --prefix next-app run build",
+    "start": "npm --prefix next-app run start"
+  },
+  "dependencies": {
+    "next": "15.5.12"
+  }
+}
