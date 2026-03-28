@@ -45,7 +45,7 @@ const CATEGORY_LABELS: Record<StoreCategory, string> = {
 const STORE_SIGNAL_ITEMS = [
   {
     value: 'Members Only',
-    label: 'Identity products and self-branding tools reserved for FSA ELITE members',
+    label: 'Self-branding tools and closer gear reserved for reps who take their presence seriously',
   },
   {
     value: 'Secure Checkout',
@@ -53,42 +53,42 @@ const STORE_SIGNAL_ITEMS = [
   },
   {
     value: '15+ Products',
-    label: 'Desk gear, promo tools, business cards, and closer gear designed for real selling environments',
+    label: 'Business cards, desk gear, promo tools, and closer gear that make people remember your name',
   },
 ];
 
 const MEMBER_STORE_POINTS = [
-  'Desk gear and promo tools built specifically for working salespeople',
-  'Business cards, presentation folders, branded USB drives, and more',
-  "A store designed to support every stage of a rep's professional image",
+  'Products that make you look more established before you say a word',
+  'Business cards, folders, and branded tools that keep your name working after the meeting ends',
+  "Everything here is built for reps who want to be remembered — not just trained",
 ];
 
 const BUNDLE_OFFERS = [
   {
     id: 'starter-presence-kit',
     title: 'Starter Presence Kit',
-    description: 'The fastest first upgrade for a rep who wants to look sharper immediately online and in person.',
+    description: 'The fastest first upgrade for a rep who wants to look more established immediately — online and in person.',
     productIds: ['digital-business-card', 'premium-business-cards'],
     label: 'Fastest image upgrade',
   },
   {
     id: 'closer-daily-kit',
     title: 'Closer Daily Kit',
-    description: 'Daily-wear identity stack for members who want brand consistency on the floor and in content.',
+    description: 'Daily-wear identity stack for reps who want to look the part on the floor, in meetings, and on camera.',
     productIds: ['elite-cap-series', 'closer-uniform-hoodie'],
     label: 'Daily visibility',
   },
   {
     id: 'authority-stack',
     title: 'Authority Stack',
-    description: 'Higher-status bundle for members who want the strongest jump in presentation and self-branding.',
+    description: 'The strongest jump in presentation and self-branding — walk in looking like you have been doing this for years.',
     productIds: ['self-promo-brand-kit', 'premium-business-cards', 'elite-cap-series'],
     label: 'Highest-status bundle',
   },
   {
     id: 'pro-rep-desk-kit',
     title: 'Pro Rep Desk Kit',
-    description: 'Everything a serious rep needs to look polished on the desk, in meetings, and on every video call.',
+    description: 'Everything a serious rep needs to look polished on the desk, in meetings, and on every video call. This is what sits on the desk all day.',
     productIds: ['branded-leather-portfolio', 'custom-notepad-pack', 'presentation-folder', 'phone-tablet-stand'],
     label: 'Full desk + promo setup',
   },
@@ -313,10 +313,10 @@ export default function Store() {
   return (
     <>
       <Head>
-        <title>FSA ELITE Member Store | Sales Gear and Self-Logo Products</title>
+        <title>FSA ELITE Member Store | Closer Gear and Self-Branding Tools</title>
         <meta
           name="description"
-          content="Shop FSA ELITE member gear, self-logo products, and creator-ready bundles built for salespeople across industries."
+          content="Shop FSA ELITE closer gear, self-branding tools, and identity products built for sales reps who want to be remembered."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/store`} />
@@ -342,8 +342,8 @@ export default function Store() {
                 <p className="eyebrow">Members Only</p>
                 <h1>Your store unlocks the moment you join — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}, one time.</h1>
                 <p className="member-gate-copy">
-                  15+ products designed for reps who want sharper introductions, stronger leave-behinds, and a look
-                  that says “established” — not “still building.” Each product has its own member pricing.
+                  15+ products designed for reps who want to look more established, leave behind something
+                  memorable, and build a presence that closes before they even speak. Each product has its own member pricing.
                 </p>
                 <div className="member-gate-actions">
                   <Link href="/checkout-preview" className="btn-primary">
@@ -371,11 +371,11 @@ export default function Store() {
                 <span className="store-brand-domain">fsaeliteperformance.com</span>
               </div>
             </div>
-            <p className="eyebrow">FSA ELITE Member Store</p>
-            <h1 className="store-title">Your name. Your tools. Their memory.</h1>
+            <p className="eyebrow">FSA ELITE Presence</p>
+            <h1 className="store-title">Training creates the skill. This store creates the presence.</h1>
             <p className="store-copy">
-              Business cards, desk gear, branded promo tools, and closer gear that make you look more established
-              before, during, and after every conversation.
+              Business cards, desk gear, branded promo tools, and closer gear that make you look more
+              established — and harder to forget — before, during, and after every conversation.
             </p>
             <p className="store-coming-soon-pill">Secure Stripe checkout is live — order now, ship fast.</p>
             <p className="store-cart-count">Items in cart: {cartCount}</p>
@@ -434,7 +434,7 @@ export default function Store() {
 
                 <article className="store-member-card">
                   <p className="eyebrow">Why Members Buy</p>
-                  <h2>Products that keep your name working after the training session ends.</h2>
+                  <h2>This is what you leave behind after the meeting. This is what makes people remember your name.</h2>
                   <ul className="store-member-list">
                     {MEMBER_STORE_POINTS.map((point) => (
                       <li key={point}>{point}</li>
@@ -671,10 +671,10 @@ export default function Store() {
             <div className="store-info-grid">
               <article className="store-info-card">
                 <p className="eyebrow">Store Information</p>
-                <h2>What members come here for</h2>
+                <h2>What this store is really for</h2>
                 <p>
-                  FSA ELITE members use this store for cleaner introductions, stronger leave-behinds, and business tools
-                  that make them look more established in front of prospects and customers.
+                  FSA ELITE members use this store to build presence — cleaner introductions, stronger
+                  leave-behinds, and professional tools that make people trust them faster.
                 </p>
               </article>
 
