@@ -1,0 +1,85 @@
+# GitHub Pages deployment workflow — STATIC EXPORT ONLY
+#
+# ⚠️  IMPORTANT: GitHub Pages serves only static files.
+#     The Next.js API routes (e.g. /api/create-checkout-session) require a
+#     serverless runtime and will NOT work on GitHub Pages.
+#     For full functionality (Stripe checkout), deploy to Vercel or Render.
+#     See README.md → Vercel Deployment for instructions.
+#
+# This workflow builds the Next.js app with `output: 'export'` (NEXT_STATIC_EXPORT=true),
+# producing a static /out directory, then uploads and deploys it to GitHub Pages.
+#
+# API routes (pages/api/) are removed before the static build because Next.js
+# does not support server-side API routes in static exports.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: next-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: next-app
+        run: npm ci --prefer-offline
+
+      - name: Remove server-only API routes for static export
+        working-directory: next-app
+        run: |
+          # API routes require a server runtime (Vercel/Render) and cannot be
+          # included in a static export. They are preserved in the repo for
+          # Vercel deployments; only removed here for the Pages build.
+          rm -rf pages/api
+
+      - name: Build static export (next build with output: export)
+        working-directory: next-app
+        run: npm run export
+        env:
+          NEXT_STATIC_EXPORT: "true"
+          # Provide a base URL for the static build.
+          # Set NEXT_PUBLIC_BASE_URL in GitHub repository variables for production.
+          NEXT_PUBLIC_BASE_URL: ${{ vars.NEXT_PUBLIC_BASE_URL || 'https://fsaeliteperformance-arch.github.io/FSA-ELITE-SALES-TRAINING' }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          PRICE_AMOUNT_CENTS: ${{ vars.PRICE_AMOUNT_CENTS || '4997' }}
+          # NOTE: STRIPE_SECRET_KEY must NOT be included in static exports.
+          # It is only used in the serverless API route on Vercel/Render.
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: next-app/out
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
