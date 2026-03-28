@@ -1,0 +1,80 @@
+name: Deploy to GitHub Pages (Static Export)
+
+# ============================================================
+# IMPORTANT: GitHub Pages serves STATIC files only.
+# This workflow exports the Next.js app as a static site.
+#
+# ⚠️  The Stripe Checkout API route (/api/create-checkout-session)
+#     WILL NOT WORK on GitHub Pages because serverless functions
+#     are not supported in static exports.
+#
+# ✅  For a fully functional Stripe Checkout (live payments),
+#     deploy to Vercel: https://vercel.com
+#     Vercel natively supports Next.js API routes / serverless.
+#
+# This workflow is useful as a marketing landing page fallback,
+# documentation, or preview. Not for production payments.
+# ============================================================
+
+on:
+  push:
+    branches:
+      - main
+
+# Sets permissions for GitHub Pages deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: next-app/package-lock.json
+
+      - name: Install dependencies
+        working-directory: next-app
+        run: npm ci --prefer-offline
+
+      - name: Build static export
+        working-directory: next-app
+        env:
+          # Static export only — no Stripe keys needed here.
+          # The /api routes will not be available on GitHub Pages.
+          # Set NEXT_PUBLIC_BASE_URL to your GitHub Pages URL or Vercel URL.
+          NEXT_PUBLIC_BASE_URL: ${{ secrets.NEXT_PUBLIC_BASE_URL }}
+          NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY }}
+          # Hint for next.config.js to enable `output: 'export'` without mutating the file.
+          NEXT_EXPORT: '1'
+        run: |
+          npm run build
+
+      - name: Upload static artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: next-app/out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
