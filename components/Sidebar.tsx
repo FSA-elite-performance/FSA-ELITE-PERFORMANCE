@@ -53,7 +53,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
           <img src="/logo.jpg" alt="FSA ELITE" className="app-sidebar-logo" />
           <span className="app-sidebar-title">
             FSA ELITE
-            <span className="app-sidebar-subtitle">Training + Identity</span>
+            <span className="app-sidebar-subtitle">Train · Brand · Close</span>
           </span>
         </Link>
 

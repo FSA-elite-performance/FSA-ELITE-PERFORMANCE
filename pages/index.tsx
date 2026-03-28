@@ -29,25 +29,25 @@ const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
 const FEATURES = [
   {
     title: 'AI Roleplay Lab',
-    description: '5 buyer personas with real-time scoring on objection handling, closing techniques, and rapport building.',
+    description: '5 tough buyer personas. Real-time scoring on objection handling, frame control, and closing. More skill, every session.',
     stat: '5',
     statLabel: 'AI Personas',
   },
   {
     title: 'Member Store',
-    description: 'Premium business cards, branded gear, and promo tools that make your presence memorable.',
+    description: 'Premium business cards, branded closer gear, and rep-branding tools that build confidence before you say a word.',
     stat: '17+',
     statLabel: 'Products',
   },
   {
-    title: 'OLIVE Assistant',
-    description: 'Your AI sales coach available 24/7 for roleplay practice, script help, and pitch feedback.',
+    title: 'OLIVE AI Coach',
+    description: 'Your AI sales coach available 24/7 — script feedback, objection walkthroughs, and pitch analysis on demand.',
     stat: '24/7',
     statLabel: 'Available',
   },
   {
     title: 'Skill Tracking',
-    description: 'Monitor your progress across 6 core sales skills with detailed performance analytics.',
+    description: 'Track progress across 6 core sales skills. See exactly where your pitch breaks — and fix it before it costs you.',
     stat: '6',
     statLabel: 'Skills Tracked',
   },
@@ -76,7 +76,7 @@ const STEPS = [
 const FAQ_ITEMS = [
   {
     question: 'Who is this for?',
-    answer: 'Sales professionals who want sharper conversations, cleaner branding, and a more memorable presence. Works for any industry.',
+    answer: 'Sales professionals who want more — more confidence walking in, more skill handling objections, more production, and more results. Works for every industry.',
   },
   {
     question: 'What does it cost?',
@@ -84,7 +84,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'What do I get?',
-    answer: 'Immediate access to AI Roleplay Lab, OLIVE assistant, member store, dashboard, and all future updates.',
+    answer: 'Immediate access to AI Roleplay Lab, OLIVE coach, member store, performance dashboard, and all future updates.',
   },
   {
     question: 'How do I get support?',
@@ -110,22 +110,22 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>FSA ELITE | AI Sales Training and Professional Branding</title>
+        <title>FSA ELITE | More Confidence. More Skill. More Results.</title>
         <meta
           name="description"
-          content="AI-powered sales training, objection roleplay, and professional branding tools for sales reps who want to level up fast."
+          content="FSA ELITE is built for salespeople who want more — more confidence, more skill, more production, and more results. AI objection drills, rep-branding tools, and a closer store in one platform."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/`} />
         <meta property="og:site_name" content="FSA ELITE" />
-        <meta property="og:title" content="FSA ELITE | AI Sales Training and Professional Branding" />
-        <meta property="og:description" content="AI-powered sales training, objection roleplay, and professional branding tools." />
+        <meta property="og:title" content="FSA ELITE | More Confidence. More Skill. More Results." />
+        <meta property="og:description" content="Built for salespeople who want more — AI objection drills, rep-branding tools, and a 17+ product member store." />
         <meta property="og:url" content={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE | AI Sales Training" />
-        <meta name="twitter:description" content="AI-powered sales training and professional branding tools." />
+        <meta name="twitter:title" content="FSA ELITE | More Confidence. More Skill. More Results." />
+        <meta name="twitter:description" content="Built for salespeople who want more — AI training, rep-branding tools, and a closer store." />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
       </Head>
 
@@ -188,14 +188,14 @@ export default function Home() {
             </div>
             
             <h1 className="landing-hero-title">
-              The complete platform for
+              Built for salespeople
               <br />
-              <span className="landing-hero-highlight">sales performance</span>
+              who want <span className="landing-hero-highlight">more</span>
             </h1>
             
             <p className="landing-hero-subtitle">
-              AI objection drills, professional branding tools, and closer gear.
-              Built for reps who refuse to blend in.
+              More confidence. More skill. More production. More results.
+              From AI objection drills to rep-branding tools — everything a closer needs in one platform.
             </p>
 
             <div className="landing-hero-actions">
@@ -261,9 +261,9 @@ export default function Home() {
         <section className="landing-section" id="features">
           <div className="landing-section-header">
             <span className="landing-eyebrow">Features</span>
-            <h2 className="landing-section-title">Everything you need to close more deals</h2>
+            <h2 className="landing-section-title">From training to branding — FSA ELITE has you covered</h2>
             <p className="landing-section-subtitle">
-              Training, branding, and tools — all connected in one platform.
+              Every tool a rep needs to show up sharper, close more, and build a presence that lasts.
             </p>
           </div>
 
@@ -305,10 +305,11 @@ export default function Home() {
         {/* CTA Section */}
         <section className="landing-cta">
           <div className="landing-cta-content">
-            <h2>The rep who prepares harder closes more.</h2>
+            <h2>More results start with more preparation.</h2>
             <p>
               Most reps wing it. FSA ELITE members drill it, brand it, and walk in
               looking like they have already closed this deal before.
+              More confidence. More skill. More production. More results.
             </p>
             <div className="landing-cta-actions">
               <Link href="/checkout-preview" className="btn-primary btn-lg">
