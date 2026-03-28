@@ -110,21 +110,21 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>FSA ELITE | AI Sales Training and Professional Branding</title>
+        <title>FSA Elite Performance | AI Sales Training and Professional Branding</title>
         <meta
           name="description"
           content="AI-powered sales training, objection roleplay, and professional branding tools for sales reps who want to level up fast."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/`} />
-        <meta property="og:site_name" content="FSA ELITE" />
-        <meta property="og:title" content="FSA ELITE | AI Sales Training and Professional Branding" />
+        <meta property="og:site_name" content="FSA Elite Performance" />
+        <meta property="og:title" content="FSA Elite Performance | AI Sales Training and Professional Branding" />
         <meta property="og:description" content="AI-powered sales training, objection roleplay, and professional branding tools." />
         <meta property="og:url" content={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE | AI Sales Training" />
+        <meta name="twitter:title" content="FSA Elite Performance | AI Sales Training" />
         <meta name="twitter:description" content="AI-powered sales training and professional branding tools." />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
       </Head>
@@ -134,8 +134,11 @@ export default function Home() {
         <header className="landing-nav">
           <div className="landing-nav-inner">
             <Link href="/" className="landing-brand">
-              <img src="/logo.jpg" alt="FSA ELITE" className="landing-logo" />
-              <span className="landing-brand-text">FSA ELITE</span>
+              <img src="/logo.jpg" alt="FSA Elite Performance" className="landing-logo" />
+              <span className="landing-brand-text">
+                FSA ELITE
+                <span className="landing-brand-sub">Performance</span>
+              </span>
             </Link>
 
             <nav className="landing-nav-links">
@@ -342,7 +345,7 @@ export default function Home() {
         <footer className="landing-footer">
           <div className="landing-footer-inner">
             <div className="landing-footer-brand">
-              <img src="/logo.jpg" alt="FSA ELITE" className="landing-footer-logo" />
+              <img src="/logo.jpg" alt="FSA Elite Performance" className="landing-footer-logo" />
               <div>
                 <strong>{BUSINESS_NAME}</strong>
                 <span>Operated by {LEGAL_BUSINESS_NAME}</span>

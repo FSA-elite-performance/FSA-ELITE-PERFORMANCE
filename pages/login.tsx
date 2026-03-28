@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { getClientAuth } from '../lib/firebaseClient';
-import { PUBLIC_BUSINESS_NAME } from '../lib/businessDetails';
 
 export default function Login() {
   const router = useRouter();
@@ -73,10 +72,10 @@ export default function Login() {
       <main className="auth-page">
         <div className="auth-card">
           <div className="auth-brand">
-            <img src="/logo.png" alt="FSA ELITE" className="auth-logo" />
+            <img src="/logo.png" alt="FSA Elite Performance" className="auth-logo" />
             <div>
-              <strong className="auth-brand-name">FSA ELITE</strong>
-              <span className="auth-brand-sub">{PUBLIC_BUSINESS_NAME}</span>
+              <strong className="auth-brand-name">FSA Elite Performance</strong>
+              <span className="auth-brand-sub">fsaeliteperformance.com</span>
             </div>
           </div>
 

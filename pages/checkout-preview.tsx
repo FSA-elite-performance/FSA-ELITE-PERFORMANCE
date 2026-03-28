@@ -99,9 +99,9 @@ export default function CheckoutPreview() {
 
             <aside className="checkout-preview-card">
               <div className="checkout-preview-brand">
-                <img src="/logo.png" alt="FSA ELITE" className="checkout-preview-logo" />
+                <img src="/logo.png" alt="FSA Elite Performance" className="checkout-preview-logo" />
                 <div>
-                  <strong className="checkout-preview-brand-name">FSA ELITE</strong>
+                  <strong className="checkout-preview-brand-name">FSA Elite Performance</strong>
                   <span className="checkout-preview-brand-domain">fsaeliteperformance.com</span>
                 </div>
               </div>

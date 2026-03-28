@@ -16,7 +16,6 @@ import {
   verifyPasswordResetCode,
 } from 'firebase/auth';
 import { getClientAuth } from '../lib/firebaseClient';
-import { PUBLIC_BUSINESS_NAME } from '../lib/businessDetails';
 
 const PASSWORD_MIN_LENGTH = 8;
 
@@ -97,10 +96,10 @@ export default function ResetPassword() {
       <main className="auth-page">
         <div className="auth-card">
           <div className="auth-brand">
-            <img src="/logo.png" alt="FSA ELITE" className="auth-logo" />
+            <img src="/logo.png" alt="FSA Elite Performance" className="auth-logo" />
             <div>
-              <strong className="auth-brand-name">FSA ELITE</strong>
-              <span className="auth-brand-sub">{PUBLIC_BUSINESS_NAME}</span>
+              <strong className="auth-brand-name">FSA Elite Performance</strong>
+              <span className="auth-brand-sub">fsaeliteperformance.com</span>
             </div>
           </div>
 

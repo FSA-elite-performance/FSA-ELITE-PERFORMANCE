@@ -50,10 +50,10 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
       />
       <aside className={`app-sidebar ${open ? 'app-sidebar-open' : ''}`}>
         <Link href="/" className="app-sidebar-brand" onClick={onClose}>
-          <img src="/logo.jpg" alt="FSA ELITE" className="app-sidebar-logo" />
+          <img src="/logo.jpg" alt="FSA Elite Performance" className="app-sidebar-logo" />
           <span className="app-sidebar-title">
             FSA ELITE
-            <span className="app-sidebar-subtitle">Training + Identity</span>
+            <span className="app-sidebar-subtitle">Performance</span>
           </span>
         </Link>
 
