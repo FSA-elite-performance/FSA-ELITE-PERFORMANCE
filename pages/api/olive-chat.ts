@@ -4,10 +4,16 @@ import OpenAI from 'openai';
 import { AI_CHAT_MAX_MSG_CHARS } from '../../lib/aiChatConstants';
 import { BOTID_ROUTE_CONFIG } from '../../lib/botid-config';
 import { getBotIdServerOptions, isAllowedVerifiedBot } from '../../lib/botid-server';
+import { createLogger, getRequestId } from '../../lib/logger';
 import {
   OLIVE_GENERAL_SYSTEM_PROMPT,
   OLIVE_PAGE_CONTEXTS,
 } from '../../lib/olivePersona';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
+
+// ─── Rate limit: 10 requests per 60 s per IP ─────────────────────────────────
+const RATE_LIMIT_MAX = 10;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 
 // ─── Limits ───────────────────────────────────────────────────────────────────
 const MAX_MESSAGES = 20;
@@ -69,9 +75,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
+  const log = createLogger(getRequestId(req));
+
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ── Rate limiting ──
+  const ip = getClientIp(req);
+  const limit = rateLimit(`${ip}:/api/olive-chat`, {
+    maxRequests: RATE_LIMIT_MAX,
+    windowMs: RATE_LIMIT_WINDOW_MS,
+  });
+  if (!limit.allowed) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: 'Too many requests. Please wait before trying again.' });
   }
 
   // Re-use the ai-chat BotID config (same check level).
@@ -80,18 +99,18 @@ export default async function handler(
       getBotIdServerOptions(BOTID_ROUTE_CONFIG.aiChat, req.headers)
     );
     if (verification.isBot && !isAllowedVerifiedBot(verification)) {
-      console.warn('BotID blocked request to /api/olive-chat');
+      log.warn('BotID blocked request to /api/olive-chat');
       return res.status(403).json({ error: 'Access denied.' });
     }
   } catch (error: unknown) {
-    console.error('BotID verification failed for /api/olive-chat:', error);
+    log.error('BotID verification failed for /api/olive-chat', { error: String(error) });
     return res.status(500).json({ error: 'Service temporarily unavailable. Please try again later.' });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   const projectId = process.env.OPENAI_PROJECT_ID?.trim();
   if (!apiKey) {
-    console.error('OPENAI_API_KEY is not set');
+    log.error('OPENAI_API_KEY is not set');
     return res.status(500).json({ error: 'AI service is not configured. Contact support.' });
   }
 
@@ -165,7 +184,7 @@ export default async function handler(
 
     return res.status(200).json({ reply });
   } catch (err: unknown) {
-    console.error('OpenAI error (olive-chat):', err);
+    log.error('OpenAI error (olive-chat)', { error: String(err) });
     return res.status(500).json({ error: 'OLIVE is temporarily unavailable. Please try again later.' });
   }
 }

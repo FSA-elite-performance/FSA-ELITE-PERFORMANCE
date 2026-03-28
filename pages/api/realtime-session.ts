@@ -2,6 +2,12 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { checkBotId } from 'botid/server';
 import { BOTID_ROUTE_CONFIG } from '../../lib/botid-config';
 import { getBotIdServerOptions, isAllowedVerifiedBot } from '../../lib/botid-server';
+import { createLogger, getRequestId } from '../../lib/logger';
+import { getClientIp, rateLimit } from '../../lib/rateLimit';
+
+// ─── Rate limit: 5 sessions per 60 s per IP (voice sessions are expensive) ───
+const RATE_LIMIT_MAX = 5;
+const RATE_LIMIT_WINDOW_MS = 60_000;
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 type ErrorResponse = { error: string };
@@ -16,9 +22,22 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<SuccessResponse | ErrorResponse>
 ) {
+  const log = createLogger(getRequestId(req));
+
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // ── Rate limiting ──
+  const ip = getClientIp(req);
+  const limit = rateLimit(`${ip}:/api/realtime-session`, {
+    maxRequests: RATE_LIMIT_MAX,
+    windowMs: RATE_LIMIT_WINDOW_MS,
+  });
+  if (!limit.allowed) {
+    res.setHeader('Retry-After', String(limit.retryAfter));
+    return res.status(429).json({ error: 'Too many requests. Please wait before trying again.' });
   }
 
   // ── BotID check (same level as ai-chat) ──
@@ -30,13 +49,13 @@ export default async function handler(
       return res.status(403).json({ error: 'Access denied.' });
     }
   } catch (error: unknown) {
-    console.error('BotID verification failed for /api/realtime-session:', error);
+    log.error('BotID verification failed for /api/realtime-session', { error: String(error) });
     return res.status(500).json({ error: 'Service temporarily unavailable.' });
   }
 
   const apiKey = process.env.OPENAI_API_KEY;
   if (!apiKey) {
-    console.error('OPENAI_API_KEY is not set');
+    log.error('OPENAI_API_KEY is not set');
     return res.status(500).json({ error: 'AI service is not configured.' });
   }
 
@@ -76,7 +95,10 @@ export default async function handler(
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error('OpenAI Realtime session creation failed:', response.status, errorText);
+      log.error('OpenAI Realtime session creation failed', {
+        status: response.status,
+        body: errorText.slice(0, 500),
+      });
       return res.status(502).json({ error: 'Failed to create voice session.' });
     }
 
@@ -88,13 +110,13 @@ export default async function handler(
     const expiresAt = data.client_secret?.expires_at ?? 0;
 
     if (!clientSecret) {
-      console.error('OpenAI Realtime session missing client_secret');
+      log.error('OpenAI Realtime session missing client_secret');
       return res.status(502).json({ error: 'Voice session response was incomplete.' });
     }
 
     return res.status(200).json({ clientSecret, expiresAt });
   } catch (error: unknown) {
-    console.error('OpenAI Realtime session error:', error);
+    log.error('OpenAI Realtime session error', { error: String(error) });
     return res.status(500).json({ error: 'Failed to initialize voice session.' });
   }
 }
