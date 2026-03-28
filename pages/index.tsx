@@ -213,38 +213,13 @@ export default function Home() {
           </div>
 
           <div className="landing-hero-visual">
-            <div className="landing-hero-card">
-              <div className="landing-hero-card-header">
-                <span className="landing-card-dot" />
-                <span className="landing-card-dot" />
-                <span className="landing-card-dot" />
-              </div>
-              <div className="landing-hero-card-content">
-                <div className="landing-demo-chat">
-                  <div className="landing-demo-msg landing-demo-msg-ai">
-                    <span className="landing-demo-speaker">Skeptical Steve</span>
-                    {'"We\'ve been burned by vendors before. Why should I trust your company?"'}
-                  </div>
-                  <div className="landing-demo-msg landing-demo-msg-user">
-                    Your response here...
-                  </div>
-                </div>
-                <div className="landing-demo-scores">
-                  <div className="landing-score-item">
-                    <span>Rapport</span>
-                    <strong className="score-high">92</strong>
-                  </div>
-                  <div className="landing-score-item">
-                    <span>Objection</span>
-                    <strong className="score-mid">78</strong>
-                  </div>
-                  <div className="landing-score-item">
-                    <span>Close</span>
-                    <strong className="score-high">85</strong>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <img
+              src="/hero-figure.svg"
+              alt="Sales professional holding a dollar sign"
+              className="landing-hero-figure"
+              width={400}
+              height={520}
+            />
           </div>
         </section>
 

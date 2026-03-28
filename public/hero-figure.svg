@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 520" fill="none">
+  <defs>
+    <linearGradient id="suit" x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0%" stop-color="#e8e8ed"/>
+      <stop offset="40%" stop-color="#c0c0c8"/>
+      <stop offset="100%" stop-color="#8a8a94"/>
+    </linearGradient>
+    <linearGradient id="shirt" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#d0d0d6"/>
+      <stop offset="100%" stop-color="#a0a0aa"/>
+    </linearGradient>
+    <linearGradient id="tie" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#1a1a22"/>
+      <stop offset="100%" stop-color="#0b0b0f"/>
+    </linearGradient>
+    <linearGradient id="dollar" x1="0.2" y1="0" x2="0.8" y2="1">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="50%" stop-color="#e8e8ed"/>
+      <stop offset="100%" stop-color="#c0c0c8"/>
+    </linearGradient>
+    <linearGradient id="glow" x1="0.5" y1="0" x2="0.5" y2="1">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06b6d4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+    <filter id="dollarGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6" result="blur"/>
+      <feFlood flood-color="#3b82f6" flood-opacity="0.35" result="color"/>
+      <feComposite in="color" in2="blur" operator="in" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Subtle glow behind figure -->
+  <ellipse cx="185" cy="340" rx="120" ry="200" fill="url(#glow)" opacity="0.5"/>
+
+  <!-- Figure group -->
+  <g filter="url(#shadow)">
+    <!-- Head -->
+    <ellipse cx="185" cy="95" rx="38" ry="44" fill="url(#suit)"/>
+
+    <!-- Neck -->
+    <rect x="172" y="132" width="26" height="20" rx="4" fill="url(#shirt)"/>
+
+    <!-- Torso / Jacket -->
+    <path d="M130 152 L185 148 L240 152 L252 310 L118 310 Z" fill="url(#suit)"/>
+
+    <!-- Shirt V -->
+    <path d="M170 152 L185 200 L200 152" fill="url(#shirt)"/>
+
+    <!-- Tie -->
+    <path d="M181 158 L185 210 L189 158 Z" fill="url(#tie)"/>
+    <circle cx="185" cy="212" r="3" fill="url(#tie)"/>
+    <path d="M181 212 L185 260 L189 212 Z" fill="url(#tie)"/>
+
+    <!-- Lapels -->
+    <path d="M170 152 L145 180 L148 190 L170 165 Z" fill="url(#suit)" opacity="0.7"/>
+    <path d="M200 152 L225 180 L222 190 L200 165 Z" fill="url(#suit)" opacity="0.7"/>
+
+    <!-- Left arm (pocket) -->
+    <path d="M130 170 L108 260 L110 310 L130 310 L140 265 L138 200 Z" fill="url(#suit)"/>
+
+    <!-- Right arm (extended, holding dollar) -->
+    <path d="M240 170 L268 210 L310 195 L318 200 L310 210 L268 225 L252 275 L252 310 L240 310 L238 265 Z" fill="url(#suit)"/>
+
+    <!-- Right hand -->
+    <ellipse cx="315" cy="200" rx="12" ry="10" fill="url(#shirt)" transform="rotate(-10 315 200)"/>
+
+    <!-- Legs -->
+    <path d="M148 310 L140 480 L170 480 L180 330 Z" fill="url(#suit)"/>
+    <path d="M222 310 L230 480 L200 480 L190 330 Z" fill="url(#suit)"/>
+
+    <!-- Shoes -->
+    <rect x="135" y="475" width="40" height="12" rx="6" fill="#1a1a22"/>
+    <rect x="195" y="475" width="40" height="12" rx="6" fill="#1a1a22"/>
+
+    <!-- Pocket square -->
+    <path d="M142 185 L148 178 L154 185 L148 190 Z" fill="#ffffff" opacity="0.6"/>
+
+    <!-- Button -->
+    <circle cx="185" cy="265" r="3.5" fill="#8a8a94" stroke="#c0c0c8" stroke-width="0.5"/>
+  </g>
+
+  <!-- Dollar sign with glow effect -->
+  <g filter="url(#dollarGlow)">
+    <text x="330" y="185" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="64" font-weight="700" fill="url(#dollar)" text-anchor="middle">$</text>
+  </g>
+</svg>
