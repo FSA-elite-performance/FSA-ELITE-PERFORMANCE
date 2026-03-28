@@ -1,34 +1,48 @@
 # FSA Elite Performance
 
-Official repository for FSAElitePerformance.com.
-High-performance training, development, and elite optimization platform.
+Official repository for [fsaeliteperformance.com](https://fsaeliteperformance.com).
+Sales-training and personal-branding SaaS for salespeople who want more — more confidence, more skill, more production, and more results.
 
 ---
 
 ## Overview
 
-FSA Elite Performance is a full-scale digital platform designed to deliver advanced performance training, athlete development systems, and structured optimization programs.
+FSA ELITE (operated by Fontenots Sales Association LLC) is a premium digital platform that helps sales professionals sharpen their craft and build a stronger personal brand — from first contact to closed deal.
 
-This repository contains source code, assets, branding elements, and deployment configurations required to run and scale the application.
+From training to branding, FSA ELITE gives every rep the tools they need to walk into every room ready:
+
+- **AI Roleplay Lab** — pressure-test your pitch against 5 tough AI buyer personas with real-time scoring across 6 core sales skills
+- **OLIVE AI Coach** — 24/7 sales coaching, objection-handling help, script feedback, and pitch analysis
+- **Member Store** — 17+ premium branded products: business cards, closer gear, desk tools, and rep-branding essentials
+- **Performance Dashboard** — track skill trends, session scores, and daily drills in one view
+
+One-time $12.99 membership. No subscription. Lifetime access to everything — current and future.
+
+This repository contains the full source code, assets, branding elements, and deployment configurations.
 
 ---
 
 ## Features
 
-- Elite performance training systems
-- Data-driven athlete tracking
-- Mental and physical optimization modules
-- Fully responsive web application
-- Integrated branding, logos, and UI assets
-- Optimized for fast deployment and scalability
+- AI-powered objection-handling roleplay with 5 buyer personas
+- Real-time scoring across 6 sales skills: Frame Control, Discovery Depth, Objection Isolation, Value Building, Next-Step Close, and Composure
+- OLIVE AI assistant available 24/7 for coaching, pitch feedback, and script help
+- Member store with 17+ rep-branding products
+- Performance dashboard with skill breakdown and daily drills
+- Membership-gated access via Stripe + server-side activation
+- Fully responsive — mobile-first for reps on the go
+- Static-export compatible for GitHub Pages hosting
 
 ---
 
 ## Tech Stack
 
-- Frontend: React / Next.js (Pages Router)
+- Frontend: React / Next.js 15 (Pages Router)
 - Backend: Node.js / Next.js API routes
-- Styling: Global CSS / Custom UI
+- AI: OpenAI API (OLIVE assistant + Roleplay Lab)
+- Payments: Stripe (one-time checkout + membership activation)
+- Auth: Firebase + signed HttpOnly membership cookie
+- Styling: Dark-first global CSS design system with CSS custom properties
 - Deployment: Vercel (recommended), static export support
 - Version Control: Git + GitHub
 
@@ -37,13 +51,13 @@ This repository contains source code, assets, branding elements, and deployment 
 ## Project Structure
 
 ```text
-next-app/
-  pages/
-  pages/api/
-  styles/
-  lib/
-  public/
-  next.config.js
+pages/          — Next.js pages (index, roleplay, store, welcome, checkout-preview, etc.)
+pages/api/      — API routes (checkout, membership, AI chat, auth)
+lib/            — Shared logic (OLIVE persona, roleplay intelligence, merch catalog, etc.)
+components/     — Reusable UI (Sidebar, OliveWidget, AppLayout, ThemeToggle)
+styles/         — Global CSS design system (dark theme, design tokens)
+public/         — Static assets (logo, OG image, etc.)
+next.config.js  — Next.js configuration with BotID and static-export toggle
 README.md
 ```
 
@@ -51,10 +65,10 @@ README.md
 
 ## Branding and Assets
 
-Official FSA Elite Performance visual assets are stored in:
+Official FSA ELITE visual assets are stored in:
 
 ```text
-next-app/public/
+public/
 ```
 
 Use branding consistently across all pages and components.
@@ -65,13 +79,12 @@ Use branding consistently across all pages and components.
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/fsa-elite-performance.git
+git clone https://github.com/FSA-elite-performance/FSA-ELITE-PERFORMANCE.git
 
 # Navigate into project root
-cd fsa-elite-performance
+cd FSA-ELITE-PERFORMANCE
 
 # Install dependencies
-cd next-app
 npm ci
 
 # Configure environment
@@ -100,7 +113,7 @@ Bot and abuse protection notes:
   - `/api/create-checkout-session` (deep analysis check level)
 - On `NEXT_EXPORT=1` static builds, BotID rewrites and API runtime protections are not active because static export does not run API routes.
 
-Build commands (run from `next-app/`):
+Build commands (run from the project root):
 
 ```bash
 npm run build
@@ -125,7 +138,7 @@ Deployment runbook:
 
 ## Environment Variables
 
-Create `.env.local` in `next-app/` and include required values documented in `next-app/.env.example`:
+Create `.env.local` in the project root and include required values documented in `.env.example`:
 
 ```env
 STRIPE_SECRET_KEY=
@@ -180,7 +193,9 @@ OpenAI prompt library integration
 
 ## Vision
 
-FSA Elite Performance is built to become a premier digital ecosystem for elite training, performance tracking, and next-level athlete development.
+FSA ELITE is built to become the go-to training and branding platform for sales professionals across every industry — a place where reps come to get sharper, look more credible, and close more.
+
+More confidence. More skill. More production. More results.
 
 ---
 
@@ -188,24 +203,25 @@ FSA Elite Performance is built to become a premier digital ecosystem for elite t
 
 ### Descripcion General
 
-FSA Elite Performance es una plataforma digital disenada para ofrecer entrenamiento de alto rendimiento, desarrollo de atletas y sistemas avanzados de optimizacion.
+FSA Elite Performance es una plataforma digital de entrenamiento en ventas y marca personal para profesionales de ventas que quieren más — más confianza, más habilidad, más producción y más resultados.
 
-Este repositorio contiene el codigo fuente, recursos visuales y configuraciones necesarias para ejecutar y escalar la aplicacion.
+Este repositorio contiene el código fuente, recursos visuales y configuraciones necesarias para ejecutar y escalar la aplicación.
 
 ### Funcionalidades
 
-- Sistemas de entrenamiento de elite
-- Seguimiento de rendimiento basado en datos
-- Optimizacion mental y fisica
-- Aplicacion web totalmente adaptable
-- Integracion completa de marca y diseno
-- Alto rendimiento y escalabilidad
+- Roleplay de manejo de objeciones con IA y 5 tipos de compradores
+- Puntuación en tiempo real sobre 6 habilidades de ventas clave
+- Asistente de ventas IA disponible las 24 horas
+- Tienda de productos de marca personal para representantes
+- Panel de rendimiento con seguimiento de habilidades y ejercicios diarios
+- Aplicación completamente responsiva, prioridad móvil
+- Compatible con exportación estática
 
 ### Instalacion
 
 ```bash
-git clone https://github.com/yourusername/fsa-elite-performance.git
-cd fsa-elite-performance/next-app
+git clone https://github.com/FSA-elite-performance/FSA-ELITE-PERFORMANCE.git
+cd FSA-ELITE-PERFORMANCE
 npm ci
 cp .env.example .env.local
 npm run dev
@@ -221,7 +237,7 @@ Compatible con:
 
 ### Vision (Espanol)
 
-FSA Elite Performance esta disenado para convertirse en una plataforma lider en entrenamiento, rendimiento y desarrollo de atletas de alto nivel.
+FSA ELITE está diseñado para convertirse en la plataforma líder de entrenamiento y branding para profesionales de ventas en todas las industrias.
 
 ---
 
