@@ -13,9 +13,21 @@ import {
 const MAX_MESSAGES = 20;
 const MAX_MSG_CHARS = AI_CHAT_MAX_MSG_CHARS;
 
-// ─── AI API base URL (supports dedaluslabs.ai or any OpenAI-compatible endpoint) ──
-const AI_API_BASE_URL =
-  process.env.AI_API_BASE_URL?.trim() || 'https://api.dedaluslabs.ai/v1';
+function getAiApiBaseUrl(): string {
+  const configured = process.env.AI_API_BASE_URL?.trim();
+  const fallback = 'https://api.dedaluslabs.ai/v1';
+  if (!configured) {
+    return fallback;
+  }
+
+  try {
+    const parsed = new URL(configured);
+    return parsed.toString().replace(/\/$/, '');
+  } catch (error: unknown) {
+    console.error('Invalid AI_API_BASE_URL, falling back to default:', error);
+    return fallback;
+  }
+}
 
 // ─── Mode-specific system prompts ─────────────────────────────────────────────
 const OLIVE_COACH_SYSTEM_PROMPT = `You are OLIVE — a sharp, no-BS sales coach. The user will give you a real objection exactly as a prospect said it.
@@ -47,11 +59,12 @@ Tone: direct, competitive, fast-paced. No hand-holding. Keep each turn under 80 
 let openaiClient: OpenAI | null = null;
 let openaiClientKey = '';
 function getOpenAIClient(apiKey: string, projectId?: string): OpenAI {
-  const clientKey = `${apiKey}:${projectId ?? ''}:${AI_API_BASE_URL}`;
+  const aiApiBaseUrl = getAiApiBaseUrl();
+  const clientKey = `${apiKey}:${projectId ?? ''}:${aiApiBaseUrl}`;
   if (!openaiClient || openaiClientKey !== clientKey) {
     openaiClient = new OpenAI({
       apiKey,
-      baseURL: AI_API_BASE_URL,
+      baseURL: aiApiBaseUrl,
       ...(projectId ? { project: projectId } : {}),
     });
     openaiClientKey = clientKey;
