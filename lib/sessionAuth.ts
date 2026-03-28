@@ -49,7 +49,7 @@ async function signValue(value: string, secret: string): Promise<string> {
   const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(value));
   const binary = Array.from(
     new Uint8Array(signature),
-    (byte) => String.fromCharCode(byte)
+    (signatureByte) => String.fromCharCode(signatureByte)
   ).join('');
   return encodeBase64Url(binary);
 }
@@ -101,25 +101,25 @@ export async function verifySessionToken(
 }
 
 export function buildSessionCookieHeader(token: string, secure: boolean): string {
-  const parts = [
+  const cookieAttributes = [
     `${SESSION_COOKIE_NAME}=${token}`,
     'Path=/',
     `Max-Age=${SESSION_TOKEN_TTL_SECONDS}`,
     'HttpOnly',
     'SameSite=Lax',
   ];
-  if (secure) parts.push('Secure');
-  return parts.join('; ');
+  if (secure) cookieAttributes.push('Secure');
+  return cookieAttributes.join('; ');
 }
 
 export function buildClearedSessionCookie(secure: boolean): string {
-  const parts = [
+  const cookieAttributes = [
     `${SESSION_COOKIE_NAME}=`,
     'Path=/',
     'Max-Age=0',
     'HttpOnly',
     'SameSite=Lax',
   ];
-  if (secure) parts.push('Secure');
-  return parts.join('; ');
+  if (secure) cookieAttributes.push('Secure');
+  return cookieAttributes.join('; ');
 }

@@ -22,9 +22,9 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
 
   useEffect(() => {
     fetch('/api/auth/session', { credentials: 'same-origin' })
-      .then((r) => r.json())
-      .then((d: { active?: boolean; email?: string }) => {
-        setSessionEmail(d.active && d.email ? d.email : null);
+      .then((response) => response.json())
+      .then((sessionData: { active?: boolean; email?: string }) => {
+        setSessionEmail(sessionData.active && sessionData.email ? sessionData.email : null);
       })
       .catch(() => setSessionEmail(null));
   }, [pathname]);

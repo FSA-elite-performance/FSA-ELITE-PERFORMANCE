@@ -9,7 +9,7 @@ const DEFAULT_ALLOWED_VERIFIED_BOT_NAMES = ['chatgpt-operator'];
 function parseAllowList(value: string | undefined, fallback: string[] = []): string[] {
   const parsed = value
     ?.split(',')
-    .map((item) => item.trim().toLowerCase())
+    .map((hostEntry) => hostEntry.trim().toLowerCase())
     .filter(Boolean);
 
   return parsed && parsed.length > 0 ? parsed : fallback;

@@ -37,14 +37,14 @@ const MODE_PLACEHOLDERS: Record<OliveMode, string> = {
   battle:  'Type your response to OLIVE\u2019s objection\u2026',
 };
 
-function getHistoryKey(m: OliveMode): string {
-  return `fsaelite:olive-history:${m}:v1`;
+function getHistoryKey(oliveMode: OliveMode): string {
+  return `fsaelite:olive-history:${oliveMode}:v1`;
 }
 
 function loadMode(): OliveMode {
   if (typeof window === 'undefined') return 'general';
-  const s = window.localStorage.getItem(OLIVE_MODE_KEY);
-  if (s === 'coach' || s === 'battle' || s === 'general') return s;
+  const storedMode = window.localStorage.getItem(OLIVE_MODE_KEY);
+  if (storedMode === 'coach' || storedMode === 'battle' || storedMode === 'general') return storedMode;
   return 'general';
 }
 
@@ -54,19 +54,19 @@ function loadEnabled(): boolean {
   return stored !== 'false';
 }
 
-function loadHistory(m: OliveMode): WidgetMessage[] {
+function loadHistory(oliveMode: OliveMode): WidgetMessage[] {
   if (typeof window === 'undefined') return [];
   try {
-    const raw = window.localStorage.getItem(getHistoryKey(m));
+    const raw = window.localStorage.getItem(getHistoryKey(oliveMode));
     if (!raw) return [];
     const parsed = JSON.parse(raw) as WidgetMessage[];
     if (!Array.isArray(parsed)) return [];
     return parsed
       .filter(
-        (msg) =>
-          (msg.role === 'user' || msg.role === 'assistant') &&
-          typeof msg.content === 'string' &&
-          msg.content.trim().length > 0
+        (message) =>
+          (message.role === 'user' || message.role === 'assistant') &&
+          typeof message.content === 'string' &&
+          message.content.trim().length > 0
       )
       .slice(-MAX_WIDGET_MESSAGES);
   } catch {
@@ -270,30 +270,30 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
           </header>
 
           <div className="olive-mode-tabs" role="tablist" aria-label="OLIVE mode">
-            {MODES.map((m) => (
+            {MODES.map((modeOption) => (
               <button
-                key={m.id}
+                key={modeOption.id}
                 role="tab"
-                aria-selected={mode === m.id}
-                className={`olive-mode-tab${mode === m.id ? ' olive-mode-tab-active' : ''}`}
-                onClick={() => switchMode(m.id)}
-                title={m.title}
+                aria-selected={mode === modeOption.id}
+                className={`olive-mode-tab${mode === modeOption.id ? ' olive-mode-tab-active' : ''}`}
+                onClick={() => switchMode(modeOption.id)}
+                title={modeOption.title}
               >
-                {m.label}
+                {modeOption.label}
               </button>
             ))}
           </div>
 
           <div className="olive-panel-messages">
-            {displayMessages.map((msg, i) => (
+            {displayMessages.map((message, messageIndex) => (
               <div
-                key={i}
-                className={`olive-msg ${msg.role === 'user' ? 'olive-msg-user' : 'olive-msg-assistant'}`}
+                key={messageIndex}
+                className={`olive-msg ${message.role === 'user' ? 'olive-msg-user' : 'olive-msg-assistant'}`}
               >
-                {msg.role === 'assistant' && (
+                {message.role === 'assistant' && (
                   <span className="olive-msg-speaker">{OLIVE_NAME}</span>
                 )}
-                <p>{msg.content}</p>
+                <p>{message.content}</p>
               </div>
             ))}
 
