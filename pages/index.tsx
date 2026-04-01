@@ -28,28 +28,28 @@ const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
 
 const FEATURES = [
   {
-    title: 'AI Roleplay Lab',
-    description: '5 buyer personas with real-time scoring on objection handling, closing techniques, and rapport building.',
-    stat: '5',
-    statLabel: 'AI Personas',
+    icon: '🎯',
+    title: 'Train the Conversation',
+    description: 'Run AI objection drills under pressure. Get scored on rapport, closing, and recovery — the skills that separate closers from talkers.',
+    bullets: ['5 buyer personas that push back hard', 'Real-time score feedback on every response', 'Drill loops that target your weakest points'],
   },
   {
-    title: 'Member Store',
-    description: 'Premium business cards, branded gear, and promo tools that make your presence memorable.',
-    stat: '17+',
-    statLabel: 'Products',
+    icon: '🔥',
+    title: 'Build Your Presence',
+    description: 'Premium business cards, branded gear, and professional tools that make you look established before you say a single word.',
+    bullets: ['Self-branding cards and promo tools', 'Closer gear built for real selling environments', 'Desk, meeting, and content-ready identity pieces'],
   },
   {
-    title: 'OLIVE Assistant',
-    description: 'Your AI sales coach available 24/7 for roleplay practice, script help, and pitch feedback.',
-    stat: '24/7',
-    statLabel: 'Available',
+    icon: '💎',
+    title: 'Be Remembered After the Meeting',
+    description: 'Leave behind something that keeps your name working when the conversation ends — folders, branded materials, polished follow-up tools.',
+    bullets: ['Presentation folders and leave-behinds', 'Branded portfolios and desk gear', 'Materials that build trust on contact'],
   },
   {
-    title: 'Skill Tracking',
-    description: 'Monitor your progress across 6 core sales skills with detailed performance analytics.',
-    stat: '6',
-    statLabel: 'Skills Tracked',
+    icon: '⚡',
+    title: 'Become the Rep People Trust Faster',
+    description: 'Confidence is built through preparation. Professionalism is built through consistency. FSA ELITE trains both.',
+    bullets: ['Skill tracking across 6 core sales metrics', 'OLIVE AI coach available 24/7', 'Progress system that compounds over time'],
   },
 ];
 
@@ -59,32 +59,32 @@ const STEPS = [
   {
     num: '01',
     title: 'Join',
-    description: 'One-time payment. No subscription. Instant access to everything.',
+    description: 'One-time payment. No subscription. Instant access to training, branding tools, and the member store.',
   },
   {
     num: '02',
     title: 'Train',
-    description: 'Run AI objection drills and see exactly where your pitch breaks.',
+    description: 'Run AI objection drills. Get scored. Watch your pitch get sharper and your confidence get louder.',
   },
   {
     num: '03',
-    title: 'Close',
-    description: 'Walk into every room with sharper skills and a stronger presence.',
+    title: 'Show Up Different',
+    description: 'Walk in with sharper skills, cleaner branding, and a presence that closes before you even speak.',
   },
 ];
 
 const FAQ_ITEMS = [
   {
     question: 'Who is this for?',
-    answer: 'Sales professionals who want sharper conversations, cleaner branding, and a more memorable presence. Works for any industry.',
+    answer: 'Sales professionals who want to sound sharper in conversations, look more established in person, and leave behind something people remember. Built for closers in any industry.',
   },
   {
     question: 'What does it cost?',
-    answer: `One-time ${formatUsd(SUBSCRIPTION_PRICE_CENTS)} for full platform access. No monthly fees. Store items priced separately.`,
+    answer: `One-time ${formatUsd(SUBSCRIPTION_PRICE_CENTS)} for full platform access — training, AI coaching, and the member store. No monthly fees. Store items priced separately.`,
   },
   {
-    question: 'What do I get?',
-    answer: 'Immediate access to AI Roleplay Lab, OLIVE assistant, member store, dashboard, and all future updates.',
+    question: 'What makes this different from other training?',
+    answer: 'Most platforms teach scripts. FSA ELITE builds identity. You train under pressure with AI, then back it up with professional branding tools that make people trust you faster.',
   },
   {
     question: 'How do I get support?',
@@ -110,22 +110,22 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>FSA ELITE | AI Sales Training and Professional Branding</title>
+        <title>FSA ELITE | Train Like a Closer. Look Like a Closer.</title>
         <meta
           name="description"
-          content="AI-powered sales training, objection roleplay, and professional branding tools for sales reps who want to level up fast."
+          content="FSA ELITE helps sales reps sharpen their pitch, elevate their image, and build a brand that closes before they even speak. AI training + professional self-branding."
         />
         <meta name="keywords" content={PUBLIC_SEO_KEYWORDS} />
         <link rel="canonical" href={`${SITE_URL}/`} />
         <meta property="og:site_name" content="FSA ELITE" />
-        <meta property="og:title" content="FSA ELITE | AI Sales Training and Professional Branding" />
-        <meta property="og:description" content="AI-powered sales training, objection roleplay, and professional branding tools." />
+        <meta property="og:title" content="FSA ELITE | Train Like a Closer. Look Like a Closer." />
+        <meta property="og:description" content="Sharpen your pitch, elevate your image, and build a presence people remember. AI sales training + professional self-branding." />
         <meta property="og:url" content={`${SITE_URL}/`} />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE | AI Sales Training" />
-        <meta name="twitter:description" content="AI-powered sales training and professional branding tools." />
+        <meta name="twitter:title" content="FSA ELITE | Train Like a Closer" />
+        <meta name="twitter:description" content="AI-powered sales training and professional self-branding tools for reps who refuse to blend in." />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
       </Head>
 
@@ -182,20 +182,20 @@ export default function Home() {
         {/* Hero Section */}
         <section className="landing-hero">
           <div className="landing-hero-content">
-            <div className="landing-hero-badge">
+            <div className="landing-hero-badge landing-hero-badge-gold">
               <span className="landing-badge-dot" />
               One Payment. Lifetime Access.
             </div>
             
             <h1 className="landing-hero-title">
-              The complete platform for
+              Sharpen your close.
               <br />
-              <span className="landing-hero-highlight">sales performance</span>
+              <span className="landing-hero-highlight">Sharpen your image.</span>
             </h1>
             
             <p className="landing-hero-subtitle">
-              AI objection drills, professional branding tools, and closer gear.
-              Built for reps who refuse to blend in.
+              FSA ELITE helps sales reps sharpen their pitch, elevate their image,
+              and build a brand that closes before they even speak.
             </p>
 
             <div className="landing-hero-actions">
@@ -213,36 +213,48 @@ export default function Home() {
           </div>
 
           <div className="landing-hero-visual">
-            <div className="landing-hero-card">
-              <div className="landing-hero-card-header">
-                <span className="landing-card-dot" />
-                <span className="landing-card-dot" />
-                <span className="landing-card-dot" />
+            <div className="landing-hero-split">
+              <div className="landing-split-side">
+                <span className="landing-split-label landing-split-label-train">Training</span>
+                <ul className="landing-split-items">
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-blue" />
+                    AI objection drills
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-blue" />
+                    Real-time scoring
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-blue" />
+                    5 buyer personas
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-blue" />
+                    Skill tracking
+                  </li>
+                </ul>
               </div>
-              <div className="landing-hero-card-content">
-                <div className="landing-demo-chat">
-                  <div className="landing-demo-msg landing-demo-msg-ai">
-                    <span className="landing-demo-speaker">Skeptical Steve</span>
-                    {'"We\'ve been burned by vendors before. Why should I trust your company?"'}
-                  </div>
-                  <div className="landing-demo-msg landing-demo-msg-user">
-                    Your response here...
-                  </div>
-                </div>
-                <div className="landing-demo-scores">
-                  <div className="landing-score-item">
-                    <span>Rapport</span>
-                    <strong className="score-high">92</strong>
-                  </div>
-                  <div className="landing-score-item">
-                    <span>Objection</span>
-                    <strong className="score-mid">78</strong>
-                  </div>
-                  <div className="landing-score-item">
-                    <span>Close</span>
-                    <strong className="score-high">85</strong>
-                  </div>
-                </div>
+              <div className="landing-split-side">
+                <span className="landing-split-label landing-split-label-presence">Presence</span>
+                <ul className="landing-split-items">
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-gold" />
+                    Business cards
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-gold" />
+                    Branded gear
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-gold" />
+                    Desk tools
+                  </li>
+                  <li className="landing-split-item">
+                    <span className="landing-split-dot landing-split-dot-gold" />
+                    Promo identity
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
@@ -257,25 +269,27 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Features Section */}
+        {/* Identity Pillars Section */}
         <section className="landing-section" id="features">
           <div className="landing-section-header">
-            <span className="landing-eyebrow">Features</span>
-            <h2 className="landing-section-title">Everything you need to close more deals</h2>
+            <span className="landing-eyebrow">The FSA Elite System</span>
+            <h2 className="landing-section-title">Skill creates the closer. Presence makes them unforgettable.</h2>
             <p className="landing-section-subtitle">
-              Training, branding, and tools — all connected in one platform.
+              Training builds the conversation. Branding builds the reputation. FSA gives you both.
             </p>
           </div>
 
-          <div className="landing-features-grid">
+          <div className="landing-pillars-grid">
             {FEATURES.map((feature) => (
-              <article key={feature.title} className="landing-feature-card">
-                <div className="landing-feature-stat">
-                  <strong>{feature.stat}</strong>
-                  <span>{feature.statLabel}</span>
-                </div>
+              <article key={feature.title} className="landing-pillar-card">
+                <span className="landing-pillar-icon">{feature.icon}</span>
                 <h3>{feature.title}</h3>
                 <p>{feature.description}</p>
+                <ul className="landing-pillar-bullets">
+                  {feature.bullets.map((bullet) => (
+                    <li key={bullet}>{bullet}</li>
+                  ))}
+                </ul>
               </article>
             ))}
           </div>
@@ -285,7 +299,7 @@ export default function Home() {
         <section className="landing-section landing-section-alt" id="how-it-works">
           <div className="landing-section-header">
             <span className="landing-eyebrow">How It Works</span>
-            <h2 className="landing-section-title">From signup to closing stronger</h2>
+            <h2 className="landing-section-title">From signup to showing up different</h2>
           </div>
 
           <div className="landing-steps">
@@ -305,21 +319,34 @@ export default function Home() {
         {/* CTA Section */}
         <section className="landing-cta">
           <div className="landing-cta-content">
-            <h2>The rep who prepares harder closes more.</h2>
+            <h2>Average reps try to be liked. Elite reps try to be remembered.</h2>
             <p>
-              Most reps wing it. FSA ELITE members drill it, brand it, and walk in
-              looking like they have already closed this deal before.
+              Train the pitch. Upgrade the presence. Walk in looking like you have
+              already closed this deal before. FSA ELITE builds both sides.
             </p>
             <div className="landing-cta-actions">
               <Link href="/checkout-preview" className="btn-primary btn-lg">
                 Start for {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
               </Link>
               <Link href={storeLink} className="btn-secondary btn-lg">
-                {hasMembership ? 'Open Store' : 'Preview Store'}
+                {hasMembership ? 'Open Store' : 'Explore Closer Gear'}
               </Link>
             </div>
           </div>
         </section>
+
+        {/* Midline */}
+        <div className="landing-midline">
+          <p className="landing-midline-text">
+            {"\"I'm not just learning sales — I "}
+            <strong>look</strong>
+            {", "}
+            <strong>sound</strong>
+            {", and "}
+            <strong>move</strong>
+            {' like a pro. People remember me.\"'}
+          </p>
+        </div>
 
         {/* FAQ Section */}
         <section className="landing-section" id="faq">
@@ -351,9 +378,9 @@ export default function Home() {
 
             <div className="landing-footer-links">
               <div className="landing-footer-col">
-                <h4>Product</h4>
-                <Link href="/roleplay">Roleplay Lab</Link>
-                <Link href="/store">Member Store</Link>
+                <h4>Platform</h4>
+                <Link href="/roleplay">Training Lab</Link>
+                <Link href="/store">Closer Gear</Link>
                 <Link href="/checkout-preview">Pricing</Link>
               </div>
               <div className="landing-footer-col">
