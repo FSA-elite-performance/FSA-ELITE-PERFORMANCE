@@ -55,7 +55,7 @@ export default function FSAElitePerformance() {
       />
       
       {/* Main Content */}
-      <main className="lg:pl-72">
+      <main className="lg:pl-72" aria-label="FSA Elite Performance Dashboard">
         <div className="p-6 lg:p-8 pt-16 lg:pt-8">
           {activeSection === "dashboard" && <DashboardSection />}
           {activeSection === "membership" && <MembershipSection />}

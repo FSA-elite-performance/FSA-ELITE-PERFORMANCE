@@ -53,7 +53,8 @@ export function AppSidebar({
       {/* Mobile menu button */}
       <button
         onClick={() => setMobileOpen(!mobileOpen)}
-        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-card border border-border"
+        aria-label={mobileOpen ? "Close menu" : "Open menu"}
+        className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-card border border-border shadow-md"
       >
         {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
       </button>
@@ -87,8 +88,8 @@ export function AppSidebar({
                 />
               </div>
               <div>
-                <h1 className="font-serif text-xl font-bold text-foreground group-hover:text-primary transition-colors">FSA Elite</h1>
-                <p className="text-xs text-muted-foreground">Performance Training</p>
+                <h1 className="font-serif text-xl font-bold text-sidebar-foreground group-hover:text-primary transition-colors">FSA Elite</h1>
+                <p className="text-xs text-sidebar-foreground/60">Performance Training</p>
               </div>
             </Link>
           </div>
@@ -99,15 +100,15 @@ export function AppSidebar({
               {quickStats.map((stat) => (
                 <div key={stat.label} className="text-center p-2 rounded-lg bg-sidebar-accent">
                   <stat.icon className="h-4 w-4 mx-auto mb-1 text-primary" />
-                  <p className="text-xs font-semibold text-foreground">{stat.value}</p>
-                  <p className="text-[10px] text-muted-foreground">{stat.label}</p>
+                  <p className="text-xs font-semibold text-sidebar-foreground">{stat.value}</p>
+                  <p className="text-[10px] text-sidebar-foreground/60">{stat.label}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          <nav className="flex-1 p-4 space-y-1 overflow-y-auto" aria-label="Sidebar navigation">
             {navigation.map((item) => {
               const isActive = activeSection === item.href.replace("#", "")
               const isSpecial = 'isSpecial' in item && item.isSpecial
@@ -116,6 +117,7 @@ export function AppSidebar({
               return (
                 <button
                   key={item.name}
+                  aria-current={isActive ? "page" : undefined}
                   onClick={() => {
                     if (isSpecial) {
                       const event = new CustomEvent('openOliveAI')
@@ -133,7 +135,7 @@ export function AppSidebar({
                         ? "bg-gradient-to-r from-primary/20 to-primary/5 text-primary hover:from-primary/30 border border-primary/20"
                         : isActive 
                           ? "bg-primary text-primary-foreground" 
-                          : "text-muted-foreground hover:text-foreground hover:bg-sidebar-accent"
+                          : "text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
                   )}
                 >
                   <item.icon className={cn("h-5 w-5", isSpecial && "text-green-400", isHighlight && !isActive && "text-primary")} />
@@ -156,7 +158,7 @@ export function AppSidebar({
           <div className="p-4 border-t border-sidebar-border space-y-3">
             <div className="p-4 rounded-lg bg-gradient-to-br from-primary/20 to-primary/5 border border-primary/20">
               <p className="text-xs font-semibold text-primary mb-1">Fontenot&apos;s Sales Association LLC</p>
-              <p className="text-[10px] text-muted-foreground mb-2">Become Elite. Close More. Win Big.</p>
+              <p className="text-[10px] text-sidebar-foreground/60 mb-2">Become Elite. Close More. Win Big.</p>
               <Link 
                 href="https://fsaeliteperformance.com" 
                 target="_blank"
@@ -170,7 +172,7 @@ export function AppSidebar({
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="w-full justify-start text-muted-foreground hover:text-foreground"
+                className="w-full justify-start text-sidebar-foreground/60 hover:text-sidebar-foreground"
                 onClick={onLogout}
               >
                 <LogOut className="h-4 w-4 mr-2" />
