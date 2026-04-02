@@ -27,7 +27,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
         setSessionEmail(d.active && d.email ? d.email : null);
       })
       .catch(() => setSessionEmail(null));
-  }, [pathname]);
+  }, []);
 
   const handleLogout = useCallback(async () => {
     if (loggingOut) return;
@@ -65,6 +65,7 @@ export default function Sidebar({ open, onClose }: SidebarProps) {
                 key={item.href}
                 href={item.href}
                 className={`app-sidebar-link ${active ? 'app-sidebar-link-active' : ''}`}
+                aria-current={active ? 'page' : undefined}
                 onClick={onClose}
               >
                 <span className="app-sidebar-icon" aria-hidden="true">{item.icon}</span>

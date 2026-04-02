@@ -490,7 +490,7 @@ Stay fully in character. Respond as this buyer would in a real conversation. Kee
         </div>
 
         <section className="roleplay-core">
-          <div className="roleplay-chat-window">
+          <div className="roleplay-chat-window" role="log" aria-live="polite">
             <p className="roleplay-helper-text">
               OLIVE is running your session. Train objection handling in real time. Type <code>/help</code> and OLIVE will coach you.
             </p>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import AppLayout from '../components/AppLayout';
+import ErrorBoundary from '../components/ErrorBoundary';
 import OliveWidget from '../components/OliveWidget';
 import '../styles/globals.css';
 
@@ -25,13 +26,15 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
       </Head>
-      {useAppLayout ? (
-        <AppLayout>
+      <ErrorBoundary>
+        {useAppLayout ? (
+          <AppLayout>
+            <Component {...pageProps} />
+          </AppLayout>
+        ) : (
           <Component {...pageProps} />
-        </AppLayout>
-      ) : (
-        <Component {...pageProps} />
-      )}
+        )}
+      </ErrorBoundary>
       <OliveWidget pageContext={pageContext} />
       <Analytics />
       <SpeedInsights />

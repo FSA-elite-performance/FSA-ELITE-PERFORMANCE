@@ -16,7 +16,7 @@ import {
 import { CHECKOUT_CONTEXT_KEY } from '../lib/accessKeys';
 import { fetchMembershipStatus } from '../lib/membershipClient';
 import { MERCH_PRODUCTS } from '../lib/merchCatalog';
-import { SUBSCRIPTION_PRICE_CENTS } from '../lib/subscriptionPlan';
+import { formatUsd, SUBSCRIPTION_PRICE_CENTS } from '../lib/subscriptionPlan';
 
 const BUSINESS_NAME = PUBLIC_BUSINESS_NAME;
 const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
@@ -93,13 +93,6 @@ const BUNDLE_OFFERS = [
     label: 'Full desk + promo setup',
   },
 ];
-
-function formatUsd(cents: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'USD',
-  }).format(cents / 100);
-}
 
 export default function Store() {
   const [hasMembership, setHasMembership] = useState<boolean | null>(null);
