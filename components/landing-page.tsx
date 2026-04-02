@@ -61,16 +61,22 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
     <div className="min-h-screen bg-background">
       {/* Navigation */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <Image 
-              src="/images/fsa-logo-main.png" 
-              alt="FSA Elite Performance" 
-              width={36} 
-              height={36}
-              style={{ width: 'auto', height: 'auto' }}
-            />
-            <span className="font-bold text-lg text-foreground">FSA <span className="text-primary">Elite</span></span>
+            <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-primary/30 shadow-sm">
+              <Image 
+                src="/images/fsa-logo-main.png" 
+                alt="FSA Elite Performance" 
+                width={48} 
+                height={48}
+                className="object-cover"
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-bold text-lg text-foreground leading-tight">FSA <span className="text-primary">Elite</span></span>
+              <span className="text-[10px] text-muted-foreground uppercase tracking-widest">Performance</span>
+            </div>
           </div>
           
           <div className="flex items-center gap-3">
@@ -99,18 +105,21 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
           <Card className="w-full max-w-md bg-background border-border shadow-2xl" onClick={(e) => e.stopPropagation()}>
             <CardContent className="p-8">
               <div className="text-center mb-6">
-                <Image 
-                  src="/images/fsa-logo-main.png" 
-                  alt="FSA Elite" 
-                  width={48} 
-                  height={48}
-                  className="mx-auto mb-4"
-                  style={{ width: 'auto', height: 'auto' }}
-                />
+                <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-lg mx-auto mb-4">
+                  <Image 
+                    src="/images/fsa-logo-main.png" 
+                    alt="FSA Elite" 
+                    width={80} 
+                    height={80}
+                    className="object-cover"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
                 <h2 className="text-2xl font-bold text-foreground">
                   {showLogin ? "Welcome Back" : "Get Instant Access"}
                 </h2>
-                <p className="text-muted-foreground text-sm mt-1">
+                <p className="text-primary font-semibold text-sm mt-1">FSA Elite Performance</p>
+                <p className="text-muted-foreground text-xs mt-1">
                   {showLogin ? "Log in to your account" : "One-time payment of $12.99 - Lifetime access"}
                 </p>
               </div>
@@ -218,9 +227,39 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
           />
           <div className="absolute inset-0 bg-gradient-to-r from-foreground/80 via-foreground/60 to-transparent" />
           
+          {/* Faded watermark logo on right side */}
+          <div className="absolute right-8 top-1/2 -translate-y-1/2 opacity-15 hidden lg:block">
+            <Image 
+              src="/images/fsa-logo-main.png"
+              alt=""
+              width={400}
+              height={400}
+              className="object-contain"
+              style={{ width: 'auto', height: 'auto' }}
+            />
+          </div>
+
           <div className="absolute inset-0 flex items-center">
             <div className="container mx-auto px-6">
               <div className="max-w-xl">
+                {/* Logo badge above headline */}
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-14 h-14 rounded-xl overflow-hidden border-2 border-primary shadow-lg">
+                    <Image 
+                      src="/images/fsa-logo-main.png"
+                      alt="FSA Elite Performance"
+                      width={56}
+                      height={56}
+                      className="object-cover"
+                      style={{ width: '100%', height: '100%' }}
+                    />
+                  </div>
+                  <div>
+                    <span className="text-white font-bold text-lg">FSA Elite Performance</span>
+                    <p className="text-primary text-sm font-semibold">The Sales Bible</p>
+                  </div>
+                </div>
+
                 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
                   Master Sales. <span className="text-primary">Get Paid.</span>
                 </h1>
@@ -278,6 +317,18 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
                 height={400}
                 className="w-full h-auto object-cover"
               />
+              <div className="absolute top-4 left-4">
+                <div className="w-12 h-12 rounded-lg overflow-hidden border-2 border-primary shadow-lg">
+                  <Image 
+                    src="/images/fsa-logo-main.png"
+                    alt="FSA"
+                    width={48}
+                    height={48}
+                    className="object-cover"
+                    style={{ width: '100%', height: '100%' }}
+                  />
+                </div>
+              </div>
               <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-foreground/90 to-transparent p-6">
                 <div className="flex items-center gap-2 mb-2">
                   <BookOpen className="h-5 w-5 text-primary" />
@@ -329,6 +380,19 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
       {/* === WHAT YOU GET STRIP === */}
       <section className="py-12 bg-primary">
         <div className="container mx-auto px-6">
+          <div className="flex items-center justify-center gap-3 mb-8">
+            <div className="w-10 h-10 rounded-lg overflow-hidden border-2 border-primary-foreground/30">
+              <Image 
+                src="/images/fsa-logo-main.png"
+                alt="FSA"
+                width={40}
+                height={40}
+                className="object-cover"
+                style={{ width: '100%', height: '100%' }}
+              />
+            </div>
+            <span className="text-primary-foreground font-bold text-lg">What You Get</span>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {[
               { icon: BookOpen, label: "18+ Training Modules" },
@@ -434,6 +498,16 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
       {/* === FINAL CTA === */}
       <section className="py-20 px-6 bg-foreground text-background">
         <div className="container mx-auto max-w-3xl text-center">
+          <div className="w-20 h-20 rounded-2xl overflow-hidden border-2 border-primary shadow-xl mx-auto mb-6">
+            <Image 
+              src="/images/fsa-logo-main.png"
+              alt="FSA Elite Performance"
+              width={80}
+              height={80}
+              className="object-cover"
+              style={{ width: '100%', height: '100%' }}
+            />
+          </div>
           <h2 className="text-3xl sm:text-4xl font-bold mb-4">
             Stop Scrolling. <span className="text-primary">Start Closing.</span>
           </h2>
@@ -467,19 +541,23 @@ export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => 
       </section>
 
       {/* Footer */}
-      <footer className="py-8 px-6 bg-background border-t border-border">
-        <div className="container mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-2">
+      <footer className="py-12 px-6 bg-background border-t border-border">
+        <div className="container mx-auto flex flex-col items-center gap-4 text-sm text-muted-foreground">
+          <div className="w-16 h-16 rounded-xl overflow-hidden border-2 border-primary/20 shadow-md">
             <Image 
               src="/images/fsa-logo-main.png" 
-              alt="FSA" 
-              width={24} 
-              height={24}
-              style={{ width: 'auto', height: 'auto' }}
+              alt="FSA Elite Performance" 
+              width={64} 
+              height={64}
+              className="object-cover"
+              style={{ width: '100%', height: '100%' }}
             />
-            <span>Fontenot&apos;s Sales Association LLC</span>
           </div>
-          <p>fsaeliteperformance.com</p>
+          <div className="text-center">
+            <p className="font-bold text-foreground text-base">FSA <span className="text-primary">Elite</span> Performance</p>
+            <p className="text-xs mt-1">Fontenot&apos;s Sales Association LLC</p>
+          </div>
+          <p className="text-xs">fsaeliteperformance.com</p>
         </div>
       </footer>
     </div>
