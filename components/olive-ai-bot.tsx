@@ -131,23 +131,29 @@ export function OliveAIBot() {
     <>
       <button
         onClick={() => setIsOpen(!isOpen)}
+        aria-label="Open Olive AI Coach"
         className={cn(
           "fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-lg transition-all duration-300",
           "bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500",
-          "flex items-center justify-center",
+          "flex items-center justify-center focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
           isOpen && "scale-0 opacity-0"
         )}
       >
         <div className="relative">
           <MessageCircle className="h-6 w-6 text-white" />
-          <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" />
+          <span className="absolute -top-1 -right-1 w-3 h-3 bg-primary rounded-full animate-pulse" aria-hidden="true" />
         </div>
       </button>
       
-      <div className={cn(
-        "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] transition-all duration-300 origin-bottom-right",
-        isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
-      )}>
+      <div
+        role="dialog"
+        aria-label="Olive AI Coach chat"
+        aria-modal="false"
+        className={cn(
+          "fixed bottom-6 right-6 z-50 w-[380px] max-w-[calc(100vw-3rem)] transition-all duration-300 origin-bottom-right",
+          isOpen ? "scale-100 opacity-100" : "scale-0 opacity-0 pointer-events-none"
+        )}
+      >
         <Card className="bg-card border-border shadow-2xl overflow-hidden">
           <CardHeader className="p-4 bg-gradient-to-r from-green-600 to-emerald-600 border-b border-border">
             <div className="flex items-center justify-between">
@@ -171,6 +177,7 @@ export function OliveAIBot() {
                 variant="ghost" 
                 size="sm"
                 onClick={() => setIsOpen(false)}
+                aria-label="Close Olive AI Coach"
                 className="text-white hover:bg-white/20"
               >
                 <X className="h-5 w-5" />
@@ -229,7 +236,9 @@ export function OliveAIBot() {
             
             <div className="p-4 border-t border-border bg-card">
               <div className="flex gap-2">
+                <label htmlFor="olive-chat-input" className="sr-only">Ask Olive anything</label>
                 <input
+                  id="olive-chat-input"
                   type="text"
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
@@ -240,6 +249,7 @@ export function OliveAIBot() {
                 <Button 
                   onClick={() => handleSend()} 
                   disabled={!input.trim() || isTyping}
+                  aria-label="Send message"
                   className="rounded-full w-10 h-10 p-0 bg-gradient-to-br from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500"
                 >
                   <Send className="h-4 w-4" />

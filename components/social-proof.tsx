@@ -6,6 +6,7 @@ import Link from "next/link"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { cn } from "@/lib/utils"
 import { 
   Heart, 
   MessageCircle, 
@@ -70,7 +71,8 @@ const testimonials = [
   {
     name: "Marcus Johnson",
     role: "Top Sales Rep, Toyota",
-    avatar: "/images/fsa-logo-main.png",
+    initials: "MJ",
+    color: "bg-blue-500",
     content: "FSA Elite transformed my approach. Went from 8 units to 22 units per month in just 3 months.",
     rating: 5,
     platform: "facebook"
@@ -78,7 +80,8 @@ const testimonials = [
   {
     name: "Sarah Williams",
     role: "Sales Manager, Ford",
-    avatar: "/images/olive-coach-logo.jpg",
+    initials: "SW",
+    color: "bg-emerald-500",
     content: "The training modules are incredible. Olive AI is like having a coach in my pocket 24/7.",
     rating: 5,
     platform: "instagram"
@@ -86,7 +89,8 @@ const testimonials = [
   {
     name: "David Chen",
     role: "Finance Manager, BMW",
-    avatar: "/images/app-icon-512.jpg",
+    initials: "DC",
+    color: "bg-amber-500",
     content: "Best $12.99 I've ever spent. The objection handling scripts alone are worth 10x that.",
     rating: 5,
     platform: "facebook"
@@ -224,15 +228,8 @@ export function SocialProof() {
             <Card key={index} className="bg-card/50">
               <CardHeader className="pb-2">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 rounded-full overflow-hidden">
-                    <Image
-                      src={testimonial.avatar}
-                      alt={testimonial.name}
-                      width={48}
-                      height={48}
-                      className="object-cover"
-                      style={{ width: '100%', height: '100%' }}
-                    />
+                  <div className={cn("w-12 h-12 rounded-full flex items-center justify-center text-white font-bold text-sm", testimonial.color)} aria-hidden="true">
+                    {testimonial.initials}
                   </div>
                   <div className="flex-1">
                     <p className="font-semibold text-foreground">{testimonial.name}</p>
@@ -274,7 +271,7 @@ export function SocialProof() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Get Started - $12.99
+              {"Get Started - $12.99"}
             </Button>
             <Button size="lg" variant="outline" asChild>
               <Link href="https://instagram.com/fsaeliteperformance" target="_blank">
