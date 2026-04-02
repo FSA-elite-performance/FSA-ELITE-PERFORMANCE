@@ -1,0 +1,35 @@
+name: Fork PR Approval
+
+# This workflow requires manual approval before CI workflows run on pull
+# requests submitted from forks. It uses a GitHub environment with required
+# reviewers so that maintainers can inspect the proposed changes (especially
+# .github/workflows/) before any code executes.
+#
+# Setup (one-time, repository owner):
+#   1. Go to Settings > Environments and create an environment named
+#      "fork-pr-approval".
+#   2. Enable "Required reviewers" and add at least one maintainer.
+#   3. Optionally restrict deployment branches to "main".
+#
+# For more information see:
+# https://docs.github.com/en/actions/managing-workflow-runs-and-deployments/managing-workflow-runs/approving-workflow-runs-from-public-forks
+
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+
+jobs:
+  approve-fork:
+    name: Approve fork PR
+    # Only require approval for PRs originating from a fork.
+    if: github.event.pull_request.head.repo.full_name != github.repository
+    runs-on: ubuntu-latest
+    environment: fork-pr-approval
+    steps:
+      - name: Fork PR approved
+        run: |
+          echo "✅ Fork PR from ${{ github.event.pull_request.head.repo.full_name }} has been approved."
+          echo "Maintainer review completed — CI workflows may now run."
