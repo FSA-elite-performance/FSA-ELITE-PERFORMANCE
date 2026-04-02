@@ -30,7 +30,7 @@ const trainingModules = [
   "Negotiation Power",
 ]
 
-export function LandingPage({ onEnterApp }: { onEnterApp: () => void }) {
+export function LandingPage({ onEnterApp }: { onEnterApp: (section?: string) => void }) {
   const [showLogin, setShowLogin] = useState(false)
   const [showSignup, setShowSignup] = useState(false)
   const [email, setEmail] = useState("")
@@ -50,10 +50,10 @@ export function LandingPage({ onEnterApp }: { onEnterApp: () => void }) {
   const handleSignup = (e: React.FormEvent) => {
     e.preventDefault()
     if (email && password && name) {
-      localStorage.setItem("fsa-member", "true")
       localStorage.setItem("fsa-email", email)
       localStorage.setItem("fsa-name", name)
-      onEnterApp()
+      // Go to membership section for Stripe payment
+      onEnterApp("membership")
     }
   }
 

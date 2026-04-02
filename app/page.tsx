@@ -25,8 +25,11 @@ export default function FSAElitePerformance() {
     }
   }, [])
 
-  const handleEnterApp = () => {
+  const handleEnterApp = (section?: string) => {
     localStorage.setItem("fsa-member", "true")
+    if (section) {
+      setActiveSection(section)
+    }
     setShowApp(true)
   }
 
