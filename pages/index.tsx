@@ -186,7 +186,6 @@ export default function Home() {
               <span className="landing-badge-dot" />
               One Payment. Lifetime Access.
             </div>
-            
             <h1 className="landing-hero-title">
               Built for salespeople
               <br />
