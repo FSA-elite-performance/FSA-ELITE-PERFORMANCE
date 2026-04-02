@@ -3,121 +3,76 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* FSA Elite Performance - Premium Theme
-   Colors: Black, White, Silver, Olive Green
-   Powered by Fontenot's Sales Association LLC */
+/* FSA Elite Performance - Clean White + Green Theme */
 :root {
-  /* Base - Black & White */
-  --background: oklch(0.06 0 0);
-  --foreground: oklch(0.98 0 0);
-  
-  /* Cards - Dark with subtle warmth */
-  --card: oklch(0.10 0.005 60);
-  --card-foreground: oklch(0.98 0 0);
-  
-  /* Popover */
-  --popover: oklch(0.10 0.005 60);
-  --popover-foreground: oklch(0.98 0 0);
-  
-  /* Primary - Olive Green */
-  --primary: oklch(0.55 0.12 125);
-  --primary-foreground: oklch(0.98 0 0);
-  
-  /* Secondary - Silver/Gray */
-  --secondary: oklch(0.75 0.01 240);
-  --secondary-foreground: oklch(0.1 0 0);
-  
-  /* Muted - Subtle gray */
-  --muted: oklch(0.20 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  
-  /* Accent - Lighter Olive */
-  --accent: oklch(0.45 0.10 130);
-  --accent-foreground: oklch(0.98 0 0);
-  
-  /* Destructive */
+  --background: oklch(0.99 0 0);
+  --foreground: oklch(0.12 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.12 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.12 0 0);
+  --primary: oklch(0.52 0.14 145);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.96 0.01 240);
+  --secondary-foreground: oklch(0.12 0 0);
+  --muted: oklch(0.96 0 0);
+  --muted-foreground: oklch(0.45 0 0);
+  --accent: oklch(0.52 0.14 145);
+  --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  
-  /* Borders & Inputs */
-  --border: oklch(0.30 0.01 240);
-  --input: oklch(0.15 0 0);
-  --ring: oklch(0.55 0.12 125);
-  
-  /* Charts */
-  --chart-1: oklch(0.55 0.12 125);
-  --chart-2: oklch(0.75 0.01 240);
-  --chart-3: oklch(0.65 0.08 130);
-  --chart-4: oklch(0.45 0.10 130);
-  --chart-5: oklch(0.85 0.02 240);
-  
+  --border: oklch(0.92 0 0);
+  --input: oklch(0.96 0 0);
+  --ring: oklch(0.52 0.14 145);
+  --chart-1: oklch(0.52 0.14 145);
+  --chart-2: oklch(0.62 0.12 145);
+  --chart-3: oklch(0.42 0.14 145);
+  --chart-4: oklch(0.72 0.10 145);
+  --chart-5: oklch(0.32 0.12 145);
   --radius: 0.625rem;
-  
-  /* Sidebar - Deep black */
-  --sidebar: oklch(0.08 0 0);
+  --sidebar: oklch(0.08 0.02 145);
   --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.55 0.12 125);
+  --sidebar-primary: oklch(0.52 0.14 145);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.15 0.01 130);
+  --sidebar-accent: oklch(0.15 0.02 145);
   --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.25 0.01 240);
-  --sidebar-ring: oklch(0.55 0.12 125);
+  --sidebar-border: oklch(0.25 0.02 145);
+  --sidebar-ring: oklch(0.52 0.14 145);
 }
 
 .dark {
-  /* Base - Black & White */
   --background: oklch(0.06 0 0);
   --foreground: oklch(0.98 0 0);
-  
-  /* Cards */
   --card: oklch(0.10 0.005 60);
   --card-foreground: oklch(0.98 0 0);
-  
-  /* Popover */
   --popover: oklch(0.10 0.005 60);
   --popover-foreground: oklch(0.98 0 0);
-  
-  /* Primary - Olive Green */
-  --primary: oklch(0.55 0.12 125);
+  --primary: oklch(0.55 0.14 145);
   --primary-foreground: oklch(0.98 0 0);
-  
-  /* Secondary - Silver */
   --secondary: oklch(0.75 0.01 240);
   --secondary-foreground: oklch(0.1 0 0);
-  
-  /* Muted */
   --muted: oklch(0.20 0 0);
   --muted-foreground: oklch(0.65 0 0);
-  
-  /* Accent - Lighter Olive */
-  --accent: oklch(0.45 0.10 130);
+  --accent: oklch(0.45 0.10 145);
   --accent-foreground: oklch(0.98 0 0);
-  
-  /* Destructive */
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.98 0 0);
-  
-  /* Borders & Inputs */
   --border: oklch(0.30 0.01 240);
   --input: oklch(0.15 0 0);
-  --ring: oklch(0.55 0.12 125);
-  
-  /* Charts */
-  --chart-1: oklch(0.55 0.12 125);
+  --ring: oklch(0.55 0.14 145);
+  --chart-1: oklch(0.55 0.14 145);
   --chart-2: oklch(0.75 0.01 240);
-  --chart-3: oklch(0.65 0.08 130);
-  --chart-4: oklch(0.45 0.10 130);
+  --chart-3: oklch(0.65 0.08 145);
+  --chart-4: oklch(0.45 0.10 145);
   --chart-5: oklch(0.85 0.02 240);
-  
-  /* Sidebar */
   --sidebar: oklch(0.08 0 0);
   --sidebar-foreground: oklch(0.98 0 0);
-  --sidebar-primary: oklch(0.55 0.12 125);
+  --sidebar-primary: oklch(0.55 0.14 145);
   --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.15 0.01 130);
+  --sidebar-accent: oklch(0.15 0.01 145);
   --sidebar-accent-foreground: oklch(0.98 0 0);
   --sidebar-border: oklch(0.25 0.01 240);
-  --sidebar-ring: oklch(0.55 0.12 125);
+  --sidebar-ring: oklch(0.55 0.14 145);
 }
 
 @theme inline {
@@ -160,14 +115,6 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  
-  /* Custom FSA Colors */
-  --color-olive: oklch(0.55 0.12 125);
-  --color-olive-light: oklch(0.65 0.10 125);
-  --color-olive-dark: oklch(0.40 0.12 125);
-  --color-silver: oklch(0.75 0.01 240);
-  --color-silver-light: oklch(0.85 0.01 240);
-  --color-silver-dark: oklch(0.60 0.01 240);
 }
 
 @layer base {

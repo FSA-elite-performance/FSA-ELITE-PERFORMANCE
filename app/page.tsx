@@ -16,10 +16,11 @@ export default function FSAElitePerformance() {
   const [showApp, setShowApp] = useState(false)
   const [activeSection, setActiveSection] = useState("dashboard")
 
-  // Check localStorage for returning users
+  // Check saved login for returning users
   useEffect(() => {
-    const hasVisited = localStorage.getItem("fsa-member")
-    if (hasVisited === "true") {
+    const isMember = localStorage.getItem("fsa-member")
+    const savedEmail = localStorage.getItem("fsa-email")
+    if (isMember === "true" && savedEmail) {
       setShowApp(true)
     }
   }, [])
@@ -31,6 +32,8 @@ export default function FSAElitePerformance() {
 
   const handleLogout = () => {
     localStorage.removeItem("fsa-member")
+    localStorage.removeItem("fsa-email")
+    localStorage.removeItem("fsa-name")
     setShowApp(false)
   }
 
