@@ -1,5 +1,6 @@
 "use client"
 
+/* FSA Elite Performance - Main App */
 import { useState, useEffect } from "react"
 import { LandingPage } from "@/components/landing-page"
 import { AppSidebar } from "@/components/app-sidebar"
