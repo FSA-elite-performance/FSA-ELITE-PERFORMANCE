@@ -136,23 +136,82 @@ export function LandingPage({ onEnterApp }: { onEnterApp: () => void }) {
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="pt-32 pb-20 px-6">
+      {/* INSTANT ACCESS HERO - Bold Price Display */}
+      <section className="pt-28 pb-12 px-6 bg-gradient-to-b from-primary/10 via-background to-background">
+        <div className="container mx-auto max-w-4xl text-center">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/30 mb-6 animate-pulse">
+            <Zap className="h-5 w-5 text-primary" />
+            <span className="text-sm text-primary font-bold uppercase tracking-wide">Instant Full Access</span>
+          </div>
+          
+          <h1 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-foreground leading-tight mb-4">
+            Pay Once. <span className="text-primary">Own Forever.</span>
+          </h1>
+          
+          <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            Get immediate access to 18+ training modules, AI coaching, CRM tools, and exclusive community.
+          </p>
+          
+          {/* BOLD PRICE DISPLAY */}
+          <div className="relative inline-block mb-8">
+            <div className="absolute -inset-4 bg-primary/20 rounded-3xl blur-xl"></div>
+            <div className="relative bg-card border-2 border-primary rounded-2xl px-12 py-8 shadow-2xl">
+              <p className="text-sm text-muted-foreground uppercase tracking-widest mb-2">One-Time Payment</p>
+              <div className="flex items-baseline justify-center gap-1">
+                <span className="text-2xl text-primary font-bold">$</span>
+                <span className="text-7xl sm:text-8xl font-black text-foreground">12</span>
+                <span className="text-4xl sm:text-5xl font-bold text-foreground">.99</span>
+              </div>
+              <p className="text-primary font-semibold mt-2">Lifetime Access - No Subscriptions</p>
+            </div>
+          </div>
+          
+          {/* MAIN CTA */}
+          <div className="mb-8">
+            <Button 
+              size="lg" 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 text-xl px-12 py-7 h-auto shadow-lg shadow-primary/25 hover:shadow-xl hover:shadow-primary/30 transition-all hover:scale-105"
+              onClick={onEnterApp}
+            >
+              <DollarSign className="mr-2 h-6 w-6" />
+              Get Instant Access Now
+              <ArrowRight className="ml-2 h-6 w-6" />
+            </Button>
+          </div>
+          
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              <span>Instant Access</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              <span>18+ Training Modules</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              <span>AI Coach Included</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-primary" />
+              <span>Secure Stripe Payment</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Secondary Hero Section */}
+      <section className="py-16 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-6">
-                <Zap className="h-4 w-4 text-primary" />
-                <span className="text-sm text-primary font-medium">The Sales Bible for Elite Performers</span>
-              </div>
-              
-              <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
+              <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                 Become the <span className="text-primary">top 1%</span> of salespeople
-              </h1>
+              </h2>
               
               <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
                 Master the art of elite selling with proven strategies, AI coaching, CRM tools, and a 
-                community of ambitious closers. One price. Lifetime access. Unlimited potential.
+                community of ambitious closers. Used by 10,000+ salespeople across every industry.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
@@ -183,10 +242,6 @@ export function LandingPage({ onEnterApp }: { onEnterApp: () => void }) {
                 <div className="flex items-center gap-2">
                   <CheckCircle className="h-4 w-4 text-primary" />
                   <span>All Industries</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle className="h-4 w-4 text-primary" />
-                  <span>AI Coach Included</span>
                 </div>
               </div>
             </div>
