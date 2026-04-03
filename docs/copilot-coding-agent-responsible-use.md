@@ -44,6 +44,28 @@ Before merging agent-authored changes:
 
 Apply the same standards as any third-party contribution.
 
+## Disable automatic code reviews in GitHub
+
+If you want to turn off GitHub's automatic code review behavior for this
+repository and request reviews manually instead:
+
+1. Open the repository on GitHub and go to **Settings**.
+2. In the current GitHub UI, first check **Settings** → **Rules** →
+   **Rulesets** (or **Settings** → **Branches** for classic branch protection).
+   If your repository is using repository-level review controls instead, also
+   check **Settings** → **Moderation options** → **Code review limits**.
+3. Find the automatic review option, such as **Enable automatic requested
+   reviews**, and turn it off.
+4. Save the repository settings change.
+
+If you do not see the setting, verify that you have the required repository
+permissions and that the feature is available on your current GitHub plan. For
+the latest GitHub navigation details, see GitHub's repository settings and pull
+request review documentation:
+
+- https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings
+- https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/managing-repository-settings/managing-pull-request-reviews-in-your-repository
+
 ## Security posture and safeguards
 
 GitHub includes guardrails, but they are not a substitute for review:
@@ -72,4 +94,3 @@ Always verify output quality, legal suitability, and security before merge.
 - Provide feedback on low-quality outputs to improve future performance
 - Keep repository instructions current so the agent receives better context
 - Revisit process and security practices as the tooling evolves
-
