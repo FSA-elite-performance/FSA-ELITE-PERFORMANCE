@@ -47,6 +47,53 @@ need to take any extra action — just wait for a maintainer to review.
 - Never commit secrets — use `process.env` and document new variables in
   `.env.example`.
 
+## Merging the FSA-ELITE Training Platform Repo
+
+If you need to bring changes from a separate `FSA-ELITE` repository into this
+store repo, use the helper script in `scripts/merge-fsaelite.sh`.  It
+automates the full safe-merge workflow:
+
+```bash
+# Make the script executable (first time only)
+chmod +x scripts/merge-fsaelite.sh
+
+# Run the merge — replace the URL with the actual FSA-ELITE repo URL
+./scripts/merge-fsaelite.sh https://github.com/YOUR-USERNAME/FSA-ELITE.git
+```
+
+The script will:
+
+1. Create a timestamped backup branch from the current `HEAD` so you can
+   roll back if anything goes wrong.
+2. Return to `main`.
+3. Add the FSA-ELITE repository as a temporary remote named `fsaelite`.
+4. Fetch all its branches and tags.
+5. Create (or reuse) a local branch named `merge-fsaelite` and merge
+   `fsaelite/main` with `--allow-unrelated-histories`.
+6. Remove the temporary remote to keep the local config clean.
+
+After the script completes:
+
+1. Resolve any merge conflicts in your editor.
+2. Validate the build:
+   ```bash
+   npm ci
+   npm run build
+   NEXT_EXPORT=1 npm run build
+   ```
+3. Open a pull request from `merge-fsaelite` into `main`.
+
+> **Manual steps** (if you prefer not to use the script):
+> ```bash
+> git checkout -b backup-before-merge
+> git checkout main
+> git remote add fsaelite https://github.com/YOUR-USERNAME/FSA-ELITE.git
+> git fetch fsaelite
+> git checkout -b merge-fsaelite
+> git merge fsaelite/main --allow-unrelated-histories
+> git remote remove fsaelite
+> ```
+
 ## Security
 
 See [SECURITY.md](SECURITY.md) for the vulnerability reporting process and the
