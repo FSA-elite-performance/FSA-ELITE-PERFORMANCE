@@ -11,6 +11,7 @@ interface SidebarProps {
 const NAV_ITEMS = [
   { href: '/welcome', label: 'Dashboard', icon: '🏁' },
   { href: '/roleplay', label: 'Roleplay Lab', icon: '🎯' },
+  { href: '/olive', label: 'OLIVE', icon: '🤖' },
   { href: '/store', label: 'Member Store', icon: '🛍️' },
 ];
 

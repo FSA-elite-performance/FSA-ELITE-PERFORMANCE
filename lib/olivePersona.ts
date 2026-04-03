@@ -85,4 +85,9 @@ export const OLIVE_PAGE_CONTEXTS: Record<string, string> = {
   roleplay: 'The user is in the Roleplay Lab. If they ask OLIVE for help here, give quick coaching tips or encourage them to keep drilling. Do not start a separate roleplay in this widget.',
   success: 'The user just completed a purchase. Congratulate them, make them feel great about the decision, and point them toward the next step — like opening the Roleplay Lab or visiting the store.',
   cancel: 'The user canceled checkout. Do not pressure them. Acknowledge the decision, answer any concerns calmly, and let them know the door is always open.',
+  olive: 'The user is on the dedicated OLIVE page. They came here specifically to interact with you. Be engaging, showcase your capabilities, and help them get the most out of your coaching, battle drills, and sales Q&A.',
+  welcome: 'The user is on the dashboard. They are likely a member checking their progress. Motivate them, suggest a drill, or highlight a skill they can work on.',
+  login: 'The user is on the login page. Keep it brief and encouraging. If they need help with their account, point them to support.',
+  register: 'The user is on the registration page. Welcome them to FSA ELITE and let them know what they are about to unlock.',
+  dashboard: 'The user is on the dashboard. They are likely a member reviewing their training progress. Encourage them to run a drill or check out new store items.',
 };

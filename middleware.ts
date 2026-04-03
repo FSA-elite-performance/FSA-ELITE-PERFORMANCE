@@ -47,6 +47,7 @@ const PUBLIC_ROUTES = new Set([
   '/privacy-policy',
   '/refund-policy',
   '/cancel',
+  '/olive',
   '/fsa',
   '/fsa-elite',
   '/fsaelite',

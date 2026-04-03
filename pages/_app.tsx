@@ -9,7 +9,7 @@ import OliveWidget from '../components/OliveWidget';
 import '../styles/globals.css';
 
 /** Routes that get the sidebar app layout. */
-const APP_LAYOUT_ROUTES = new Set(['/welcome', '/roleplay', '/store', '/legal']);
+const APP_LAYOUT_ROUTES = new Set(['/welcome', '/roleplay', '/olive', '/store', '/legal']);
 
 function routeToPageContext(pathname: string): string {
   const clean = pathname.replace(/^\//, '').split('/')[0] || 'home';
