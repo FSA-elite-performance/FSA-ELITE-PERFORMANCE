@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { PUBLIC_SITE_URL } from '../../lib/businessDetails';
+import { getEdgeFlag, isEdgeConfigAvailable } from '../../lib/edgeConfig';
 
 type CheckState = 'pass' | 'warn' | 'fail';
 
@@ -157,6 +158,33 @@ export default async function handler(
   pushEnvChecks(checks);
   const configuredBaseUrl = pushBaseUrlChecks(reqHost, checks);
   pushDomainChecks(reqHost, checks);
+
+  // Vercel Edge Config connectivity
+  if (isEdgeConfigAvailable()) {
+    try {
+      const maintenance = await getEdgeFlag('maintenance', false);
+      checks.push({
+        id: 'edge-config:connected',
+        label: 'Vercel Edge Config connected',
+        state: 'pass',
+        detail: `Connected. maintenance=${String(maintenance)}`,
+      });
+    } catch {
+      checks.push({
+        id: 'edge-config:connected',
+        label: 'Vercel Edge Config connected',
+        state: 'warn',
+        detail: 'EDGE_CONFIG is set but store read failed.',
+      });
+    }
+  } else {
+    checks.push({
+      id: 'edge-config:connected',
+      label: 'Vercel Edge Config connected',
+      state: 'warn',
+      detail: 'EDGE_CONFIG not configured (optional; set in Vercel project settings).',
+    });
+  }
 
   checks.push({
     id: 'api:method-guard',
