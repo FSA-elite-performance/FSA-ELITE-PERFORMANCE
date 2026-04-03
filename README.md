@@ -35,6 +35,13 @@ This repository contains source code, assets, branding elements, and deployment 
 
 ---
 
+## Responsible AI Contribution Guidance
+
+- For repository-specific guidance on safe and effective use of GitHub Copilot coding agent, see:
+  - `docs/copilot-coding-agent-responsible-use.md`
+
+---
+
 ## Project Structure
 
 ```text
