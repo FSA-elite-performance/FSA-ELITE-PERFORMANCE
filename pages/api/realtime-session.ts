@@ -24,7 +24,7 @@ export default async function handler(
   // ── BotID check (same level as ai-chat) ──
   try {
     const verification = await checkBotId(
-      getBotIdServerOptions(BOTID_ROUTE_CONFIG.aiChat, req.headers)
+      getBotIdServerOptions(BOTID_ROUTE_CONFIG.realtimeSession, req.headers)
     );
     if (verification.isBot && !isAllowedVerifiedBot(verification)) {
       return res.status(403).json({ error: 'Access denied.' });

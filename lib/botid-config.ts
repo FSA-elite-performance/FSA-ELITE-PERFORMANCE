@@ -23,6 +23,13 @@ export const BOTID_ROUTE_CONFIG = {
       checkLevel: 'basic',
     },
   },
+  realtimeSession: {
+    path: '/api/realtime-session',
+    method: 'POST',
+    advancedOptions: {
+      checkLevel: 'basic',
+    },
+  },
 } satisfies Record<string, BotIdProtectedRoute>;
 
 export const BOTID_PROTECTED_ROUTES = Object.values(BOTID_ROUTE_CONFIG);

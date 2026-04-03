@@ -39,6 +39,10 @@ export default async function handler(
     return res.status(401).json({ ok: false, error: 'Invalid or expired ID token.' });
   }
 
+  if (!uid.trim() || !email.trim()) {
+    return res.status(401).json({ ok: false, error: 'Invalid account information.' });
+  }
+
   const sessionToken = await createSessionToken(uid, email);
   if (!sessionToken) {
     return res.status(500).json({ ok: false, error: 'Session signing key is not configured.' });
