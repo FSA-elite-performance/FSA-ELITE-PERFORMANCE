@@ -165,7 +165,7 @@ Making the Roleplay Lab public
 - The Roleplay UI (`next-app/pages/roleplay.tsx`) can be gated behind membership checks. This repository's default branch currently has the Roleplay Lab open to all visitors; to re-enable gating, restore the client membership check that calls `/api/membership-status`.
 
 If you want, I can add a small admin page to toggle public vs members-only access at runtime.
- 
+
 CI / Safety additions
 
 - A GitHub Action `secret-scan.yml` runs on PRs and pushes to `main` to detect common secret patterns (including `sk-` OpenAI keys) and fail the check if found.
