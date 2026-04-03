@@ -37,17 +37,14 @@ jobs:
         with:
           node-version: 'lts/*'
           cache: 'npm'
-          cache-dependency-path: next-app/package-lock.json
 
       - name: Install dependencies
-        working-directory: next-app
         run: npm ci
 
       - name: Build and export Next.js app
-        working-directory: next-app
         env:
           # NEXT_EXPORT=1 tells next.config.js to enable `output: 'export'` for static generation.
-          # See next-app/next.config.js for the conditional logic.
+          # See next.config.js for the conditional logic.
           NEXT_EXPORT: "1"
           # Required: set these as GitHub repository secrets or variables.
           # The STRIPE_SECRET_KEY is server-side only; it is NOT embedded in the static output.
@@ -59,7 +56,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Next.js static export outputs to /out by default when output:'export' is set
-          path: next-app/out
+          path: out
 
   deploy:
     name: Deploy to GitHub Pages

@@ -14,21 +14,15 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 'lts/*'
+          cache: 'npm'
       - name: Install dependencies
-        run: |
-          cd next-app
-          npm ci
+        run: npm ci
       - name: Build (standard)
-        run: |
-          cd next-app
-          npm run build
+        run: npm run build
       - name: Static export (NEXT_EXPORT=1)
-        run: |
-          cd next-app
-          node scripts/export-build.js
+        run: node scripts/export-build.js
       - name: Link check (linkinator)
         run: |
           npm install -g linkinator
-          cd next-app
           npx linkinator ./out --skipExternal
