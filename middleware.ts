@@ -29,6 +29,9 @@ const ALIAS_REDIRECTS: Record<string, string> = {
   '/shop': '/store',
   '/dashboard': '/welcome',
   '/join': '/checkout-preview',
+  '/fsa': '/',
+  '/fsa-elite': '/',
+  '/fsaelite': '/',
 };
 
 /**
@@ -49,9 +52,6 @@ const PUBLIC_ROUTES = new Set([
   '/refund-policy',
   '/cancel',
   '/olive',
-  '/fsa',
-  '/fsa-elite',
-  '/fsaelite',
 ]);
 
 /**
