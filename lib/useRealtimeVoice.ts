@@ -81,24 +81,24 @@ export function useRealtimeVoice({
     const chunk = playbackQueueRef.current.shift();
     if (!chunk) return;
 
-    const ctx = audioContextRef.current;
-    if (!ctx) return;
+    const audioContext = audioContextRef.current;
+    if (!audioContext) return;
 
     isPlayingRef.current = true;
     try {
       // OpenAI sends raw PCM16 24kHz mono. Decode manually.
       const pcm16 = new Int16Array(chunk);
       const float32 = new Float32Array(pcm16.length);
-      for (let i = 0; i < pcm16.length; i++) {
-        float32[i] = pcm16[i] / 32768;
+      for (let sampleIndex = 0; sampleIndex < pcm16.length; sampleIndex++) {
+        float32[sampleIndex] = pcm16[sampleIndex] / 32768;
       }
 
-      const buffer = ctx.createBuffer(1, float32.length, 24000);
+      const buffer = audioContext.createBuffer(1, float32.length, 24000);
       buffer.copyToChannel(float32, 0);
 
-      const source = ctx.createBufferSource();
+      const source = audioContext.createBufferSource();
       source.buffer = buffer;
-      source.connect(ctx.destination);
+      source.connect(audioContext.destination);
       source.onended = () => {
         isPlayingRef.current = false;
         playNextChunk();
@@ -123,14 +123,14 @@ export function useRealtimeVoice({
     });
     mediaStreamRef.current = stream;
 
-    const ctx = audioContextRef.current;
-    if (!ctx) return;
+    const audioContext = audioContextRef.current;
+    if (!audioContext) return;
 
-    const source = ctx.createMediaStreamSource(stream);
+    const source = audioContext.createMediaStreamSource(stream);
     // ScriptProcessor is deprecated but universally supported. AudioWorklet
     // requires a separate module file which complicates bundling — acceptable
     // trade-off for an initial voice-mode implementation.
-    const processor = ctx.createScriptProcessor(4096, 1, 1);
+    const processor = audioContext.createScriptProcessor(4096, 1, 1);
     processorRef.current = processor;
 
     processor.onaudioprocess = (event) => {
@@ -140,30 +140,30 @@ export function useRealtimeVoice({
       const inputData = event.inputBuffer.getChannelData(0);
 
       // Resample from AudioContext sampleRate to 24000 Hz.
-      const sampleRate = ctx.sampleRate;
+      const sampleRate = audioContext.sampleRate;
       const targetRate = 24000;
       const ratio = sampleRate / targetRate;
       const outputLength = Math.floor(inputData.length / ratio);
       const pcm16 = new Int16Array(outputLength);
 
-      for (let i = 0; i < outputLength; i++) {
-        const srcIdx = Math.floor(i * ratio);
-        const sample = Math.max(-1, Math.min(1, inputData[srcIdx]));
-        pcm16[i] = sample < 0 ? sample * 32768 : sample * 32767;
+      for (let sampleIndex = 0; sampleIndex < outputLength; sampleIndex++) {
+        const sourceIndex = Math.floor(sampleIndex * ratio);
+        const sample = Math.max(-1, Math.min(1, inputData[sourceIndex]));
+        pcm16[sampleIndex] = sample < 0 ? sample * 32768 : sample * 32767;
       }
 
-      const base64 = arrayBufferToBase64(pcm16.buffer);
+      const encodedAudio = arrayBufferToBase64(pcm16.buffer);
 
       ws.send(
         JSON.stringify({
           type: 'input_audio_buffer.append',
-          audio: base64,
+          audio: encodedAudio,
         })
       );
     };
 
     source.connect(processor);
-    processor.connect(ctx.destination);
+    processor.connect(audioContext.destination);
   }, []);
 
   // ── Start voice session ──
@@ -199,8 +199,8 @@ export function useRealtimeVoice({
       }
 
       // 2. Create AudioContext.
-      const ctx = new AudioContext({ sampleRate: 24000 });
-      audioContextRef.current = ctx;
+      const audioContext = new AudioContext({ sampleRate: 24000 });
+      audioContextRef.current = audioContext;
 
       // 3. Connect WebSocket to OpenAI Realtime.
       const url = `${REALTIME_BASE}?model=${REALTIME_MODEL}`;
@@ -217,9 +217,9 @@ export function useRealtimeVoice({
           await startMicrophone();
           updateStatus('listening');
         } catch (micError: unknown) {
-          const msg =
+          const micErrorMessage =
             micError instanceof Error ? micError.message : 'Microphone access denied.';
-          setError(msg);
+          setError(micErrorMessage);
           updateStatus('error');
           ws.close();
         }
@@ -249,9 +249,9 @@ export function useRealtimeVoice({
             case 'conversation.item.input_audio_transcription.completed': {
               // User speech transcript.
               if (typeof data.transcript === 'string' && data.transcript.trim()) {
-                const t: VoiceTranscript = { role: 'user', text: data.transcript.trim() };
-                setTranscripts((prev) => [...prev, t]);
-                onTranscript?.(t);
+                const userTranscript: VoiceTranscript = { role: 'user', text: data.transcript.trim() };
+                setTranscripts((prev) => [...prev, userTranscript]);
+                onTranscript?.(userTranscript);
               }
               break;
             }
@@ -259,9 +259,9 @@ export function useRealtimeVoice({
             case 'response.audio_transcript.done': {
               // Assistant speech transcript.
               if (typeof data.transcript === 'string' && data.transcript.trim()) {
-                const t: VoiceTranscript = { role: 'assistant', text: data.transcript.trim() };
-                setTranscripts((prev) => [...prev, t]);
-                onTranscript?.(t);
+                const assistantTranscript: VoiceTranscript = { role: 'assistant', text: data.transcript.trim() };
+                setTranscripts((prev) => [...prev, assistantTranscript]);
+                onTranscript?.(assistantTranscript);
               }
               break;
             }
@@ -286,9 +286,9 @@ export function useRealtimeVoice({
         updateStatus('idle');
         cleanup();
       };
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to start voice session.';
-      setError(msg);
+    } catch (startError: unknown) {
+      const startErrorMessage = startError instanceof Error ? startError.message : 'Failed to start voice session.';
+      setError(startErrorMessage);
       updateStatus('error');
     }
   }, [status, updateStatus, startMicrophone, playNextChunk, onTranscript]);
@@ -301,7 +301,7 @@ export function useRealtimeVoice({
       processorRef.current = null;
     }
     if (mediaStreamRef.current) {
-      mediaStreamRef.current.getTracks().forEach((t) => t.stop());
+      mediaStreamRef.current.getTracks().forEach((mediaTrack) => mediaTrack.stop());
       mediaStreamRef.current = null;
     }
     if (audioContextRef.current) {
@@ -338,8 +338,8 @@ export function useRealtimeVoice({
 function arrayBufferToBase64(buffer: ArrayBuffer): string {
   const bytes = new Uint8Array(buffer);
   let binary = '';
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
+  for (let byteIndex = 0; byteIndex < bytes.length; byteIndex++) {
+    binary += String.fromCharCode(bytes[byteIndex]);
   }
   return btoa(binary);
 }
@@ -347,8 +347,8 @@ function arrayBufferToBase64(buffer: ArrayBuffer): string {
 function base64ToArrayBuffer(base64: string): ArrayBuffer {
   const binary = atob(base64);
   const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
+  for (let byteIndex = 0; byteIndex < binary.length; byteIndex++) {
+    bytes[byteIndex] = binary.charCodeAt(byteIndex);
   }
   return bytes.buffer;
 }

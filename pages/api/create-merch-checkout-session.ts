@@ -43,8 +43,8 @@ function isValidBaseUrl(value: string): boolean {
 
 function firstHeaderValue(value: string | string[] | undefined): string | null {
   if (Array.isArray(value)) {
-    const first = value[0]?.trim();
-    return first || null;
+    const firstValue = value[0]?.trim();
+    return firstValue || null;
   }
 
   const normalized = value?.trim();
@@ -115,17 +115,17 @@ export default async function handler(
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
 
   for (const item of items) {
-    const candidate = item as CheckoutItem;
-    if (typeof candidate.productId !== 'string' || typeof candidate.quantity !== 'number') {
+    const checkoutItem = item as CheckoutItem;
+    if (typeof checkoutItem.productId !== 'string' || typeof checkoutItem.quantity !== 'number') {
       return res.status(400).json({ error: 'Each item must include productId and quantity.' });
     }
 
-    const sanitizedProductId = candidate.productId.trim();
+    const sanitizedProductId = checkoutItem.productId.trim();
     if (!sanitizedProductId) {
       return res.status(400).json({ error: 'productId cannot be empty.' });
     }
 
-    if (!Number.isInteger(candidate.quantity) || candidate.quantity < 1 || candidate.quantity > MAX_QTY_PER_ITEM) {
+    if (!Number.isInteger(checkoutItem.quantity) || checkoutItem.quantity < 1 || checkoutItem.quantity > MAX_QTY_PER_ITEM) {
       return res.status(400).json({ error: `quantity must be an integer between 1 and ${MAX_QTY_PER_ITEM}.` });
     }
 
@@ -135,7 +135,7 @@ export default async function handler(
     }
 
     lineItems.push({
-      quantity: candidate.quantity,
+      quantity: checkoutItem.quantity,
       price_data: {
         currency: 'usd',
         unit_amount: product.priceCents,

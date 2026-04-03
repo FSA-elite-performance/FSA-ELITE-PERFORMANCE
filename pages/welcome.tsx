@@ -75,18 +75,18 @@ export default function Welcome() {
   const drillsToday = progress?.drillsCompletedByDay?.[todayKey()] ?? 0;
   const weakestSkill = turns === 0
     ? null
-    : SKILL_KEYS.reduce<SkillTag | null>((lowest, key) => {
+    : SKILL_KEYS.reduce<SkillTag | null>((weakestSoFar, key) => {
         const current = progress?.skillAggregate?.[key];
-        if (!current || current.count === 0) return lowest;
+        if (!current || current.count === 0) return weakestSoFar;
 
-        if (!lowest) return key;
+        if (!weakestSoFar) return key;
 
-        const lowestAgg = progress?.skillAggregate?.[lowest];
-        if (!lowestAgg || lowestAgg.count === 0) return key;
+        const weakestAggregate = progress?.skillAggregate?.[weakestSoFar];
+        if (!weakestAggregate || weakestAggregate.count === 0) return key;
 
-        const currentAvg = current.sum / current.count;
-        const lowestAvg = lowestAgg.sum / lowestAgg.count;
-        return currentAvg < lowestAvg ? key : lowest;
+        const currentSkillAvg = current.sum / current.count;
+        const weakestSkillAvg = weakestAggregate.sum / weakestAggregate.count;
+        return currentSkillAvg < weakestSkillAvg ? key : weakestSoFar;
       }, null);
   const focusLabel = weakestSkill ? formatSkillTag(weakestSkill) : null;
 

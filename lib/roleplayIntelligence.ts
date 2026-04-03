@@ -195,7 +195,7 @@ function clampScore(value: number): number {
 }
 
 function countMatches(text: string, needles: string[]): number {
-  return needles.reduce((count, needle) => (text.includes(needle) ? count + 1 : count), 0);
+  return needles.reduce((matchCount, searchTerm) => (text.includes(searchTerm) ? matchCount + 1 : matchCount), 0);
 }
 
 export function evaluateSalesTurn(input: string): {

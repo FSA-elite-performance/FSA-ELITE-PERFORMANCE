@@ -87,7 +87,7 @@ function parseScenarioContext(value: unknown): ScenarioContext | null {
   const hiddenVariables = candidate.hiddenVariables as Record<string, unknown> | undefined;
 
   const triggerPhrases = Array.isArray(candidate.triggerPhrases)
-    ? candidate.triggerPhrases.filter((entry): entry is string => typeof entry === 'string' && entry.trim().length > 0)
+    ? candidate.triggerPhrases.filter((phraseEntry): phraseEntry is string => typeof phraseEntry === 'string' && phraseEntry.trim().length > 0)
     : [];
 
   if (
@@ -189,31 +189,31 @@ export default async function handler(
 
   const sanitizedMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
 
-  for (const msg of messages) {
-    const candidate = msg as IncomingMessage;
+  for (const message of messages) {
+    const incomingMessage = message as IncomingMessage;
 
-    if (!candidate || typeof candidate.role !== 'string' || typeof candidate.content !== 'string') {
+    if (!incomingMessage || typeof incomingMessage.role !== 'string' || typeof incomingMessage.content !== 'string') {
       return res.status(400).json({ error: 'Each message must have a role and content string.' });
     }
 
-    if (!['user', 'assistant'].includes(candidate.role)) {
+    if (!['user', 'assistant'].includes(incomingMessage.role)) {
       return res.status(400).json({ error: 'Message role must be "user" or "assistant".' });
     }
 
-    if (candidate.content.length > MAX_MSG_CHARS) {
+    if (incomingMessage.content.length > MAX_MSG_CHARS) {
       return res
         .status(400)
         .json({ error: `Message content exceeds ${MAX_MSG_CHARS} character limit.` });
     }
 
     // Basic sanitization: normalize whitespace and reject empty content after trim.
-    const normalized = candidate.content.replace(/\s+/g, ' ').trim();
+    const normalized = incomingMessage.content.replace(/\s+/g, ' ').trim();
     if (!normalized) {
       return res.status(400).json({ error: 'Message content cannot be empty.' });
     }
 
     sanitizedMessages.push({
-      role: candidate.role as 'user' | 'assistant',
+      role: incomingMessage.role as 'user' | 'assistant',
       content: normalized,
     });
   }
@@ -233,7 +233,7 @@ export default async function handler(
         ...sanitizedMessages,
       ].map((m) => `${m.role.toUpperCase()}: ${m.content}`);
 
-      const responseAny: any = await client.responses.create({
+      const promptApiResponse: any = await client.responses.create({
         model: 'openai/gpt-5',
         prompt: { id: promptId, version: '1' },
         input: inputs.join('\n\n'),
@@ -243,9 +243,9 @@ export default async function handler(
 
       // The Responses API can return different shapes; try common locations for text output.
       const replyText =
-        responseAny.output_text ??
-        (Array.isArray(responseAny.output) && responseAny.output[0]?.content?.find((c: { type: string }) => c.type === 'output_text')?.text) ??
-        responseAny.output?.[0]?.content?.[0]?.text ??
+        promptApiResponse.output_text ??
+        (Array.isArray(promptApiResponse.output) && promptApiResponse.output[0]?.content?.find((contentBlock: { type: string }) => contentBlock.type === 'output_text')?.text) ??
+        promptApiResponse.output?.[0]?.content?.[0]?.text ??
         null;
 
       if (!replyText) {
@@ -272,8 +272,8 @@ export default async function handler(
     }
 
     return res.status(200).json({ reply });
-  } catch (err: unknown) {
-    console.error('OpenAI error:', err);
+  } catch (apiError: unknown) {
+    console.error('OpenAI error:', apiError);
     return res.status(500).json({ error: 'AI service unavailable. Please try again later.' });
   }
 }

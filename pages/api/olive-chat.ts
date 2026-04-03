@@ -110,23 +110,23 @@ export default async function handler(
 
   const sanitizedMessages: Array<{ role: 'user' | 'assistant'; content: string }> = [];
 
-  for (const msg of messages) {
-    const candidate = msg as IncomingMessage;
-    if (!candidate || typeof candidate.role !== 'string' || typeof candidate.content !== 'string') {
+  for (const message of messages) {
+    const incomingMessage = message as IncomingMessage;
+    if (!incomingMessage || typeof incomingMessage.role !== 'string' || typeof incomingMessage.content !== 'string') {
       return res.status(400).json({ error: 'Each message must have a role and content string.' });
     }
-    if (!['user', 'assistant'].includes(candidate.role)) {
+    if (!['user', 'assistant'].includes(incomingMessage.role)) {
       return res.status(400).json({ error: 'Message role must be "user" or "assistant".' });
     }
-    if (candidate.content.length > MAX_MSG_CHARS) {
+    if (incomingMessage.content.length > MAX_MSG_CHARS) {
       return res.status(400).json({ error: `Message content exceeds ${MAX_MSG_CHARS} character limit.` });
     }
-    const normalized = candidate.content.replace(/\s+/g, ' ').trim();
+    const normalized = incomingMessage.content.replace(/\s+/g, ' ').trim();
     if (!normalized) {
       return res.status(400).json({ error: 'Message content cannot be empty.' });
     }
     sanitizedMessages.push({
-      role: candidate.role as 'user' | 'assistant',
+      role: incomingMessage.role as 'user' | 'assistant',
       content: normalized,
     });
   }
@@ -164,8 +164,8 @@ export default async function handler(
     }
 
     return res.status(200).json({ reply });
-  } catch (err: unknown) {
-    console.error('OpenAI error (olive-chat):', err);
+  } catch (apiError: unknown) {
+    console.error('OpenAI error (olive-chat):', apiError);
     return res.status(500).json({ error: 'OLIVE is temporarily unavailable. Please try again later.' });
   }
 }

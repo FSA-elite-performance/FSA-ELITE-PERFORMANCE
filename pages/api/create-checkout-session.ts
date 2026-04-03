@@ -40,8 +40,8 @@ function isValidBaseUrl(value: string): boolean {
 
 function firstHeaderValue(value: string | string[] | undefined): string | null {
   if (Array.isArray(value)) {
-    const first = value[0]?.trim();
-    return first || null;
+    const firstValue = value[0]?.trim();
+    return firstValue || null;
   }
 
   const normalized = value?.trim();
@@ -164,8 +164,8 @@ export default async function handler(
     }
 
     return res.status(200).json({ url: session.url });
-  } catch (err: unknown) {
-    console.error('Stripe error:', err);
+  } catch (stripeError: unknown) {
+    console.error('Stripe error:', stripeError);
     return res.status(500).json({ error: 'Unable to initialize checkout. Please try again.' });
   }
 }

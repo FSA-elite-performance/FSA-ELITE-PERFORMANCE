@@ -12,8 +12,8 @@ import '../styles/globals.css';
 const APP_LAYOUT_ROUTES = new Set(['/welcome', '/roleplay', '/olive', '/store', '/legal']);
 
 function routeToPageContext(pathname: string): string {
-  const clean = pathname.replace(/^\//, '').split('/')[0] || 'home';
-  return clean;
+  const basePathSegment = pathname.replace(/^\//, '').split('/')[0] || 'home';
+  return basePathSegment;
 }
 
 export default function App({ Component, pageProps }: AppProps) {

@@ -39,7 +39,7 @@ async function signValue(value: string, secret: string): Promise<string> {
   );
 
   const signature = await crypto.subtle.sign('HMAC', key, encoder.encode(value));
-  const binary = Array.from(new Uint8Array(signature), (byte) => String.fromCharCode(byte)).join('');
+  const binary = Array.from(new Uint8Array(signature), (signatureByte) => String.fromCharCode(signatureByte)).join('');
   return encodeBase64Url(binary);
 }
 
@@ -50,8 +50,8 @@ export function parseCookie(cookieHeader: string | undefined, name: string): str
 
   const match = cookieHeader
     .split(';')
-    .map((item) => item.trim())
-    .find((item) => item.startsWith(`${name}=`));
+    .map((cookieSegment) => cookieSegment.trim())
+    .find((cookieSegment) => cookieSegment.startsWith(`${name}=`));
 
   return match ? match.slice(name.length + 1) : null;
 }
