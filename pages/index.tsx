@@ -151,7 +151,7 @@ export default function Home() {
               </Link>
             </div>
 
-            <button 
+            <button
               className="landing-mobile-toggle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle menu"
@@ -191,7 +191,7 @@ export default function Home() {
               <br />
               who want <span className="landing-hero-highlight">more</span>
             </h1>
-            
+
             <p className="landing-hero-subtitle">
               More confidence. More skill. More production. More results.
               From AI objection drills to rep-branding tools — everything a closer needs in one platform.
