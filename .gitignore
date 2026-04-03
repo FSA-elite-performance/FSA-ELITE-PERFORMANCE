@@ -1,3 +1,11 @@
+# ─── v0 sandbox internal files ───────────────────────────────────────────────
+__v0_runtime_loader.js
+__v0_devtools.tsx
+__v0_jsx-dev-runtime.ts
+.snowflake/
+.v0-trash/
+next.user-config.*
+
 # ─── Node ──────────────────────────────────────────────────────────────────
 node_modules/
 npm-debug.log*
@@ -24,6 +32,9 @@ dist/
 next-app/.env
 next-app/.env.local
 next-app/.env.*.local
+
+# ─── Vercel ─────────────────────────────────────────────────────────────────
+.vercel/
 
 # ─── Firebase service-account keys ──────────────────────────────────────────
 *firebase-adminsdk*.json
@@ -53,7 +64,6 @@ Thumbs.db
 # ─── Misc ────────────────────────────────────────────────────────────────────
 *.log
 coverage/
-.vercel
 
 # ─── Sensitive account files ─────────────────────────────────────────────────
 Backup-codes-*.txt
