@@ -4145,6 +4145,45 @@ ul { padding-left: 1.15rem; }
   letter-spacing: 0.1em;
 }
 
+/* Platform Stats Strip */
+.landing-stats-strip {
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-surface);
+  padding: 2rem 1.5rem;
+}
+
+.landing-stats-inner {
+  display: flex;
+  justify-content: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.landing-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  text-align: center;
+}
+
+.landing-stat-item strong {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--color-accent);
+  line-height: 1;
+}
+
+.landing-stat-item span {
+  font-size: 0.78rem;
+  color: var(--color-muted-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
+
 /* Sections */
 .landing-section {
   max-width: 1200px;

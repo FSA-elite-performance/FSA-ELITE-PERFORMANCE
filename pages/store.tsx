@@ -52,7 +52,7 @@ const STORE_SIGNAL_ITEMS = [
     label: 'Powered by Stripe — encrypted, PCI-compliant, and live for every order',
   },
   {
-    value: '15+ Products',
+    value: '17+ Products',
     label: 'Desk gear, promo tools, business cards, and closer gear designed for real selling environments',
   },
 ];
@@ -335,7 +335,7 @@ export default function Store() {
                 <p className="eyebrow">Members Only</p>
                 <h1>Your store unlocks the moment you join — {formatUsd(SUBSCRIPTION_PRICE_CENTS)}, one time.</h1>
                 <p className="member-gate-copy">
-                  15+ products designed for reps who want sharper introductions, stronger leave-behinds, and a look
+                  17+ products designed for reps who want sharper introductions, stronger leave-behinds, and a look
                   that says “established” — not “still building.” Each product has its own member pricing.
                 </p>
                 <div className="member-gate-actions">
@@ -575,11 +575,11 @@ export default function Store() {
 
               {cartItems.length === 0 ? (
                 <>
-                  <p className="store-empty">Add items to begin checkout.</p>
+                  <p className="store-empty">Your cart is empty—add items to checkout.</p>
                   <ul className="store-cart-empty-points">
-                    <li>Start with a business-card product for the fastest image upgrade</li>
-                    <li>Add a daily-wear piece to make the brand visible beyond training</li>
-                    <li>Use bundles if you want the strongest identity jump fastest</li>
+                    <li>Business cards give the fastest image upgrade — start there</li>
+                    <li>Add a daily-wear piece to keep your brand visible beyond the session</li>
+                    <li>Use bundles for the strongest identity jump and 10% savings</li>
                   </ul>
                 </>
               ) : (
@@ -638,7 +638,7 @@ export default function Store() {
               {bundles.length > 0 && (
                 <div className="store-cart-upsell">
                   <p className="eyebrow">Quick Add</p>
-                  <h3>Need a faster decision?</h3>
+                  <h3>Save 10% with a bundle</h3>
                   <button type="button" className="btn-secondary store-cart-upsell-btn" onClick={() => addBundleToCart(bundles[0].productIds)}>
                     Add {bundles[0].title}
                   </button>
