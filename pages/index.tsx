@@ -59,17 +59,17 @@ const STEPS = [
   {
     num: '01',
     title: 'Join',
-    description: 'One-time payment. No subscription. Instant access to everything.',
+    description: 'One-time payment. No subscription. Instant access to everything — roleplay lab, store, dashboard, OLIVE.',
   },
   {
     num: '02',
     title: 'Train',
-    description: 'Run AI objection drills and see exactly where your pitch breaks.',
+    description: 'Run AI objection drills against 5 buyer personas and see exactly where your pitch breaks — before the real call.',
   },
   {
     num: '03',
     title: 'Close',
-    description: 'Walk into every room with sharper skills and a stronger presence.',
+    description: 'Walk into every room with sharper skills, a stronger presence, and gear that makes you look established.',
   },
 ];
 
@@ -85,6 +85,10 @@ const FAQ_ITEMS = [
   {
     question: 'What do I get?',
     answer: 'Immediate access to AI Roleplay Lab, OLIVE assistant, member store, dashboard, and all future updates.',
+  },
+  {
+    question: 'Is there a guarantee?',
+    answer: `We stand behind the platform. If you have any issues with access or the experience does not meet your expectations, contact us at ${SUPPORT_EMAIL} within 7 days and we will make it right.`,
   },
   {
     question: 'How do I get support?',
@@ -184,18 +188,17 @@ export default function Home() {
           <div className="landing-hero-content">
             <div className="landing-hero-badge">
               <span className="landing-badge-dot" />
-              One Payment. Lifetime Access.
+              One Payment. Lifetime Access. · {formatUsd(SUBSCRIPTION_PRICE_CENTS)}
             </div>
             
             <h1 className="landing-hero-title">
-              The complete platform for
+              Your pitch. Pressure-tested by AI.
               <br />
-              <span className="landing-hero-highlight">sales performance</span>
+              <span className="landing-hero-highlight">Your brand. Built to close.</span>
             </h1>
             
             <p className="landing-hero-subtitle">
-              AI objection drills, professional branding tools, and closer gear.
-              Built for reps who refuse to blend in.
+              AI objection drills, professional branding tools, and closer gear—all connected in one platform. Built for reps who refuse to wing it.
             </p>
 
             <div className="landing-hero-actions">
@@ -257,13 +260,39 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Platform Stats Strip */}
+        <div className="landing-stats-strip">
+          <div className="landing-stats-inner">
+            <div className="landing-stat-item">
+              <strong>5</strong>
+              <span>AI Buyer Personas</span>
+            </div>
+            <div className="landing-stat-item">
+              <strong>6</strong>
+              <span>Skills Tracked</span>
+            </div>
+            <div className="landing-stat-item">
+              <strong>17+</strong>
+              <span>Member Products</span>
+            </div>
+            <div className="landing-stat-item">
+              <strong>8</strong>
+              <span>Industries Served</span>
+            </div>
+            <div className="landing-stat-item">
+              <strong>{formatUsd(SUBSCRIPTION_PRICE_CENTS)}</strong>
+              <span>One-Time. Lifetime Access.</span>
+            </div>
+          </div>
+        </div>
+
         {/* Features Section */}
         <section className="landing-section" id="features">
           <div className="landing-section-header">
             <span className="landing-eyebrow">Features</span>
-            <h2 className="landing-section-title">Everything you need to close more deals</h2>
+            <h2 className="landing-section-title">Built for reps who close — not just pitch</h2>
             <p className="landing-section-subtitle">
-              Training, branding, and tools — all connected in one platform.
+              Training, branding, and tools — all connected in one platform. Designed for closers in every industry.
             </p>
           </div>
 
@@ -308,7 +337,8 @@ export default function Home() {
             <h2>The rep who prepares harder closes more.</h2>
             <p>
               Most reps wing it. FSA ELITE members drill it, brand it, and walk in
-              looking like they have already closed this deal before.
+              looking like they have already closed this deal before. For {formatUsd(SUBSCRIPTION_PRICE_CENTS)} — once —
+              you get lifetime access to everything. Most sales courses charge $49/month. Coaching programs run $997+.
             </p>
             <div className="landing-cta-actions">
               <Link href="/checkout-preview" className="btn-primary btn-lg">
