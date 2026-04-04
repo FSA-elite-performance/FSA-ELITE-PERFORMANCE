@@ -54,7 +54,9 @@ Consolidate all active FSA Elite Performance repositories into a single GitHub o
 - `backend`
 - `ops-deploy`
 
-If only one operator exists today, still create `admins` and `core` first.
+If only one administrator exists today, still create `admins` and `core` first.
+- `admins`: organization/repository administration, billing, security policy, branch protection, and team management.
+- `core`: day-to-day platform development and code ownership without full org-admin privileges.
 
 ## Recommended Monorepo Naming
 - `platform`
@@ -98,6 +100,11 @@ If only one operator exists today, still create `admins` and `core` first.
 - Consolidate runtime config/env typing into `@fsa/config`
 - Use shared `@fsa/utils` and `@fsa/types`
 
+### Package Manager Transition Note
+- Current repository workflows run with npm.
+- During monorepo foundation, introduce `pnpm` workspace tooling in the new monorepo and migrate CI scripts in the same wave.
+- Keep npm-based legacy repos unchanged until each repo is migrated, then retire their npm workflows at archive time.
+
 ## CI/CD Standardization
 - One reusable workflow strategy in `.github/workflows`
 - Required checks on PRs: lint, typecheck, unit tests, build
@@ -107,25 +114,25 @@ If only one operator exists today, still create `admins` and `core` first.
 
 ## Migration Waves
 
-### Wave 0: Foundation
+### Wave 1: Foundation
 1. Create target GitHub organization
 2. Create teams and baseline permissions
 3. Create monorepo with `pnpm` workspaces + turbo
 4. Add base CI templates, CODEOWNERS, branch protections
 
-### Wave 1: Core Application Migration
+### Wave 2: Core Application Migration
 1. Migrate `FSA-ELITE-SALES-TRAINING` into `/apps/training`
 2. Migrate `FSA-ELITE-PERFORMANCE-STORE` into `/apps/store`
 3. Migrate academy/chatbot/api repos into `/apps/academy`, `/apps/chatbot`, `/apps/api`
 4. Keep adapters/shims during transition only where required
 
-### Wave 2: Shared Package Extraction
+### Wave 3: Shared Package Extraction
 1. Extract duplicated UI into `/packages/ui`
 2. Extract auth/session logic into `/packages/auth`
 3. Extract configuration and env parsing into `/packages/config`
 4. Extract common utilities/types into `/packages/utils` and `/packages/types`
 
-### Wave 3: Deployment and Cutover
+### Wave 4: Deployment and Cutover
 1. Point environments and domains to monorepo deployments
 2. Validate production parity (auth, checkout, AI roleplay, content delivery)
 3. Freeze writes on legacy repos
@@ -149,7 +156,7 @@ A legacy repository can be archived only when all of the following are true:
 - [ ] Choose org name and create org
 - [ ] Choose monorepo name and initialize workspace
 - [ ] Configure teams/permissions
-- [ ] Migrate core repos (wave 1)
-- [ ] Extract shared packages (wave 2)
+- [ ] Migrate core repos (wave 2)
+- [ ] Extract shared packages (wave 3)
 - [ ] Standardize CI/CD and branch protections
-- [ ] Complete cutover and archive legacy repos (wave 3)
+- [ ] Complete cutover and archive legacy repos (wave 4)
