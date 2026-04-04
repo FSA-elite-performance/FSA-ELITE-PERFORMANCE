@@ -102,8 +102,8 @@ If only one administrator exists today, still create `admins` and `core` first.
 
 ### Package Manager Transition Note
 - Current repository workflows run with npm.
-- During monorepo foundation, introduce `pnpm` workspace tooling in the new monorepo and migrate CI scripts in the same wave.
-- Keep npm-based legacy repos unchanged until each repo is migrated, then retire their npm workflows at archive time.
+- During Wave 1 foundation, introduce `pnpm` workspace tooling and CI scripts for the new monorepo only.
+- Keep npm-based legacy repos unchanged until their Wave 2 migration into the monorepo, then retire their npm workflows at archive time.
 
 ## CI/CD Standardization
 - One reusable workflow strategy in `.github/workflows`
@@ -117,7 +117,7 @@ If only one administrator exists today, still create `admins` and `core` first.
 ### Wave 1: Foundation
 1. Create target GitHub organization
 2. Create teams and baseline permissions
-3. Create monorepo with `pnpm` workspaces + turbo
+3. Create monorepo with `pnpm` workspaces + Turborepo
 4. Add base CI templates, CODEOWNERS, branch protections
 
 ### Wave 2: Core Application Migration
