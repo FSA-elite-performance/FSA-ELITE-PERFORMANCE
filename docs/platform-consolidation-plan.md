@@ -64,29 +64,29 @@ If only one operator exists today, still create `admins` and `core` first.
 ## Monorepo Structure
 ```text
 /apps
-  /apps/web
-  /apps/store
-  /apps/training
-  /apps/academy
-  /apps/chatbot
-  /apps/api
+  /web
+  /store
+  /training
+  /academy
+  /chatbot
+  /api
 
 /packages
-  /packages/ui
-  /packages/auth
-  /packages/database
-  /packages/config
-  /packages/types
-  /packages/utils
+  /ui
+  /auth
+  /database
+  /config
+  /types
+  /utils
 
 /content
-  /content/training
-  /content/academy
+  /training
+  /academy
 
 /docs
 
 /.github
-  /.github/workflows
+  /workflows
 ```
 
 ## Technical Standardization
@@ -114,7 +114,7 @@ If only one operator exists today, still create `admins` and `core` first.
 4. Add base CI templates, CODEOWNERS, branch protections
 
 ### Wave 1: Core Application Migration
-1. Migrate `FSA-ELITE-SALES-TRAINING` into `/apps/training` (or `/apps/web` if it remains unified)
+1. Migrate `FSA-ELITE-SALES-TRAINING` into `/apps/training`
 2. Migrate `FSA-ELITE-PERFORMANCE-STORE` into `/apps/store`
 3. Migrate academy/chatbot/api repos into `/apps/academy`, `/apps/chatbot`, `/apps/api`
 4. Keep adapters/shims during transition only where required

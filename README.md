@@ -39,8 +39,8 @@ This repository contains source code, assets, branding elements, and deployment 
 
 - For repository-specific guidance on safe and effective use of GitHub Copilot coding agent, see:
   - `docs/copilot-coding-agent-responsible-use.md`
- - For repository consolidation execution guidance, see:
-   - `docs/platform-consolidation-plan.md`
+- For repository consolidation execution guidance, see:
+  - `docs/platform-consolidation-plan.md`
 
 ---
 
