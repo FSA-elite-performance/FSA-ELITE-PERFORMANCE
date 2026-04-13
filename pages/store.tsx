@@ -254,10 +254,20 @@ export default function Store() {
   function removeFromCart(productId: string) {
     setCart((prev) => {
       const nextQty = Math.max((prev[productId] ?? 0) - 1, 0);
-      return {
-        ...prev,
-        [productId]: nextQty,
-      };
+      if (nextQty === 0) {
+        const next = { ...prev };
+        delete next[productId];
+        return next;
+      }
+      return { ...prev, [productId]: nextQty };
+    });
+  }
+
+  function deleteFromCart(productId: string) {
+    setCart((prev) => {
+      const next = { ...prev };
+      delete next[productId];
+      return next;
     });
   }
 
@@ -590,13 +600,29 @@ export default function Store() {
 
                     return (
                       <li key={item.productId}>
-                        <div className="store-cart-line-copy">
+                        <button
+                          type="button"
+                          className="store-cart-line-copy store-cart-line-link"
+                          onClick={() => openProductDetails(item.productId)}
+                        >
                           <strong>{product.name}</strong>
                           <span>{formatUsd(product.priceCents)} each</span>
-                        </div>
-                        <div className="store-cart-line-meta">
-                          <span>x{item.quantity}</span>
-                          <strong>{formatUsd(product.priceCents * item.quantity)}</strong>
+                        </button>
+                        <div className="store-cart-line-controls">
+                          <div className="store-cart-stepper" aria-label={`Quantity for ${product.name}`}>
+                            <button type="button" onClick={() => removeFromCart(item.productId)} aria-label="Decrease quantity">−</button>
+                            <span>{item.quantity}</span>
+                            <button type="button" onClick={() => addToCart(item.productId)} aria-label="Increase quantity">+</button>
+                          </div>
+                          <strong className="store-cart-line-total">{formatUsd(product.priceCents * item.quantity)}</strong>
+                          <button
+                            type="button"
+                            className="store-cart-remove-btn"
+                            onClick={() => deleteFromCart(item.productId)}
+                            aria-label={`Remove ${product.name} from cart`}
+                          >
+                            ×
+                          </button>
                         </div>
                       </li>
                     );
