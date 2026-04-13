@@ -18,6 +18,7 @@ interface OliveWidgetProps {
 const OLIVE_ENABLED_KEY = 'fsaelite:olive-enabled:v1';
 const OLIVE_MODE_KEY = 'fsaelite:olive-mode:v1';
 const MAX_WIDGET_MESSAGES = 20;
+const OLIVE_SHORTCUT_LABEL = '⌥O or ⌥Tab';
 
 const MODES: { id: OliveMode; label: string; title: string }[] = [
   { id: 'general', label: 'General', title: 'Ask OLIVE anything about sales, the platform, or your game' },
@@ -124,6 +125,29 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
     }
   }, [open]);
 
+  // Keyboard shortcuts: Option/Alt+O or Option/Alt+Tab toggles OLIVE.
+  useEffect(() => {
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (!event.altKey) return;
+      const key = event.key.toLowerCase();
+      const isShortcut = key === 'o' || key === 'tab';
+      if (!isShortcut) return;
+
+      event.preventDefault();
+      setEnabled((prevEnabled) => {
+        if (!prevEnabled) {
+          setOpen(true);
+          return true;
+        }
+        setOpen((prevOpen) => !prevOpen);
+        return prevEnabled;
+      });
+    };
+
+    window.addEventListener('keydown', handleKeydown);
+    return () => window.removeEventListener('keydown', handleKeydown);
+  }, []);
+
   async function sendMessage(text: string) {
     const trimmed = text.trim();
     if (!trimmed || loading) return;
@@ -204,7 +228,8 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
         className="olive-fab olive-fab-disabled"
         onClick={toggleEnabled}
         aria-label="Enable OLIVE assistant"
-        title="Turn OLIVE back on"
+        aria-keyshortcuts="Alt+O Alt+Tab"
+        title={`Turn OLIVE back on (${OLIVE_SHORTCUT_LABEL})`}
       >
         <span className="olive-fab-icon">O</span>
       </button>
@@ -224,6 +249,8 @@ export default function OliveWidget({ pageContext }: OliveWidgetProps) {
           className="olive-fab"
           onClick={() => setOpen(true)}
           aria-label="Open OLIVE assistant"
+          aria-keyshortcuts="Alt+O Alt+Tab"
+          title={`Open OLIVE assistant (${OLIVE_SHORTCUT_LABEL})`}
         >
           <span className="olive-fab-icon">O</span>
           <span className="olive-fab-pulse" />
