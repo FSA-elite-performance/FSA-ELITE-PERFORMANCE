@@ -32,7 +32,7 @@ export default function RefundPolicyPage() {
   return (
     <>
       <Head>
-        <title>Refund Policy | FSA ELITE Performance</title>
+        <title>Refund Policy | FSA Elite Performance</title>
         <meta
           name="description"
           content="Read the FSA ELITE Performance refund and support policy for digital training access and merchandise orders."

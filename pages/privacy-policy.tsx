@@ -67,7 +67,7 @@ export default function PrivacyPolicyPage() {
   return (
     <>
       <Head>
-        <title>Privacy Policy | FSA ELITE Performance</title>
+        <title>Privacy Policy | FSA Elite Performance</title>
         <meta
           name="description"
           content="Read the FSA ELITE Performance privacy policy for customer information, payments, support, and data handling."

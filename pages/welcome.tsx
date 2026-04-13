@@ -124,7 +124,7 @@ export default function Welcome() {
   return (
     <>
       <Head>
-        <title>Dashboard | FSA ELITE</title>
+        <title>Dashboard | FSA Elite Performance</title>
         <meta
           name="description"
           content="Your FSA ELITE training dashboard at fsaeliteperformance.com. Track roleplay performance, skill progress, and daily drills."

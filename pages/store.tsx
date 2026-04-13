@@ -306,7 +306,7 @@ export default function Store() {
   return (
     <>
       <Head>
-        <title>FSA ELITE Member Store | Sales Gear and Self-Logo Products</title>
+        <title>FSA Elite Performance Member Store | Sales Gear and Self-Logo Products</title>
         <meta
           name="description"
           content="Shop FSA ELITE member gear, self-logo products, and creator-ready bundles built for salespeople across industries."
@@ -358,13 +358,13 @@ export default function Store() {
               ← Back to Home
             </Link>
             <div className="store-brand-row">
-              <img src="/logo.png" alt="FSA ELITE" className="store-brand-logo" />
+              <img src="/logo.png" alt="FSA Elite Performance" className="store-brand-logo" />
               <div>
-                <strong className="store-brand-name">FSA ELITE</strong>
+                <strong className="store-brand-name">{BUSINESS_NAME}</strong>
                 <span className="store-brand-domain">fsaeliteperformance.com</span>
               </div>
             </div>
-            <p className="eyebrow">FSA ELITE Member Store</p>
+            <p className="eyebrow">{BUSINESS_NAME} Member Store</p>
             <h1 className="store-title">Your name. Your tools. Their memory.</h1>
             <p className="store-copy">
               Business cards, desk gear, branded promo tools, and closer gear that make you look more established

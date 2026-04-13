@@ -1,5 +1,5 @@
 export const LEGAL_BUSINESS_NAME = 'Fontenots Sales Association LLC';
-export const PUBLIC_BUSINESS_NAME = 'FSA ELITE';
+export const PUBLIC_BUSINESS_NAME = 'FSA Elite Performance';
 export const PUBLIC_SITE_URL = 'https://fsaeliteperformance.com/';
 export const PUBLIC_STORE_URL = 'https://fsaeliteperformance.store/';
 export const PUBLIC_BRAND_ALIASES = [

@@ -96,7 +96,7 @@ export default function Success() {
   return (
     <>
       <Head>
-        <title>Payment Successful | FSA ELITE Sales Training</title>
+        <title>Payment Successful | FSA Elite Performance</title>
       </Head>
       <main className="status-page">
         <div className="status-icon" aria-hidden="true">

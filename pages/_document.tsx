@@ -1,6 +1,7 @@
 import { Html, Head, Main, NextScript } from 'next/document';
 import {
   PUBLIC_BRAND_ALIASES,
+  PUBLIC_BUSINESS_NAME,
   PUBLIC_SEO_KEYWORDS,
   PUBLIC_SITE_URL,
   SUPPORT_EMAIL,
@@ -8,13 +9,14 @@ import {
 } from '../lib/businessDetails';
 
 const SITE_URL = PUBLIC_SITE_URL.replace(/\/$/, '');
+const SITE_TITLE = `${PUBLIC_BUSINESS_NAME} Sales Training`;
 const SITE_DESCRIPTION =
   'FSA Elite Performance delivers AI sales training, objection handling drills, self-branding tools, and closer gear for reps who want stronger skills and stronger identity.';
 
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
-  name: 'FSA Elite Performance Training',
+  name: `${PUBLIC_BUSINESS_NAME} Training`,
   alternateName: [...PUBLIC_BRAND_ALIASES],
   url: SITE_URL,
   email: SUPPORT_EMAIL,
@@ -26,7 +28,7 @@ const ORGANIZATION_SCHEMA = {
 const WEBSITE_SCHEMA = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
-  name: 'FSA ELITE',
+  name: PUBLIC_BUSINESS_NAME,
   alternateName: [...PUBLIC_BRAND_ALIASES],
   url: SITE_URL,
   description: SITE_DESCRIPTION,
@@ -39,10 +41,10 @@ export default function Document() {
       <Head>
         <meta charSet="utf-8" />
         <meta name="theme-color" content="#0a0a0a" />
-        <meta name="application-name" content="FSA ELITE Sales Training" />
+        <meta name="application-name" content={SITE_TITLE} />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="FSA ELITE" />
+        <meta name="apple-mobile-web-app-title" content={PUBLIC_BUSINESS_NAME} />
         <meta name="format-detection" content="telephone=no" />
         <meta name="msapplication-TileColor" content="#0a0a0a" />
         <meta name="msapplication-TileImage" content={`${SITE_URL}/android-chrome-192x192.png`} />
@@ -72,16 +74,16 @@ export default function Document() {
         />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="FSA ELITE Sales Training" />
-        <meta property="og:title" content="FSA ELITE Sales Training" />
+        <meta property="og:site_name" content={SITE_TITLE} />
+        <meta property="og:title" content={SITE_TITLE} />
         <meta property="og:description" content={SITE_DESCRIPTION} />
         <meta property="og:url" content={SITE_URL} />
         <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
-        <meta property="og:image:alt" content="FSA ELITE Sales Training" />
+        <meta property="og:image:alt" content={SITE_TITLE} />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="FSA ELITE Sales Training" />
+        <meta name="twitter:title" content={SITE_TITLE} />
         <meta name="twitter:description" content={SITE_DESCRIPTION} />
         <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
         <script

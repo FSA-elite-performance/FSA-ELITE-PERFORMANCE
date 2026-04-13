@@ -31,7 +31,7 @@ export default function LegalPage() {
   return (
     <>
       <Head>
-        <title>Legal | FSA ELITE Performance</title>
+        <title>Legal | FSA Elite Performance</title>
         <meta
           name="description"
           content="Access the FSA ELITE legal center for privacy, terms, refunds, and support information at fsaeliteperformance.com."

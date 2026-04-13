@@ -66,17 +66,17 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>Log In | FSA ELITE Performance</title>
+        <title>Log In | FSA Elite Performance</title>
         <meta name="robots" content="noindex" />
       </Head>
 
       <main className="auth-page">
         <div className="auth-card">
           <div className="auth-brand">
-            <img src="/logo.png" alt="FSA ELITE" className="auth-logo" />
+            <img src="/logo.png" alt="FSA Elite Performance" className="auth-logo" />
             <div>
-              <strong className="auth-brand-name">FSA ELITE</strong>
-              <span className="auth-brand-sub">{PUBLIC_BUSINESS_NAME}</span>
+              <strong className="auth-brand-name">{PUBLIC_BUSINESS_NAME}</strong>
+              <span className="auth-brand-sub">fsaeliteperformance.com</span>
             </div>
           </div>
 

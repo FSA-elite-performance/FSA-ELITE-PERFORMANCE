@@ -6,7 +6,7 @@ export default function Cancel() {
   return (
     <>
       <Head>
-        <title>Checkout Canceled | FSA ELITE Sales Training</title>
+        <title>Checkout Canceled | FSA Elite Performance</title>
       </Head>
       <main className="status-page">
         <div className="status-icon" aria-hidden="true">
