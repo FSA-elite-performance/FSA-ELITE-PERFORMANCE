@@ -4000,6 +4000,14 @@ ul { padding-left: 1.15rem; }
   justify-content: center;
 }
 
+.landing-hero-figure {
+  width: 100%;
+  max-width: 360px;
+  height: auto;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.4));
+  animation: subtleFloat 6s ease-in-out infinite;
+}
+
 .landing-hero-card {
   width: 100%;
   max-width: 420px;
@@ -4118,6 +4126,10 @@ ul { padding-left: 1.15rem; }
   
   .landing-hero-actions {
     justify-content: center;
+  }
+
+  .landing-hero-figure {
+    max-width: 260px;
   }
 }
 
